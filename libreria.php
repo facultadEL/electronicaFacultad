@@ -1,5 +1,5 @@
 <?php
-//Actualizada a la fecha 30/09/2014
+//Actualizada a la fecha 30/09/2014 
 error_reporting(E_ALL);
 //Guarda la consulta de base de datos, siempre y cuando se le envie el sql y la conexion a la base;
     //Devuelve el error para hacer el javascript para mostrar los mensajes segun el guardado
