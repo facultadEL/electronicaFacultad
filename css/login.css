@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* ---------- ERIC MEYER'S RESET CSS ---------- */
+/* ---------- http://meyerweb.com/eric/tools/css/reset/ ---------- */
+
+@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+body {
+	background-color: #C0C0C0; /* color de fondo */
+	color: #000;
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+
+input {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	-webkit-appearance: none;
+}
+
+/* ---------- LOGIN ---------- */
+
+#login {
+	margin: 120px auto; /* margen superior */
+	width: 400px;
+}
+
+#login h2 {
+	background-color: #489785; /*color de fondo del login.. #f95252*/
+	-webkit-border-radius: 20px 20px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
+	border-radius: 20px 20px 0 0;
+	color: #fff; /*color de la palabra login*/
+	font-size: 28px;
+	padding: 20px 26px;
+}
+
+#login h2 span[class*="fontawesome-"] {
+	margin-right: 14px;
+}
+
+#login fieldset {
+	background-color: #fff; /*si cambiamos #fff por trasnparent queda transparente.. Es el color dentro del login*/
+	-webkit-border-radius: 0 0 20px 20px;
+	-moz-border-radius: 0 0 20px 20px;
+	border-radius: 0 0 20px 20px;
+	padding: 20px 23px;
+}
+
+#login fieldset p {
+	color: #777;
+	margin-bottom: 14px;
+	font-style: bold;
+}
+
+#login fieldset p:last-child {
+	margin-bottom: 0;
+}
+
+#login fieldset input {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 10px;
+}
+
+#login fieldset input[type="email"], #login fieldset input[type="password"] {
+	background-color: #eee;
+	color: #777;
+	padding: 7px;
+	width: 330px;
+	height: 30px;
+}
+
+#login fieldset input[type="email"]:hover, #login fieldset input[type="password"]:hover{
+	background-color: #ddd;
+}
+
+#login fieldset input[type="submit"] {
+	background-color: #33cc77;
+	color: #fff;
+	display: block;
+	margin: 0 auto;
+	padding: 12px 16;
+	cursor: pointer;
+	width: 350px;
+	height: 40px;
+}
+
+#login fieldset input[type="submit"]:hover {
+	background-color: #489785;
+}
+
+#login fieldset input[type="button"] {
+	background-color: #3D3D3D;
+	color: #fff;
+	display: block;
+	margin: 0 auto;
+	cursor: pointer;
+	width: 350px;
+	height: 40px;
+}
+
+#login fieldset input[type="button"]:hover {
+	background-color: #979797;
+}
