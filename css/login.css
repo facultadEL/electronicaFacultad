@@ -46,9 +46,9 @@ input {
 
 #login h2 {
 	background-color: #489785; /*color de fondo del login.. #f95252*/
-	-webkit-border-radius: 20px 20px 0 0;
-	-moz-border-radius: 20px 20px 0 0;
-	border-radius: 20px 20px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	-moz-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
 	color: #fff; /*color de la palabra login*/
 	font-size: 28px;
 	padding: 20px 26px;
@@ -60,15 +60,15 @@ input {
 
 #login fieldset {
 	background-color: #fff; /*si cambiamos #fff por trasnparent queda transparente.. Es el color dentro del login*/
-	-webkit-border-radius: 0 0 20px 20px;
-	-moz-border-radius: 0 0 20px 20px;
-	border-radius: 0 0 20px 20px;
-	padding: 20px 23px;
+	-webkit-border-radius: 0 0 10px 10px;
+	-moz-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+	padding: 20px 25px;
 }
 
 #login fieldset p {
 	color: #777;
-	margin-bottom: 14px;
+	margin-bottom: 5px;
 	font-style: bold;
 }
 
@@ -85,8 +85,8 @@ input {
 #login fieldset input[type="email"], #login fieldset input[type="password"] {
 	background-color: #eee;
 	color: #777;
-	padding: 7px;
-	width: 330px;
+	padding: 5px;
+	width: 340px;
 	height: 30px;
 }
 
@@ -126,19 +126,30 @@ input {
 }
 
 #btn_sincta{
-	-webkit-border-radius: 15px;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 	background-color: #086A87;
 	color: #fff;
 	display: block;
 	margin: 10px auto;
 	cursor: pointer;
-	width: 390px;
+	width: 400px;
 	height: 40px;
 }
 
 #btn_sincta:hover {
 	background-color: #0489B1;
 	border: 2px solid #086A87;
+}
+
+hr {
+	border: 1;
+	height: 2px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: #C0C0C0;
+	width: 100%;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
