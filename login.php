@@ -11,7 +11,7 @@
 		<h2><span class="fontawesome-lock"></span>Login</h2>
 		<form action="" method="POST">
 			<fieldset>
-				<p><label for="email">E-mail</label></p>
+				<p><label for="email">Usuario</label></p>
 				<p><input type="email" id="email" value="" placeholder="E-mail"/></p> <!-- JS because of IE support; better: placeholder="mail@address.com" -->
 
 				<p><label for="password">Contrase&ntilde;a</label></p>
@@ -20,6 +20,8 @@
 				<p><input type="submit" value="Acceder"></p>
 				<p><input type="button" value="Olvid&eacute; mi contrase&ntilde;a"></p>
 			</fieldset>
+				<p><input type="button" id="btn_sincta" value="No tengo cuenta"></p>
+
 		</form>
 	</div> <!-- end login -->
 </body>	

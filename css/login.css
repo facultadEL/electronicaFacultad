@@ -77,8 +77,8 @@ input {
 }
 
 #login fieldset input {
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
 
@@ -107,6 +107,7 @@ input {
 
 #login fieldset input[type="submit"]:hover {
 	background-color: #489785;
+	border: 2px solid #33cc77;
 }
 
 #login fieldset input[type="button"] {
@@ -121,4 +122,23 @@ input {
 
 #login fieldset input[type="button"]:hover {
 	background-color: #979797;
+	border: 2px solid #3D3D3D;
+}
+
+#btn_sincta{
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background-color: #086A87;
+	color: #fff;
+	display: block;
+	margin: 10px auto;
+	cursor: pointer;
+	width: 390px;
+	height: 40px;
+}
+
+#btn_sincta:hover {
+	background-color: #0489B1;
+	border: 2px solid #086A87;
 }
