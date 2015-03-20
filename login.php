@@ -22,7 +22,7 @@
 				<p><input type="submit" value="Acceder"></p>
 				<p><input type="button" value="Olvid&eacute; mi contrase&ntilde;a"></p>
 			</fieldset>
-				<p><input type="button" id="btn_sincta" value="No tengo cuenta"></p>
+				<p><a href="registrarPasante.php"><input type="button" id="btn_sincta" value="No tengo cuenta"></a></p>
 		</form>
 	</div> <!-- end login -->
 </body>	
