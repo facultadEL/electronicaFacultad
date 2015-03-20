@@ -1,0 +1,120 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+/* ---------- ERIC MEYER'S RESET CSS ---------- */
+/* ---------- http://meyerweb.com/eric/tools/css/reset/ ---------- */
+
+@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+body {
+	background-color: #C0C0C0; /* color de fondo */
+	color: #000;
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 1em;
+}
+
+input {
+	/*border: none;*/
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	-webkit-appearance: none;
+}
+
+#formulario {
+	width: 960px;
+	margin: 30px auto; /* margen superior */
+}
+
+#formulario h2 {
+	background-color: #489785; /*color de fondo del login.. #f95252*/
+	-webkit-border-radius: 10px 10px 0 0;
+	-moz-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+	color: #fff; /*color de la palabra login*/
+	font-size: 28px;
+	padding: 20px 26px;
+	text-align: center;
+}
+
+#formulario #tablaGeneral {
+	background-color: #fff; /*si cambiamos #fff por trasnparent queda transparente.. Es el color dentro del login*/
+	-webkit-border-radius: 0 0 10px 10px;
+	-moz-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+	/*padding: 20px 25px;*/
+	width: 100%;
+}
+
+#formulario #tablaGeneral tr{
+	width: 100%;
+}
+
+#formulario #tablaGeneral td{
+	width: 100%;
+}
+
+#formulario #tablaGeneral tr td legend{
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #6E6E6E;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+#formulario #tablaInterna{
+	-webkit-border-radius: 10 10 10px 10px;
+	-moz-border-radius: 10 10 10px 10px;
+	border-radius: 10 10 10px 10px;
+	/*padding: 20px 25px;*/
+	width: 90%;
+	margin-top: 10px;
+	margin-left: 45px;
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+#formulario #tablaInterna tr{
+	width: 100%;
+}
+
+#formulario #tablaInterna .etiqueta{
+	width: 10%;
+	text-align: center;	
+	color: #086A87;
+	font-weight: bold;
+}
+
+#formulario #tablaInterna .campos{
+	width: 40%;
+	margin-left: 0px;
+}
+
+#tabla {
+	background: #F2F2F2;
+}
+
+#tabla1 {
+	background: #F2F2F2;
+	align: center;
+}
+
+l1 {
+	text-transform: capitalize;
+}
