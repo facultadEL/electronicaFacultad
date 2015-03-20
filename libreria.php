@@ -83,6 +83,48 @@ function cambiarDni($dni){
   }
   return $dniFormateado;
 }
+
+/*
+Esta funcion sube los datos al servidor.
+Se le tiene que mandar:
+- placeToLoad = El lugar donde debe guardar el archivo. Es el nombre de la carpeta del proyecto, tal cual como se llama en el servidor.Por ejemplo: SeguimientoTitulo, 
+- fileName = La informacion obtenida de $_FILES['archivoPdf']['name'] 
+- fileTmpName = La informacion obtenida de $_FILES['archivoPdf']['tmp_name'];
+*/
+function loadFileToServer($placeToLoad)
+{
+	$nombre_archivoPdf = $_FILES['archivoPdf']['name'];
+	$tipo_archivo = $_FILES['archivoPdf']['type'];
+	$tamano_archivo = $_FILES['archivoPdf']['size'];
+	$filePdf = $_FILES['archivoPdf']['tmp_name'];
+	
+	$ftp_server = "190.114.198.126";
+	$ftp_user_name = "fernandoserassioextension";
+	$ftp_user_pass = "fernando2013";
+	$destino_Pdf = "web/".$placeToLoad."/archivos/".$nombre_archivoPdf;
+	$destinoPdf = "archivos/".$nombre_archivoPdf;
+	$vacio = "archivos/";
+	
+	//conexión
+	$conn_id = ftp_connect($ftp_server); 
+	// logeo
+	$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass); 
+	
+	//probando conexion
+	//if ((!$conn_id) || (!$login_result)){ 
+	//       echo "Conexión al FTP con errores!";
+	//       echo "Intentando conectar a $ftp_server for user $ftp_user_name"; 
+	//       exit; 
+	//   }else{
+	//       echo "Conectado a $ftp_server, for user $ftp_user_name";
+	//   }
+	
+	if ($nombre_archivoPdf <> NULL){
+	$uploadPdf = ftp_put($conn_id, $destino_Pdf, $filePdf, FTP_BINARY);
+	}
+	return $destinoPdf;
+}
+
 /*
 require ("PHPMailer_5.2.1/class.phpmailer.php");
 
