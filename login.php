@@ -8,22 +8,47 @@
 </head>
 <body>
 	<div id="login">
-		<h2><span class="fontawesome-lock"></span>Login</h2>
+		<h2>Login</h2>
 		<form action="" method="POST">
-			<fieldset>
-				<p><label for="email">Usuario:</label></p>
-				<p><input type="email" id="email" value="" placeholder="E-mail"/></p> <!-- JS because of IE support; better: placeholder="mail@address.com" -->
-
-				<p><label for="password">Contrase&ntilde;a:</label></p>
-				<p><input type="password" id="password" value="" placeholder="Contrase&ntilde;a"/></p> <!-- JS because of IE support; better: placeholder="password" -->
-					<p>
-						<hr>
-					</p>
-				<p><input type="submit" value="Acceder"></p>
-				<p><input type="button" value="Olvid&eacute; mi contrase&ntilde;a"></p>
-			</fieldset>
-				<p><a href="registrarPasante.php"><input type="button" id="btn_sincta" value="No tengo cuenta"></a></p>
+				<table width="100%" align="center">
+					<tr>
+						<td>
+							<label for="email">Usuario:</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="email" id="email" value="" placeholder="E-mail"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="password">Contrase&ntilde;a:</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" id="password" value="" placeholder="Contrase&ntilde;a"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<hr width="100%">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" id="btn_enviar" value="Acceder">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" id="btn_olvpass" value="Olvid&eacute; mi contrase&ntilde;a">
+						</td>
+					</tr>
+				</table>
 		</form>
 	</div> <!-- end login -->
+<p><a href="registrarPasante.php"><input type="button" id="btn_sincta" value="No tengo cuenta"></a></p>
 </body>	
 </html>

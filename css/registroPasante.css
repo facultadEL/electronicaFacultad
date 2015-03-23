@@ -1,120 +1,238 @@
-@charset "utf-8";
-/* CSS Document */
-
-/* ---------- FONTAWESOME ---------- */
-/* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
-/* ---------- http://weloveiconfonts.com/ ---------- */
-
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-
-/* ---------- ERIC MEYER'S RESET CSS ---------- */
-/* ---------- http://meyerweb.com/eric/tools/css/reset/ ---------- */
-
-@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
-
-/* ---------- FONTAWESOME ---------- */
-
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
-}
-
-/* ---------- GENERAL ---------- */
-
 body {
-	background-color: #C0C0C0; /* color de fondo */
+	background: #e1e1e1 url('../img/ruido.png') repeat;
 	color: #000;
 	font-family: "Varela Round", Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	line-height: 1em;
 }
-
-input {
-	/*border: none;*/
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	-webkit-appearance: none;
-}
-
-#formulario {
-	width: 960px;
-	margin: 30px auto; /* margen superior */
-}
-
-#formulario h2 {
+h2 {
 	background-color: #489785; /*color de fondo del login.. #f95252*/
-	-webkit-border-radius: 10px 10px 0 0;
-	-moz-border-radius: 10px 10px 0 0;
-	border-radius: 10px 10px 0 0;
-	color: #fff; /*color de la palabra login*/
+	-webkit-border-radius: 10px 10px 0px 0px;
+	-moz-border-radius: 10px 10px 0px 0px;
+	border-radius: 10px 10px 0px 0px;
+	color: #fff; /*color del texto*/
 	font-size: 28px;
 	padding: 20px 26px;
 	text-align: center;
+	margin-bottom: 0px;
+	border-top: 3px Solid #6E6E6E;
+	border-right: 3px Solid #6E6E6E;
+	border-left: 3px Solid #6E6E6E;
 }
-
-#formulario #tablaGeneral {
-	background-color: #fff; /*si cambiamos #fff por trasnparent queda transparente.. Es el color dentro del login*/
-	-webkit-border-radius: 0 0 10px 10px;
-	-moz-border-radius: 0 0 10px 10px;
-	border-radius: 0 0 10px 10px;
-	/*padding: 20px 25px;*/
-	width: 100%;
+.formNuevoPasante {
+	padding: 5px 20px 20px 20px;
+	border-bottom: 3px Solid #6E6E6E;
+	border-right: 3px Solid #6E6E6E;
+	border-left: 3px Solid #6E6E6E;
+	background: #FAFAFA;
+	-webkit-border-radius: 0px 0px 10px 10px;
+	-moz-border-radius: 0px 0px 10px 10px;
+	border-radius: 0px 0px 10px 10px;
+	margin-bottom: 10px;
 }
-
-#formulario #tablaGeneral tr{
-	width: 100%;
+#formulario{
+	width: 960px;
+	box-shadow: 0px 0px 20px 4px #6E6E6E;  /*3 nro. Es el difuminado. 4 nro. es el tamaño*/
+	margin: 50px auto; /* margen superior */
+	margin-bottom: 0px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	border-radius: 10px 10px 10px 10px;
 }
-
-#formulario #tablaGeneral td{
-	width: 100%;
-}
-
-#formulario #tablaGeneral tr td legend{
-	font-family: "Varela Round", Arial, Helvetica, sans-serif;
-	font-size: 16px;
+legend{
+	font-family: Calibri;
+	font-size: 18px;
+	font-weight: bold;
 	color: #6E6E6E;
-	padding-left: 10px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }
-
-#formulario #tablaInterna{
-	-webkit-border-radius: 10 10 10px 10px;
-	-moz-border-radius: 10 10 10px 10px;
-	border-radius: 10 10 10px 10px;
-	/*padding: 20px 25px;*/
-	width: 90%;
-	margin-top: 10px;
-	margin-left: 45px;
-	font-family: "Varela Round", Arial, Helvetica, sans-serif;
-	font-size: 14px;
+#leyenda{
+	font-family: Calibri;
+	font-size: 16px;
+	font-weight: bold;
+	color: #6E6E6E;
 }
-
-#formulario #tablaInterna tr{
-	width: 100%;
+label {
+	font-family: Calibri;
+	font-size: 15px;
+	font-weight: normal;
+	color: #336699;
+	text-transform: capitalize;
+	padding-right: 5px;
 }
-
-#formulario #tablaInterna .etiqueta{
-	width: 10%;
-	text-align: center;	
-	color: #086A87;
+l1 {
+	font-family: Calibri;
+	color: #424242;
+	text-transform: capitalize;
+	padding-left: 5px;
+	font-size: 18px;
 	font-weight: bold;
 }
-
-#formulario #tablaInterna .campos{
-	width: 40%;
-	margin-left: 0px;
+fieldset {
+	padding: 10px;
 }
-
-#tabla {
-	background: #F2F2F2;
+.campoText{
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #424242;
+	padding: 5px;
+	width: 200px;
+	height: 15px;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+	font-family: Calibri;
+	position:relative;
+	border: none;
+	box-shadow:0px 0px 10px 1px  #ccc;
 }
-
-#tabla1 {
-	background: #F2F2F2;
-	align: center;
+.campoNro{
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #424242;
+	padding: 5px;
+	width: 40px;
+	height: 15px;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+	font-family: Calibri;
+	position:relative;
+	border: none;
+	box-shadow:0px 0px 10px 1px  #ccc;
 }
-
-l1 {
-	text-transform: capitalize;
+.campoTextTel{
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #424242;
+	padding: 5px;
+	width: 146px;
+	height: 15px;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+	font-family: Calibri;
+	position:relative;
+	border: none;
+	box-shadow:0px 0px 10px 1px  #ccc;
+}
+.campoDate{
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #424242;
+	padding: 5px;
+	width: 150px;
+	height: 20px;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+	font-family: Calibri;
+	position:relative;
+	border: none;
+	box-shadow:0px 0px 10px 1px  #ccc;
+}
+.campoArea{
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #424242;
+	padding: 5px;
+	width: 350px;
+	height: 100px;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+	font-family: Calibri;
+	position:relative;
+	border: none;
+	box-shadow:0px 0px 10px 1px  #ccc;
+}
+.submit{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #A4A4A4;
+	color: #fff;
+	display: block;
+	margin: 10px auto;
+	cursor: pointer;
+	width: 120px;
+	height: 40px;
+	border: none;
+	background-image: url('../img/floppy.png');
+	background-repeat: no-repeat;
+	background-position: 12px;
+	padding-left: 40px;
+	-webkit-background-size: 30px 30px;           /* Safari 3.0 */
+    -moz-background-size: 30px 30px;           /* Gecko 1.9.2 (Firefox 3.6) */
+    -o-background-size: 30px 30px;           /* Opera 9.5 */
+    background-size: 30px 30px;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
+    margin-left: 5px;
+}
+.submit:hover {
+	box-shadow:0px 0px 15px 0px  #000;
+}
+#btn_cancelar{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #8A0808;
+	color: #fff;
+	display: block;
+	margin: 10px auto;
+	cursor: pointer;
+	width: 120px;
+	height: 40px;
+	border: none;
+	background-image: url('../img/cancelar.png');
+	background-repeat: no-repeat;
+	background-position: 12px;
+	padding-left: 40px;
+	-webkit-background-size: 30px 30px;           /* Safari 3.0 */
+    -moz-background-size: 30px 30px;           /* Gecko 1.9.2 (Firefox 3.6) */
+    -o-background-size: 30px 30px;           /* Opera 9.5 */
+    background-size: 30px 30px;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
+    margin-right: 5px;
+}
+#btn_cancelar:hover {
+	box-shadow:0px 0px 15px 0px  #DF0101;
+}
+a {
+	text-decoration: none;
+}
+select{
+	font-family: Calibri;
+	font-size: 16px;
+	padding: 3px;
+	color: #424242;
+	letter-spacing: 1px;
+	text-shadow:0px 1px 0px #FAFAFA;
+	-webkit-border-radius: 3px 3px 3px 3px; 
+	-moz-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+	border: 0;
+	padding: 3px;
+	-webkit-font-smoothing: antialiased;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+	font-weight: normal;
+}
+option{
+	font-family: Calibri;
+	padding: 3px;
+	color: #424242;
+	letter-spacing: 1px;
+	text-shadow:0px 1px 0px #FAFAFA;
+	-webkit-border-radius: 3px 3px 3px 3px; 
+	-moz-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+	-webkit-font-smoothing: antialiased;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+#tablaBtn{
+	margin-bottom: 30px;
 }

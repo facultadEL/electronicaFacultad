@@ -3,4 +3,4 @@
 	nombre character varying,
 	archivo character varying,
 	estado integer references estado_idea(id)
-)
+);

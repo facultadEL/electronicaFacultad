@@ -4,4 +4,4 @@
 	apellido character varying,
 	mail character varying,
 	telefono character varying
-)
+);

@@ -3,4 +3,4 @@
 	idea integer references idea(id),
 	profesor integer references profesor(id),
 	ideaaprobada boolean
-)
+);
