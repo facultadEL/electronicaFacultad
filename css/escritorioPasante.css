@@ -19,7 +19,7 @@ h2 {
 	border-right: 3px Solid #6E6E6E;
 	border-left: 3px Solid #6E6E6E;
 }
-.formNuevoPasante {
+.nueva_idea {
 	padding: 5px 20px 20px 20px;
 	border-bottom: 3px Solid #6E6E6E;
 	border-right: 3px Solid #6E6E6E;
@@ -30,47 +30,42 @@ h2 {
 	border-radius: 0px 0px 10px 10px;
 	margin-bottom: 10px;
 }
+#menu { 
+	background: #E6E6E6;
+	padding: 5px 15px;
+	border-right: 3px Solid #6E6E6E;
+	border-left: 3px Solid #6E6E6E;
+	text-align: center;
+} 
+#menu li { 
+	display: inline-block;
+	list-style: none; 
+	padding: 5px; 
+	font: bold 14px verdana, sans-serif; 
+}
 #formulario{
 	width: 960px;
 	box-shadow: 0px 0px 20px 4px #6E6E6E;  /*3 nro. Es el difuminado. 4 nro. es el tamaño*/
 	margin: 50px auto; /* margen superior */
-	margin-bottom: 0px;
+	margin-bottom: 200px;
 	-webkit-border-radius: 10px 10px 10px 10px;
 	-moz-border-radius: 10px 10px 10px 10px;
 	border-radius: 10px 10px 10px 10px;
 }
-legend{
-	font-family: Calibri;
-	font-size: 18px;
-	font-weight: bold;
-	color: #6E6E6E;
-	padding-top: 10px;
-	padding-bottom: 10px;
+#add_idea{
+	visibility: hidden;
+	/*display: none;*/
 }
-#leyenda{
-	font-family: Calibri;
-	font-size: 16px;
-	font-weight: bold;
-	color: #6E6E6E;
+#imagen{
+	padding: 20px 0px 0px 0px;
 }
 label {
 	font-family: Calibri;
-	font-size: 15px;
+	font-size: 20px;
 	font-weight: normal;
 	color: #336699;
 	text-transform: capitalize;
 	padding-right: 5px;
-}
-l1 {
-	font-family: Calibri;
-	color: #424242;
-	text-transform: capitalize;
-	padding-left: 5px;
-	font-size: 18px;
-	font-weight: bold;
-}
-fieldset {
-	padding: 10px;
 }
 .campoText{
 	-webkit-border-radius: 3px;
@@ -106,42 +101,7 @@ fieldset {
 	-moz-box-shadow: 0px 0px 10px 1px  #ccc;
 	-webkit-box-shadow: 0px 0px 10px 1px  #ccc;
 }
-.campoTextTel{
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	color: #424242;
-	padding: 5px;
-	width: 146px;
-	height: 15px;
-	font-size: 16px;
-	font-weight: normal;
-	text-align: left;
-	font-family: Calibri;
-	position:relative;
-	border: none;
-	box-shadow:0px 0px 10px 1px  #ccc;
-	-moz-box-shadow: 0px 0px 10px 1px  #ccc;
-	-webkit-box-shadow: 0px 0px 10px 1px  #ccc;
-}
-.campoDate{
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	color: #424242;
-	padding: 5px;
-	width: 150px;
-	height: 20px;
-	font-size: 16px;
-	font-weight: normal;
-	text-align: left;
-	font-family: Calibri;
-	position:relative;
-	border: none;
-	box-shadow:0px 0px 10px 1px  #ccc;
-	-moz-box-shadow: 0px 0px 10px 1px  #ccc;
-	-webkit-box-shadow: 0px 0px 10px 1px  #ccc;
-}
+
 .campoArea{
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

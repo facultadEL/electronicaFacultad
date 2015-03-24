@@ -1,3 +1,9 @@
+<?php
+	session_start(); // al volver al index si existe una session, esta sera destruida, existen formas de conservarlas como con un if(session_start()!= NULL). Pero por el momento para el ejemplo no es valido.
+ 		$_SESSION['usuario'] = NULL;
+ 		$_SESSION['password'] = NULL;
+	session_destroy(); // Se destruye la session existente de esta forma no permite el duplicado.
+?>
 <!doctype html>
 <html lang="en-US">
 <head>
@@ -9,7 +15,7 @@
 <body>
 	<div id="login">
 		<h2>Login</h2>
-		<form action="" method="POST">
+		<form action="verificarLogin.php" method="post">
 				<table width="100%" align="center">
 					<tr>
 						<td>
@@ -18,7 +24,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="email" id="email" value="" placeholder="E-mail"/>
+							<input type="email" id="email" name="usuario" value="" placeholder="E-mail" autofocus required/>
 						</td>
 					</tr>
 					<tr>
@@ -28,7 +34,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="password" id="password" value="" placeholder="Contrase&ntilde;a"/>
+							<input type="password" id="password" name="password" value="" placeholder="Contrase&ntilde;a" required/>
 						</td>
 					</tr>
 					<tr>

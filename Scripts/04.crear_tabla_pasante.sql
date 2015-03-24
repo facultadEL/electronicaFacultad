@@ -29,5 +29,7 @@
   loc_trabajo character varying,
   codpos2 character varying,
   empresa_trabaja character varying,
-  perfil_laboral character varying
+  perfil_laboral character varying,
+  logueado boolean default false,
+  rol_fk integer references rol(id)
 );
