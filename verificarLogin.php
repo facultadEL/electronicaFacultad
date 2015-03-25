@@ -49,7 +49,7 @@ if ($rowId['id'] == NULL) {
 		    //echo $_SESSION['rol_fk'];
 
 			if ($rowLogin['rol_fk'] == 1 ) { // 1 = rol Alumno
-				echo '<script language="JavaScript"> location ="escritorioPasante.php"	</script>';
+				echo '<script language="JavaScript"> location ="escritorioPasante.php?enviado=0"	</script>';
 				//echo 'logueado alumno';
 			}
 		}
