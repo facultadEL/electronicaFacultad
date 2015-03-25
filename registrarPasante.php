@@ -310,7 +310,7 @@ include_once "conexion.php";
 			<?php }; ?>
 		</td>	
 		<td width="50%" align="left">
-			<input class="submit" type="submit" value="Guardar"/>
+			<input class="submit" type="submit" value="Guardar"/>Prueba
 		</td>
 	</tr>
 </table>
