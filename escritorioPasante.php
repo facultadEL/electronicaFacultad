@@ -13,8 +13,35 @@
 <title><?php echo 'Bienvenido, '.$_SESSION['nombre'];?></title>
 <script type="text/javascript">
 	function directorio(){
-		var filename = document.getElementById('add_idea').value; document.getElementById('path').value = filename;
+		var nombreArchivo = $('#add_idea').val(); 
+		nombreArchivoSeparado = nombreArchivo.split('\\');
+		nombreArchivoFinal = nombreArchivoSeparado[nombreArchivoSeparado.length - 1];
+		nombreArchivoFinal = $('#path').val(nombreArchivoFinal);
 		//alert(filename);
+	}
+
+	function validarArchivo(){
+		nombreArchivoValidar = $('#add_idea').val();
+		if(nombreArchivoValidar != ""){
+			vNombreArchivoValidar = nombreArchivoValidar.split('.');
+			extension = vNombreArchivoValidar[vNombreArchivoValidar.length - 1];
+			if(extension != "pdf"){
+				alert("Debe ingresar un archivo pdf!");
+				$('#add_idea').val("");
+			}
+		}
+	}
+
+	function validarForm(){
+		nombreArchivoValidar = $('#add_idea').val();
+		if(nombreArchivoValidar != ""){
+			vNombreArchivoValidar = nombreArchivoValidar.split('.');
+			extension = vNombreArchivoValidar[vNombreArchivoValidar.length - 1];
+			if(extension == "pdf"){
+				return true;
+			}
+		}
+		return false;
 	}
 </script>
 </head>
@@ -79,7 +106,7 @@ if ($hayIdea == 0) {
 	<tr width="100%">
 		<td width="10%" align="center" rowspan="3">
 			<label for="add_idea"><img id="imagen" src="img/add-idea.png" width="180" height="180"></label>
-			<input id="add_idea" name="add_idea" type="file" onchange="directorio();" required/>
+			<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
 		</td>
 		<td width="40%"  colspan="2">
 			<h1>No tienes ninguna idea subida</h1>
