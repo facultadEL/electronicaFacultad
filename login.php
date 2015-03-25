@@ -55,6 +55,6 @@
 				</table>
 		</form>
 	</div> <!-- end login -->
-<p><a href="registrarPasante.php"><input type="button" id="btn_sincta" value="No tengo cuenta"></a></p>
+<p><a href="registrarPasante.php?idPasante=0"><input type="button" id="btn_sincta" value="No tengo cuenta"></a></p>
 </body>	
 </html>

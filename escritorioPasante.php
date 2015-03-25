@@ -102,30 +102,37 @@ if ($hayIdea == 0) {
 	</ul>
 </nav>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
-<table align="center" width="100%">
+<table align="center" width="100%" border="1">
 	<tr width="100%">
-		<td width="10%" align="center" rowspan="3">
+		<td width="10%" align="center" rowspan="4">
 			<label for="add_idea"><img id="imagen" src="img/add-idea.png" width="180" height="180"></label>
 			<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
 		</td>
-		<td width="40%"  colspan="2">
+		<td width="39%"  colspan="2">
 			<h1>No tienes ninguna idea subida</h1>
-			<label id="archivo">Archivo: </label><input id="path" name="path" type="text" class="campoTextArc" value="" disabled="true" />
+		</td>
+	</tr>
+		<tr>
+		<td width="7%" align="right">
+			<label for="nombre">Archivo: </label>
+		</td>
+		<td width="10%" align="left">
+			<input id="path" name="path" type="text" class="campoText" value="" disabled="true" />
 		</td>
 	</tr>
 	<tr>
-		<td width="6%" align="right">
+		<td width="7%" align="right">
 			<label for="nombre">Nombre idea: </label>
 		</td>
-		<td width="19%" align="left">
+		<td width="10%" align="left">
 			<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
 		</td>
 	</tr>
 	<tr>
-		<td width="6%" align="right">
+		<td width="7%" align="right">
 			<label for="estado" class="lbl_estado">Estado: </label>
 		</td>
-		<td width="19%" align="left">
+		<td width="10%" align="left">
 			<?php
 				$consultaEstado=pg_query("SELECT * FROM estado_idea");
 				while($rowEstado=pg_fetch_array($consultaEstado)){
