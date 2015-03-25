@@ -13,9 +13,11 @@
 			switch(valDni.length)
 			{
 				case 7:
-					//mascara = "0.000.000";
+				case 9:
+					mascara = "0.000.000";
 					break;
 				case 8:
+				case 10:
 					mascara = "00.000.000";
 					break;
 			}
@@ -301,7 +303,7 @@ include_once "conexion.php";
 <table id="tablaBtn" align="center">
 	<tr width="100%">
 		<td width="50%" align="right">
-			<?php if($id_Pasante != NULL){?>
+			<?php if($id_Pasante != 0){?>
 				<a href="verAlumno.php?idAlumno=<?php echo $id_Pasante;?>&titulo_pasante=<?php echo $carrera_fk;?>"><input type="button" id="btn_cancelar" value="Cancelar"></a>
 			<?php }else{?>
 				<a href="login.php"><input type="button" id="btn_cancelar" value="Cancelar"></a>
