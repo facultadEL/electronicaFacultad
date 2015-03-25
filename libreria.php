@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php
 //Actualizada a la fecha 30/09/2014 
 error_reporting(E_ALL);
@@ -91,8 +92,8 @@ Se le tiene que mandar:
 - fileName = La informacion obtenida de $_FILES['archivoPdf']['name'] 
 - fileTmpName = La informacion obtenida de $_FILES['archivoPdf']['tmp_name'];
 */
-function loadFileToServer($placeToLoad)
-{
+function loadFileToServer($placeToLoad) {
+    
 	$nombre_archivoPdf = $_FILES['archivoPdf']['name'];
 	$tipo_archivo = $_FILES['archivoPdf']['type'];
 	$tamano_archivo = $_FILES['archivoPdf']['size'];
@@ -110,18 +111,23 @@ function loadFileToServer($placeToLoad)
 	// logeo
 	$login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass); 
 	
-	//probando conexion
-	//if ((!$conn_id) || (!$login_result)){ 
-	//       echo "Conexión al FTP con errores!";
-	//       echo "Intentando conectar a $ftp_server for user $ftp_user_name"; 
-	//       exit; 
-	//   }else{
-	//       echo "Conectado a $ftp_server, for user $ftp_user_name";
-	//   }
-	
-	if ($nombre_archivoPdf <> NULL){
-	$uploadPdf = ftp_put($conn_id, $destino_Pdf, $filePdf, FTP_BINARY);
-	}
+    //probando conexion
+    //if ((!$conn_id) || (!$login_result)){ 
+    //       echo "Conexión al FTP con errores!";
+    //       echo "Intentando conectar a $ftp_server for user $ftp_user_name"; 
+    //       exit; 
+    //   }else{
+    //       echo "Conectado a $ftp_server, for user $ftp_user_name";
+    //   }
+
+    $resultadoPdf = explode(".", $nombre_archivoPdf);
+    $totalPdf=count($resultadoPdf);
+    $ip = $totalPdf - 1;
+        if ($nombre_archivoPdf <> NULL){
+            $uploadPdf = ftp_put($conn_id, $destino_Pdf, $filePdf, FTP_BINARY);
+        }else{
+            echo '<script type="text/javascript">alert("El archivo subido no es válido. Suba un PDF");</script>';
+        }
 	return $destinoPdf;
 }
 

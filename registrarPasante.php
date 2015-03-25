@@ -99,7 +99,7 @@ include_once "conexion.php";
 							<td colspan="1">
 								<select id="tipodni" name="tipodni" size="1">
 									<?php
-										$consultaTipoDNI=pg_query("select * FROM tipo_dni");
+										$consultaTipoDNI=pg_query("SELECT * FROM tipo_dni");
 										while($rowTipoDNI=pg_fetch_array($consultaTipoDNI)){
 										if ($tipodni == $rowTipoDNI['id']){
 					                        echo "<option value=".$rowTipoDNI['id']." selected>".$rowTipoDNI['nombre']."</option>";

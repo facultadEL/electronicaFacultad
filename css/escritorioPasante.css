@@ -1,7 +1,7 @@
 body {
 	background: #e1e1e1 url('../img/ruido.png') repeat;
 	color: #000;
-	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	line-height: 1em;
 }
@@ -10,39 +10,88 @@ h2 {
 	-webkit-border-radius: 10px 10px 0px 0px;
 	-moz-border-radius: 10px 10px 0px 0px;
 	border-radius: 10px 10px 0px 0px;
+	letter-spacing: 1px;
 	color: #fff; /*color del texto*/
 	font-size: 28px;
 	padding: 20px 26px;
 	text-align: center;
 	margin-bottom: 0px;
 	border-top: 3px Solid #6E6E6E;
-	border-right: 3px Solid #6E6E6E;
-	border-left: 3px Solid #6E6E6E;
 }
 .nueva_idea {
 	padding: 5px 20px 20px 20px;
-	border-bottom: 3px Solid #6E6E6E;
-	border-right: 3px Solid #6E6E6E;
-	border-left: 3px Solid #6E6E6E;
 	background: #FAFAFA;
 	-webkit-border-radius: 0px 0px 10px 10px;
 	-moz-border-radius: 0px 0px 10px 10px;
 	border-radius: 0px 0px 10px 10px;
-	margin-bottom: 10px;
+	margin-top: 0px;
 }
 #menu { 
-	background: #E6E6E6;
-	padding: 5px 15px;
-	border-right: 3px Solid #6E6E6E;
-	border-left: 3px Solid #6E6E6E;
+	/*background: #F2F2F2;
+	
+	margin-bottom: 0px;
 	text-align: center;
-} 
-#menu li { 
-	display: inline-block;
-	list-style: none; 
-	padding: 5px; 
-	font: bold 14px verdana, sans-serif; 
+	border: 1px Solid #6E6E6E;*/
+	background: #444;
+	display: block;
+    width: 100%;
+    overflow: hidden;
 }
+#menu ul{
+	margin: 15px;
+    padding: 15px 0px 15px 0px;
+    float: center;
+    list-style: none;
+    background: #444
+    background: rgba(0,0,0,.2);
+    box-shadow: 0px 1px 1px rgba(255,255,255,.2), 2px 2px 1px rgba(0,0,0,.8) inset; 
+    -webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+    text-align: center;
+}
+#menu li {
+	display: inline;
+	float: center;
+/*	color: #000;
+	padding: 10px 30px 10px 30px;
+	margin-right: 10px;
+	margin-left: 10px;
+	font: bold 16px Calibri, verdana, sans-serif; 
+	border: 1px Solid #6E6E6E;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-moz-transition: -moz-transform 1s ease-in-out 0.1s; 
+	-webkit-transition: -webkit-transform 1s ease-in-out 0.1s;*/
+}
+#menu a {
+    float:center;
+    padding: 6px;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #555;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    font: bold 1.1em/1 'trebuchet MS', Arial, Helvetica;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #fff #ccc #999 #eee;
+    background: #c1c1c1;
+    background: linear-gradient(#f5f5f5, #c1c1c1);            
+ }
+ #menu a:hover, #menu a:focus {
+    outline: 0;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,.2);
+    background: #fac754;
+    background: linear-gradient(#fac754, #f8ac00);
+}
+#menu a:active {
+    box-shadow: 0 0 2px 2px rgba(0,0,0,.3) inset;
+}
+
 #formulario{
 	width: 960px;
 	box-shadow: 0px 0px 20px 4px #6E6E6E;  /*3 nro. Es el difuminado. 4 nro. es el tamaño*/
@@ -51,6 +100,10 @@ h2 {
 	-webkit-border-radius: 10px 10px 10px 10px;
 	-moz-border-radius: 10px 10px 10px 10px;
 	border-radius: 10px 10px 10px 10px;
+	border-bottom: 3px Solid #6E6E6E;
+	border-right: 3px Solid #6E6E6E;
+	border-left: 3px Solid #6E6E6E;
+	
 }
 #add_idea{
 	visibility: hidden;
@@ -60,6 +113,14 @@ h2 {
 	padding: 20px 0px 0px 0px;
 }
 label {
+	font-family: Calibri;
+	font-size: 20px;
+	font-weight: normal;
+	color: #336699;
+	text-transform: capitalize;
+	padding-right: 5px;
+}
+lbl_estado{
 	font-family: Calibri;
 	font-size: 20px;
 	font-weight: normal;
@@ -83,13 +144,18 @@ label {
 	border: none;
 	box-shadow:0px 0px 10px 1px  #ccc;
 }
-.campoNro{
+#archivo{
+	margin-left: 53px;
+	margin-bottom: 0px;
+}
+.campoTextArc{
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	color: #424242;
 	padding: 5px;
-	width: 40px;
+	margin-left: 4px;
+	width: 370px;
 	height: 15px;
 	font-size: 16px;
 	font-weight: normal;
@@ -97,29 +163,29 @@ label {
 	font-family: Calibri;
 	position:relative;
 	border: none;
-	box-shadow: 0px 0px 10px 1px  #ccc;
-	-moz-box-shadow: 0px 0px 10px 1px  #ccc;
-	-webkit-box-shadow: 0px 0px 10px 1px  #ccc;
+	box-shadow:0px 0px 10px 1px  #ccc;
 }
-
-.campoArea{
+l1{
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	color: #424242;
 	padding: 5px;
-	width: 350px;
-	height: 100px;
 	font-size: 16px;
 	font-weight: normal;
 	text-align: left;
 	font-family: Calibri;
-	position:relative;
 	border: none;
-	box-shadow:0px 0px 10px 1px  #ccc;
-	-moz-box-shadow: 0px 0px 10px 1px  #ccc;
-	-webkit-box-shadow: 0px 0px 10px 1px  #ccc;
 }
+h1{
+	font-family: Calibri;
+	font-size: 26px;
+	font-weight: normal;
+	text-align: center;
+	padding-bottom: 10px;
+	color: #086A87;
+}
+
 .submit{
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;

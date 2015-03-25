@@ -3,6 +3,7 @@
   id serial NOT NULL primary key,
   nombre character varying
 );
+INSERT INTO estado_idea(nombre)VALUES('No existe idea');
 INSERT INTO estado_idea(nombre)VALUES('Pendiente de aprobación');
 INSERT INTO estado_idea(nombre)VALUES('Aprobado');
 INSERT INTO estado_idea(nombre)VALUES('No Aprobado');

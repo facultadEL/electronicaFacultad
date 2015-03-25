@@ -44,7 +44,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 		// $maximoAlumno = $maximoAlumno + 1;
 		// $id_Alumno = $maximoAlumno;
 
-		$newPasante="INSERT INTO pasante(nombre, apellido, nro_legajo, tipodni, nrodni, fec_nacimiento, loc_nacimiento, prov_viviendo, loc_viviendo, codpos, calle, nrocalle, piso, dpto, carrera_fk, caracfijo, nrofijo, caraccel, nrocelular, mail, mail2, facebook, twitter, password, prov_trabajo, loc_trabajo, codpos2, empresa_trabaja, perfil_laboral)VALUES('$nombre','$apellido','$nro_legajo','$tipodni','$nrodni','$fec_nacimiento','$loc_nacimiento','$prov_viviendo','$loc_viviendo','$codpos','$calle','$nrocalle','$piso','$dpto',2,'$caracfijo','$nrofijo','$caraccel','$nrocelular','$mail','$mail2','$facebook','$twitter','$password','$prov_trabajo','$loc_trabajo','$codpos2','$empresa_trabaja','$perfil_laboral');";
+		$newPasante="INSERT INTO pasante(nombre, apellido, nro_legajo, tipodni, nrodni, fec_nacimiento, loc_nacimiento, prov_viviendo, loc_viviendo, codpos, calle, nrocalle, piso, dpto, carrera_fk, caracfijo, nrofijo, caraccel, nrocelular, mail, mail2, facebook, twitter, password, prov_trabajo, loc_trabajo, codpos2, empresa_trabaja, perfil_laboral,rol_fk)VALUES('$nombre','$apellido','$nro_legajo','$tipodni','$nrodni','$fec_nacimiento','$loc_nacimiento','$prov_viviendo','$loc_viviendo','$codpos','$calle','$nrocalle','$piso','$dpto',2,'$caracfijo','$nrofijo','$caraccel','$nrocelular','$mail','$mail2','$facebook','$twitter','$password','$prov_trabajo','$loc_trabajo','$codpos2','$empresa_trabaja','$perfil_laboral',1);";
 			$error=0;
 			if (!pg_query($conn, $newPasante)){
 				$errorpg = pg_last_error($conn);
