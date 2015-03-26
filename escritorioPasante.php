@@ -84,6 +84,7 @@ $hayIdea = 0;
 		$id_Idea = $rowIdea['id'];
 		$nombre_idea = $rowIdea['nombre'];
 		$estado = $rowIdea['estado'];
+		$archivo = $rowIdea['archivo'];
 		
 		if ($id_Idea != 0 || $id_Idea != NULL) {
 			$hayIdea = 1;
@@ -96,19 +97,19 @@ if ($hayIdea == 0) {
 <h2>Seguimiento de la Idea</h2>
 <nav id="menu">
 	<ul> 
-		<li><a href="">Perfil</a></li>
-		<li><a href="">Menú2</a></li>
-		<li><a href="">Cerrar Sesi&oacute;n</a></li>
+		<li><a href="enDesarrollo.php">Perfil</a></li>
+		<li><a href="enDesarrollo.php">Menú2</a></li>
+		<li><a href="enDesarrollo.php">Cerrar Sesi&oacute;n</a></li>
 	</ul>
 </nav>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
-<table align="center" width="100%" border="1">
+<table align="center" width="100%" >
 	<tr width="100%">
-		<td width="10%" align="center" rowspan="4">
+		<td width="9%" align="center" rowspan="4">
 			<label for="add_idea"><img id="imagen" src="img/add-idea.png" width="180" height="180"></label>
 			<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
 		</td>
-		<td width="39%"  colspan="2">
+		<td width="40%" colspan="2">
 			<h1>No tienes ninguna idea subida</h1>
 		</td>
 	</tr>
@@ -134,7 +135,7 @@ if ($hayIdea == 0) {
 		</td>
 		<td width="10%" align="left">
 			<?php
-				$consultaEstado=pg_query("SELECT * FROM estado_idea");
+				$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
 				while($rowEstado=pg_fetch_array($consultaEstado)){
 					if ($rowEstado['id'] == 1){
                     	echo '<l1>'.$rowEstado['nombre'].'</l1>';
@@ -155,23 +156,23 @@ if ($hayIdea == 0) {
 </form>
 </div>
 </body>
-<?php }else{ echo 'hay idea'; ?>
+<?php }else{ ?>
 	<body>
 	<div id="formulario">
 	<h2>Seguimiento de la Idea</h2>
 	<nav id="menu">
 		<ul> 
-			<li><a href="">Perfil</a></li>
-			<li><a href="">Menú2</a></li>
-			<li><a href="">Cerrar Sesi&oacute;n</a></li>
+			<li><a href="enDesarrollo.php">Perfil</a></li>
+			<li><a href="enDesarrollo.php">Menú2</a></li>
+			<li><a href="enDesarrollo.php">Cerrar Sesi&oacute;n</a></li>
 		</ul>
 	</nav>
 	<form class="nueva_idea" name="con_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
-	<table align="center" width="100%" border="1">
+	<table align="center" width="100%">
 		<tr width="100%">
 			<td width="10%" align="center" rowspan="4">
-				<label for="add_idea"><img id="imagen" src="img/add-idea.png" width="180" height="180"></label>
-				<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
+				<label for="add_idea"><img id="imagen" src="img/uploaded-idea.png" width="180" height="180"></label>
+				<!-- <input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/> -->
 			</td>
 			<td width="39%"  colspan="2">
 				<h1>Hay idea</h1>
@@ -182,7 +183,7 @@ if ($hayIdea == 0) {
 				<label for="nombre">Archivo: </label>
 			</td>
 			<td width="10%" align="left">
-				<input id="path" name="path" type="text" class="campoText" value="" disabled="true" />
+				<l1><?php echo $archivo; ?></l1>
 			</td>
 		</tr>
 		<tr>
@@ -190,7 +191,7 @@ if ($hayIdea == 0) {
 				<label for="nombre">Nombre idea: </label>
 			</td>
 			<td width="10%" align="left">
-				<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
+				<l1><?php echo $nombre_idea; ?></l1>
 			</td>
 		</tr>
 		<tr>
@@ -199,9 +200,9 @@ if ($hayIdea == 0) {
 			</td>
 			<td width="10%" align="left">
 				<?php
-					$consultaEstado=pg_query("SELECT * FROM estado_idea");
+					$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
 					while($rowEstado=pg_fetch_array($consultaEstado)){
-						if ($rowEstado['id'] == 1){
+						if ($rowEstado['id'] == $estado){
 	                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
 						}
 						//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
@@ -211,9 +212,11 @@ if ($hayIdea == 0) {
 		</tr>
 	</table>
 	<table id="tablaBtn" align="center">
-		<tr width="100%">	
+		<tr width="100%">
+			<tr><td><br></td></tr>
 			<td width="100%" align="center">
-				<input class="submit" type="submit" value="Guardar"/>
+				<l1>Para hacer: Acá poner la calificación de cada profesor de la idea. </l1>
+				<!-- <input class="submit" type="submit" value="Guardar"/>  ver si se va a poner un botón y cual?--> 
 			</td>
 		</tr>
 	</table>
