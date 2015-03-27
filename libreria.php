@@ -1,4 +1,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script>
+	loadDictionaries();
+	getPass(longValue);
+</script>
 <?php
 //Actualizada a la fecha 30/09/2014 
 error_reporting(E_ALL);
@@ -124,6 +128,11 @@ function loadFileToServer($placeToLoad) {
         $uploadPdf = ftp_put($conn_id, $destino_Pdf, $filePdf, FTP_BINARY);
     }
 	return $destinoPdf;
+}
+
+function getCode()
+{
+	
 }
 
 /*
