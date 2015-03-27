@@ -1,7 +1,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
-	loadDictionaries();
-	getPass(longValue);
+
+cU = 0;var vDP=[];var d={};
+function nDS(){nD="";for(var i=1;i<=8;i++){if(i==1){nD+="0";}else{nD += Math.floor(Math.random()*2);}}return nD;}
+function sD(){lUD={"01000001":"A","01000010":"B","01000011":"C","01000100":"D","01000101":"E","01000110":"F","01000111":"G","01001000":"H","01001001":"I","01001010":"J","01001011":"K","01001100":"L","01001101":"M","01001110":"N","01001111":"O","01010000":"P","01010001":"Q","01010010":"R","01010011":"S","01010100":"T","01010101":"U","01010110":"V","01010111":"W","01011000":"X","01011001":"Y","01011010":"Z",}}
+function gV(bC){dTR = "";dTR = d[bC];if(dTR==null){gV(nDS());}else{if($.inObject(dTR,lUD)!=null){cU=1;}}return dTR;}
+$.inObject=function(value,obj){var fK;$.each(obj,function(key,val){if(value===val){fK=key;return;}});return fK;};
+function gP(lP){cU=0;cOD=0;dTA="";fP="";vDP.length=0;cODP=lP*8;for(var i=1;i<=cODP;i++){cOD++;if(cOD==1){dG=0;}else{dG=Math.floor(Math.random()*2);}dTA+=dG;if(cOD==8){vDP.push(dTA);cOD=0;dTA="";}}for(var i=0;i<vDP.length;i++){fP += gV(vDP[i]);}if(cU==1){return fP;}else{gP(lP);}}
+function lDD(){var nDT={};d=nDT;$.each(lUD,function(key,value){d[key]=value;});}
+
 </script>
 <?php
 //Actualizada a la fecha 30/09/2014 
@@ -130,9 +138,12 @@ function loadFileToServer($placeToLoad) {
 	return $destinoPdf;
 }
 
-function getCode()
+function getCode($largoCodigo)
 {
-	
+    echo '<script>sD();lDD();longValue = '.$largoCodigo.';codigo = gP(longValue);</script>';
+    $variablephp = "<script> document.write(codigo) </script>";
+    return $variablephp;
+
 }
 
 /*
