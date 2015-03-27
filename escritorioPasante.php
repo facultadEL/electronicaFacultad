@@ -75,10 +75,12 @@ $id = $_SESSION['id'];
 		}else{
 			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "escritorioPasante.php";</script>';
 		}
-}
+}else{
+	//$hayIdea = 0;
 
+$id = $_SESSION['id'];
 $hayIdea = 0;
-	$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id;");
+	$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
 	while($rowIdea=pg_fetch_array($consultarIdea,NULL,PGSQL_ASSOC)){
 		$id_Pasante = $rowIdea['pasante_fk'];
 		$id_Idea = $rowIdea['id'];
@@ -86,10 +88,11 @@ $hayIdea = 0;
 		$estado = $rowIdea['estado'];
 		$archivo = $rowIdea['archivo'];
 		
-		if ($id_Idea != 0 || $id_Idea != NULL) {
+		if ($id_Idea != 0 && $enviado == 0  || $id_Idea != NULL && $enviado == 0) {
 			$hayIdea = 1;
 		}
 	}
+}
 if ($hayIdea == 0) { 
 ?>
 <body>

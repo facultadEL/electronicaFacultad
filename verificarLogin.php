@@ -35,7 +35,7 @@ if ($rowId['id'] == NULL) {
 			$password_encontrado = 1;
 			//echo 'pass_bd: '.$rowLogin['password'].'<br>';
 		}else{
-			$usuario_encontrado = 0;
+			$password_encontrado = 0;
 		}
 
 		if ($usuario_encontrado == 1 && $password_encontrado == 1) {

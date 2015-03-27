@@ -120,14 +120,9 @@ function loadFileToServer($placeToLoad) {
     //       echo "Conectado a $ftp_server, for user $ftp_user_name";
     //   }
 
-    $resultadoPdf = explode(".", $nombre_archivoPdf);
-    $totalPdf=count($resultadoPdf);
-    $ip = $totalPdf - 1;
-        if ($nombre_archivoPdf <> NULL){
-            $uploadPdf = ftp_put($conn_id, $destino_Pdf, $filePdf, FTP_BINARY);
-        }else{
-            echo '<script type="text/javascript">alert("El archivo subido no es válido. Suba un PDF");</script>';
-        }
+    if ($nombre_archivoPdf <> NULL){
+        $uploadPdf = ftp_put($conn_id, $destino_Pdf, $filePdf, FTP_BINARY);
+    }
 	return $destinoPdf;
 }
 

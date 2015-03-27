@@ -54,12 +54,14 @@ $id_Pasante = $_REQUEST['idPasante'];
 				$termino = "COMMIT";
 			}
 		   pg_query($termino);
+
 				
 		if ($error==1){
 			echo '<script language="JavaScript"> 			alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
 		}else{
-			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "escritorioPasante.php?idPasante='.$id_Pasante.'";</script>';
+			echo $id_P;
+			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "login.php?registrado=0";</script>';
 		}
 	}else{
 		//aca va el update
