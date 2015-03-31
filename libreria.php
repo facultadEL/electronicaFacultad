@@ -46,7 +46,7 @@ function traerSqlCondicion($rango,$tabla,$condicion){
 }
 
 function traerId($tabla){
-	$sqlId = pg_query('SELECT max(id_'.$tabla.') FROM '.$tabla);
+	$sqlId = pg_query('SELECT max(id) FROM '.$tabla);
 	$rowId = pg_fetch_array($sqlId);
 	$maxId = $rowId['max'] + 1;
 	return $maxId;
@@ -136,10 +136,14 @@ function getCode($largoCodigo)
 
 }
 
-/*
+
 require ("PHPMailer_5.2.1/class.phpmailer.php");
 
-function enviarMail($c,$a){
+// $sendFrom = dirección remitente
+// $from_name = nombre remitente
+// $to = dirección a donde enviamos
+
+function enviarMail($c,$a,$sendFrom,$from_name,$to){
         
     $cuerpo = $c;
     $asunto = $a;
@@ -148,15 +152,15 @@ function enviarMail($c,$a){
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = "ssl"; 
     $mail->Host = "smtp.gmail.com"; // dirección del servidor
-    $mail->Username = "eze.olea.f@gmail.com"; // Usuario
+    $mail->Username = "extensionfrvm@gmail.com"; // Usuario
 
-    $mail->Password = "8fF6zcPg86"; // Contraseña
+    $mail->Password = "4537500frvm"; // Contraseña
 
     $mail->Port = 465; // Puerto a utilizar
-    $mail->From = "vencimientos@transportedoncarlosvm.com"; // dirección remitente
-    $mail->FromName = "Vencimientos Transporte Don Carlos"; // nombre remitente
+    $mail->From = $sendFrom; // dirección remitente
+    $mail->FromName = $from_name; // nombre remitente
 
-    $mail->AddAddress("eze.olea.f@gmail.com",''); // Esta es la dirección a donde enviamos
+    $mail->AddAddress($to, ''); // Esta es la dirección a donde enviamos
 
     //$mail->AddCC("cuenta@dominio.com"); // Copia
     //$mail->AddBCC("cuenta@dominio.com"); // Copia oculta
@@ -183,4 +187,4 @@ function enviarMail($c,$a){
 //}
 
     }
-    */
+    

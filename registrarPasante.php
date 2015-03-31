@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="css/registroPasante.css">
 	<title>Registro de Usuario</title>
 	<script>
+		var mailDictionary = [];
+
 		function maskDni()
 		{
 			valDni = $('#nrodni').val();
@@ -23,6 +25,23 @@
 			}
 			$('#nrodni').mask(mascara);
 		}
+
+		function setMail(mailToSet)
+		{
+			mailDictionary.push(mailToSet);
+		}
+
+		function checkMail()
+		{
+			var mailABuscar = $('#mail').val();
+			if($.inArray(mailABuscar, mailDictionary) != -1)
+			{
+				alert("Este mail ya se encuentra registrado");
+				$('#mail').val("");
+				$('#mail').focus();
+			}
+		}
+
 	</script>
 </head>
 <body>
@@ -63,6 +82,11 @@ include_once "conexion.php";
 			$codpos2 = $rowPasante['codpos2'];
 			$empresa_trabaja = $rowPasante['empresa_trabaja'];
 			$perfil_laboral = $rowPasante['perfil_laboral'];
+	}
+
+	$verificarMail=pg_query("SELECT mail FROM pasante;");
+	while($rowVerifMail=pg_fetch_array($verificarMail,NULL,PGSQL_ASSOC)){
+		echo "<script>setMail('".$rowVerifMail['mail']."')</script>";
 	}
 ?>
 <div id="formulario">
@@ -217,7 +241,7 @@ include_once "conexion.php";
 								<label for="mail">Mail 1: </label>
 							</td>
 							<td colspan="2">
-								<input id="mail" name="mail" type="email" class="campoText" value="<?php echo $mail; ?>" autocomplete="off" required/>
+								<input id="mail" name="mail" type="email" class="campoText" value="<?php echo $mail; ?>" onchange="checkMail();" autocomplete="off" required/>
 							</td>
 							<td colspan="1" align="right">
 								<label for="mail2">Mail 2: </label>
@@ -286,19 +310,6 @@ include_once "conexion.php";
 		</td>
 	</tr>
 </table>
-<fieldset>
-	<legend>Datos de usuario</legend>
-		<table align="center" width="100%">
-			<tr width="100%">
-				<td width="10%" align="right">
-					<label for="password">Contrase&ntilde;a: </label>
-				</td>
-				<td width="90%">
-					<input id="password" name="password" type="password" pattern=".{6,}" title="M&iacute;nimo seis caracteres" class="campoText" value="<?php echo $password; ?>" required/>
-				</td>
-			</tr>
-		</table>
-</fieldset>
 </div>
 <table id="tablaBtn" align="center">
 	<tr width="100%">

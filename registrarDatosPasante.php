@@ -5,9 +5,10 @@
 <body>
 <?php
 include_once "conexion.php";
+include_once "libreria.php";
 
 $id_Pasante = $_REQUEST['idPasante'];
-	if ($id_Pasante == NULL){
+	if ($id_Pasante == 0){
 		$nombre = ucwords($_REQUEST['nombre']);
 		$apellido = ucwords($_REQUEST['apellido']);
 		$nro_legajo = $_REQUEST['nro_legajo'];
@@ -22,7 +23,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 		$nrocalle = $_REQUEST['nrocalle'];
 		$piso = $_REQUEST['piso'];
 		$dpto = ucwords($_REQUEST['dpto']);
-		$carrera_fk = $_REQUEST['carrera_fk'];
+		//$carrera_fk = $_REQUEST['carrera_fk'];
 		$caracfijo = $_REQUEST['caracfijo'];
 		$nrofijo = $_REQUEST['nrofijo'];
 		$caraccel = $_REQUEST['caraccel'];
@@ -31,25 +32,36 @@ $id_Pasante = $_REQUEST['idPasante'];
 		$mail2 = $_REQUEST['mail2'];
 		$facebook = ucwords($_REQUEST['facebook']);
 		$twitter = ucwords($_REQUEST['twitter']);
-		$password = $_REQUEST['password'];
+		$password = getCode(8);
 		$prov_trabajo = ucwords($_REQUEST['prov_trabajo']);
 		$loc_trabajo = ucwords($_REQUEST['loc_trabajo']);
 		$codpos2 = $_REQUEST['codpos2'];
 		$empresa_trabaja = ucwords($_REQUEST['empresa_trabaja']);
 		$perfil_laboral = ucfirst($_REQUEST['perfil_laboral']);
+
+		$traerId = traerId('pasante');
+		$cuerpo = "
+        <div align='left'>
+            <div align='left'>
+                <strong>Nuevo Alumno registrado</strong><br/><br/>
+
+                La persona <strong>$nombre $apellido</strong> complet&oacute; el formulario de inscripci&oacute;n.<br/><br />
+                
+                Presione aqu&iacute; para confirmarlo, <a href=".'"confirmarAlumno.php?idPasante='.$traerId.'" target="_blank"'.">Confirmar</a>.<br /><br />
+                <br />
+            </div>
+        </div>
+        ";
+        $asunto = "Confirmar Alumno";
+        $sendFrom = "lucaspm_2005@hotmail.com";
+        $from_name = "Dpto Electronica";
+        $to = "eze.olea.f@gmail.com";
 		
 		// $consultaMax = pg_query("SELECT max(id) FROM pasante");
 		// $rowMax = pg_fetch_array($consultaMax);
 		// $maximoAlumno = $rowMax['max'];
 		// $maximoAlumno = $maximoAlumno + 1;
 		// $id_Alumno = $maximoAlumno;
-
-		$verificarMail=pg_query("SELECT mail FROM pasante WHERE UPPER(mail) LIKE UPPER('{$mail}');");
-		while($rowVerifMail=pg_fetch_array($verificarMail,NULL,PGSQL_ASSOC)){
-			if ($mail == $rowVerifMail['mail']) {
-				echo '<script language="JavaScript"> alert("El mail ya se encuentra registrado, usted ya tiene cuenta."); window.location = "login.php";</script>';
-			}
-		}
 
 		$newPasante="INSERT INTO pasante(nombre, apellido, nro_legajo, tipodni, nrodni, fec_nacimiento, loc_nacimiento, prov_viviendo, loc_viviendo, codpos, calle, nrocalle, piso, dpto, carrera_fk, caracfijo, nrofijo, caraccel, nrocelular, mail, mail2, facebook, twitter, password, prov_trabajo, loc_trabajo, codpos2, empresa_trabaja, perfil_laboral,rol_fk)VALUES('$nombre','$apellido','$nro_legajo','$tipodni','$nrodni','$fec_nacimiento','$loc_nacimiento','$prov_viviendo','$loc_viviendo','$codpos','$calle','$nrocalle','$piso','$dpto',2,'$caracfijo','$nrofijo','$caraccel','$nrocelular','$mail','$mail2','$facebook','$twitter','$password','$prov_trabajo','$loc_trabajo','$codpos2','$empresa_trabaja','$perfil_laboral',1);";
 			$error=0;
@@ -64,11 +76,11 @@ $id_Pasante = $_REQUEST['idPasante'];
 
 				
 		if ($error==1){
-			echo '<script language="JavaScript"> 			alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
+			echo '<script language="JavaScript"> 	alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
 		}else{
-			echo $id_P;
-			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "login.php?registrado=0";</script>';
+			enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
+			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "login.php?registrado=1";</script>';
 		}
 	}else{
 		//aca va el update
