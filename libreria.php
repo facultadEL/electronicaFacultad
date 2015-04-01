@@ -3,7 +3,7 @@
 <script type='text/javascript' src="codeLibrary.js"></script>
 <?php
 //Actualizada a la fecha 30/09/2014 
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 //Guarda la consulta de base de datos, siempre y cuando se le envie el sql y la conexion a la base;
     //Devuelve el error para hacer el javascript para mostrar los mensajes segun el guardado
 function guardarSql($sqlGuardar){
@@ -133,7 +133,6 @@ function getCode($largoCodigo)
     echo '<script>sD();lDD();longValue = '.$largoCodigo.';codigo = gP(longValue);</script>';
     $variablephp = "<script> document.write(codigo) </script>";
     return $variablephp;
-
 }
 
 

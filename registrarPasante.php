@@ -91,7 +91,7 @@ include_once "conexion.php";
 ?>
 <div id="formulario">
 <h2>Formulario de Inscripci&oacute;n</h2>
-<form class="formNuevoPasante" name="f1" id="form2" action="registrarDatosPasante.php?idPasante=<?php echo $id_Pasante ?>" method="post" enctype="multipart/form-data">
+<form class="formNuevoPasante" name="f1" id="form2" action="registrarDatosPasante.php?idPasante=<?php echo $id_Pasante ?>&password=<?php echo $password ?>" method="post" enctype="multipart/form-data">
 <table align="center" width="100%">
 	<tr width="100%">
 		<td width="100%">
@@ -103,7 +103,7 @@ include_once "conexion.php";
 								<label for="nombre">Nombre: </label>
 							</td>
 							<td width="30%">
-								<input id="nombre" name="nombre" type="text" class="campoText" value="<?php echo $nombre; ?>" required/>
+								<input id="nombre" name="nombre" type="text" class="campoText" value="<?php echo $nombre; ?>" required autofocus/>
 							</td>
 							<td width="10%" align="right">
 								<label for="apellido">Apellido: </label>
