@@ -47,15 +47,16 @@ $id_Pasante = $_REQUEST['idPasante'];
 
                 La persona <strong>$nombre $apellido</strong> complet&oacute; el formulario de inscripci&oacute;n.<br/><br />
                 
-                Presione aqu&iacute; para confirmarlo, <a href=".'"confirmarAlumno.php?idPasante='.$traerId.'" target="_blank"'.">Confirmar</a>.<br /><br />
+                Presione aqu&iacute; para confirmarlo, <a href=".'"http://extension.frvm.utn.edu.ar/electronicaFacultad/enDesarrollo.php?idPasante='.$traerId.'" target="_blank"'.">Confirmar</a>.<br /><br />
                 <br />
             </div>
         </div>
         ";
         $asunto = "Confirmar Alumno";
-        $sendFrom = "lucaspm_2005@hotmail.com";
+        $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
         $from_name = "Dpto Electronica";
-        $to = "eze.olea.f@gmail.com";
+        $to = "etell@frvm.utn.edu.ar";
+        //$to = "eze.olea.f@gmail.com";
 		
 		// $consultaMax = pg_query("SELECT max(id) FROM pasante");
 		// $rowMax = pg_fetch_array($consultaMax);
