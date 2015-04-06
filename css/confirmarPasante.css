@@ -4,6 +4,7 @@ body {
 	font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	line-height: 1em;
+	width: 100%;
 }
 h2 {
 	background-color: #489785; /*color de fondo del login.. #f95252*/
@@ -13,18 +14,19 @@ h2 {
 	letter-spacing: 1px;
 	color: #fff; /*color del texto*/
 	font-size: 28px;
-	padding: 20px 26px;
+	padding: 2% 2.6%;
 	text-align: center;
 	margin-bottom: 0px;
 	border-top: 3px Solid #6E6E6E;
 }
 .nueva_idea {
-	padding: 5px 40px 20px 20px;
+	/*padding: 5px 40px 20px 20px;*/
+	padding: 2%;
 	background: #FAFAFA;
 	-webkit-border-radius: 0px 0px 10px 10px;
 	-moz-border-radius: 0px 0px 10px 10px;
 	border-radius: 0px 0px 10px 10px;
-	margin-top: 0px;
+	margin-top: 0%;
 }
 #menu { 
 	/*background: #F2F2F2;
@@ -38,8 +40,8 @@ h2 {
     overflow: hidden;
 }
 #menu ul{
-	margin: 15px;
-    padding: 15px 0px 15px 0px;
+	margin: 1.5%;
+    padding: 1.5% 0% 1.5% 0%;
     float: center;
     list-style: none;
     background: #444
@@ -53,21 +55,10 @@ h2 {
 #menu li {
 	display: inline;
 	float: center;
-/*	color: #000;
-	padding: 10px 30px 10px 30px;
-	margin-right: 10px;
-	margin-left: 10px;
-	font: bold 16px Calibri, verdana, sans-serif; 
-	border: 1px Solid #6E6E6E;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	-moz-transition: -moz-transform 1s ease-in-out 0.1s; 
-	-webkit-transition: -webkit-transform 1s ease-in-out 0.1s;*/
 }
 #menu a {
     float:center;
-    padding: 6px;
+    padding: 0.6%;
     text-decoration: none;
     border-radius: 4px;
     color: #555;
@@ -93,10 +84,11 @@ h2 {
 }
 
 #formulario{
-	width: 960px;
+	width: 70%;
 	box-shadow: 0px 0px 20px 4px #6E6E6E;  /*3 nro. Es el difuminado. 4 nro. es el tamaño*/
-	margin: 50px auto; /* margen superior */
-	margin-bottom: 200px;
+	margin: 5% auto; /* margen superior */
+	margin-bottom: 0%;
+	padding-right: 0%;
 	-webkit-border-radius: 10px 10px 10px 10px;
 	-moz-border-radius: 10px 10px 10px 10px;
 	border-radius: 10px 10px 10px 10px;
@@ -105,45 +97,16 @@ h2 {
 	border-left: 3px Solid #6E6E6E;
 	
 }
-#add_idea{
-	visibility: hidden;
-	/*display: none;*/
-}
-#imagen{
-	padding: 20px 0px 0px 0px;
-}
+
 label {
-	font-family: Calibri;
+/*	font-family: Calibri;
 	font-size: 20px;
 	font-weight: normal;
 	color: #336699;
-	text-transform: capitalize;
-	padding-right: 5px;
+	text-transform: capitalize;*/
 }
-lbl_estado{
-	font-family: Calibri;
-	font-size: 20px;
-	font-weight: normal;
-	color: #336699;
-	text-transform: capitalize;
-	padding-right: 5px;
-}
-.campoText{
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	color: #424242;
-	padding: 5px;
-	width: 350px;
-	height: 15px;
-	font-size: 16px;
-	font-weight: normal;
-	text-align: left;
-	font-family: Calibri;
-	position:relative;
-	border: none;
-	box-shadow:0px 0px 10px 1px  #ccc;
-}
+
+
 l1{
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -156,14 +119,6 @@ l1{
 	font-family: Calibri;
 	border: none;
 }
-h1{
-	font-family: Calibri;
-	font-size: 26px;
-	font-weight: normal;
-	text-align: center;
-	padding-bottom: 10px;
-	color: #086A87;
-}
 
 .submit{
 	-webkit-border-radius: 10px;
@@ -172,7 +127,7 @@ h1{
 	background-color: #A4A4A4;
 	color: #fff;
 	display: block;
-	margin: 10px auto;
+	margin: 2% auto;
 	cursor: pointer;
 	width: 120px;
 	height: 40px;
@@ -222,36 +177,9 @@ h1{
 a {
 	text-decoration: none;
 }
-select{
-	font-family: Calibri;
-	font-size: 16px;
-	padding: 3px;
-	color: #424242;
-	letter-spacing: 1px;
-	text-shadow:0px 1px 0px #FAFAFA;
-	-webkit-border-radius: 3px 3px 3px 3px; 
-	-moz-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	border: 0;
-	padding: 3px;
-	-webkit-font-smoothing: antialiased;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-	font-weight: normal;
-}
-option{
-	font-family: Calibri;
-	padding: 3px;
-	color: #424242;
-	letter-spacing: 1px;
-	text-shadow:0px 1px 0px #FAFAFA;
-	-webkit-border-radius: 3px 3px 3px 3px; 
-	-moz-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
-	-webkit-font-smoothing: antialiased;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
+
 #tablaBtn{
-	margin-bottom: 30px;
+	margin-bottom: 3%;
 }
 
 #fila{
@@ -259,4 +187,19 @@ option{
 	border: 1px solid #ccc;
 	display: block;
 	padding: 0.5%;
+}
+
+#columnaNombre{
+	width: 69%;
+	border: 1px solid #ccc;
+	display: inline-table;
+	padding: 0.2%;
+	text-align: center;
+}
+#columnaBtnConfirm{
+	width: 29.5%;
+	border: 1px solid #ccc;
+	display: inline-table;
+	padding: 0.2%;
+	text-align: center;
 }

@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type='text/javascript' src="codeLibrary.js"></script>
 <script src="jquery.mask.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/registroPasante.css">
 	<title>Registro de Usuario</title>
@@ -42,6 +43,23 @@
 			}
 		}
 
+		function setPass(passToSet){
+			pass = passToSet;
+		}
+		//Esto se ejecuta cuando la página ya esta cargada
+		$(document).ready(function(){
+			//Acá se controla si trae un password. Lo trae cargado en caso de que sea un update de datos
+			//Si no lo trae cargado, lo genera por primera vez que se registra.
+			if (pass == null) {
+				sD();
+				lDD();
+				longValue = 8;
+				var pass = gP(longValue);
+
+			}
+			//Setea el hidden con el password
+			$('#hiddenPass').val(pass);
+		});
 	</script>
 </head>
 <body>
@@ -82,6 +100,7 @@ include_once "conexion.php";
 			$codpos2 = $rowPasante['codpos2'];
 			$empresa_trabaja = $rowPasante['empresa_trabaja'];
 			$perfil_laboral = $rowPasante['perfil_laboral'];
+			echo "<script>setPass('".$password."');</script>";
 	}
 
 	$verificarMail=pg_query("SELECT mail FROM pasante;");
@@ -91,7 +110,7 @@ include_once "conexion.php";
 ?>
 <div id="formulario">
 <h2>Formulario de Inscripci&oacute;n</h2>
-<form class="formNuevoPasante" name="f1" id="form2" action="registrarDatosPasante.php?idPasante=<?php echo $id_Pasante ?>&password=<?php echo $password ?>" method="post" enctype="multipart/form-data">
+<form class="formNuevoPasante" name="f1" id="form2" action="registrarDatosPasante.php?idPasante=<?php echo $id_Pasante ?>" method="post" enctype="multipart/form-data">
 <table align="center" width="100%">
 	<tr width="100%">
 		<td width="100%">
@@ -104,6 +123,7 @@ include_once "conexion.php";
 							</td>
 							<td width="30%">
 								<input id="nombre" name="nombre" type="text" class="campoText" value="<?php echo $nombre; ?>" required autofocus/>
+								<input type="hidden" name="password" id="hiddenPass"/>
 							</td>
 							<td width="10%" align="right">
 								<label for="apellido">Apellido: </label>
