@@ -94,14 +94,10 @@ $id_Pasante = $_REQUEST['idPasante'];
 </nav>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
 <center>
-<div id="fila">
-	<div id="columnaNombre">
-		<label>Pasante</label>
+	<div id="fila">
+		<div id="columnaNombre"><label>Pasante</label></div>
+		<div id="columnaBtnConfirm"><label>Confirmado</label></div>
 	</div>
-	<div id="columnaBtnConfirm">
-		<label>Confirmado</label>
-	</div>
-</div>
 	<?php
 		$nuevoAlumno = pg_query("SELECT id, nombre, apellido, confirmado FROM pasante WHERE confirmado = false;");
 		while($rowNewPasante=pg_fetch_array($nuevoAlumno,NULL,PGSQL_ASSOC)){
