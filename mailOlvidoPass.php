@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php
 include_once "conexion.php";
 include_once "libreria.php";
@@ -17,13 +18,13 @@ $rowbuscarPass = pg_fetch_array($buscarPass,NULL,PGSQL_ASSOC);
 
             Usted solicit&oacute; que le recuerden su contrase&ntilde;a:<br/><br />
             
-            <u><strong>Usuario:<strong></u> '.$recuperarPass.'<br/>
-            <u><strong>Contrase&ntilde;a:<strong></u> '.$passRecuperado.'<br/>
+            <u><strong>Usuario:<strong></u> $recuperarPass<br/>
+            <u><strong>Contrase&ntilde;a:<strong></u> $passRecuperado<br/>
             <br />
         </div>
     </div>
     ";
-    $asunto = "Recordatorio de contraseña";
+    $asunto = "Recordatorio de password";
     $sendFrom = "dpto-electronica@frvm.utn.edu.ar"; //seguramente va otro mail, hay que crear un gmail
     $from_name = "Dpto Electronica";
     $to = $recuperarPass;

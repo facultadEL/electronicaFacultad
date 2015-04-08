@@ -5,7 +5,7 @@ $passNuevo = $_REQUEST['nuevoPass'];
 //echo 'usuario: '.$usuario.'<br>';
 //echo 'password: '.$password.'<br>';
 $id_Pasante = $_SESSION['id'];
-echo 'pass: '.$passNuevo;
+//echo 'pass: '.$passNuevo;
 
 include_once "conexion.php";
 
