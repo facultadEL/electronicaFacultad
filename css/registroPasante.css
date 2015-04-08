@@ -172,6 +172,7 @@ fieldset {
 	width: 120px;
 	height: 40px;
 	border: none;
+	font: bold 16px Calibri, sans-serif;
 	background-image: url('../img/floppy.png');
 	background-repeat: no-repeat;
 	background-position: 12px;
@@ -199,6 +200,7 @@ fieldset {
 	width: 120px;
 	height: 40px;
 	border: none;
+	font: bold 16px Calibri, sans-serif;
 	background-image: url('../img/cancelar.png');
 	background-repeat: no-repeat;
 	background-position: 12px;

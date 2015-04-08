@@ -151,7 +151,7 @@ function enviarMail($c,$a,$sendFrom,$from_name,$to){
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = "ssl"; 
     $mail->Host = "smtp.gmail.com"; // dirección del servidor
-    $mail->Username = "extensionfrvm@gmail.com"; // Usuario
+    $mail->Username = "extensionfrvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
 
     $mail->Password = "4537500frvm"; // Contraseña
 

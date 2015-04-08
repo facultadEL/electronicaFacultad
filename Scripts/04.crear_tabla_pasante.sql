@@ -31,5 +31,6 @@
   empresa_trabaja character varying,
   perfil_laboral character varying,
   logueado boolean default false,
+  primera_vez boolean default TRUE,
   rol_fk integer references rol(id)
 );

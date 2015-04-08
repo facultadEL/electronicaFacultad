@@ -9,13 +9,59 @@
 <head>
 	<meta charset="utf-8">
 	<title>Login</title>
+	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
 	<link rel="stylesheet" href="css/login.css">
+	<script>
+		var dataDictionary = [];
+
+		function setData(dataToPush){
+			dataDictionary.push(dataToPush);
+		}
+
+		function validateData(){
+
+			var mail, pass, loginCheck;
+			mail = $('#email').val().toLowerCase();
+			pass = $('#password').val();
+			loginCheck = mail+'/--/'+pass;
+
+			if($.inArray(loginCheck, dataDictionary) != -1){
+				return true;
+			}else{
+				for (var i = 0; i < dataDictionary.length; i++) {
+					vString = dataDictionary[i].split('/--/');
+
+					if (vString[0] == mail){
+						alert("La contraseña es incorrecta");
+						$('#password').val("");
+						$('#password').focus();
+						return false;
+					}else{
+						alert("Los datos ingresados son incorrectos");
+						$('#email').val("");
+						$('#password').val("");
+						$('#email').focus();
+						return false;
+					}
+				}
+			}
+		}
+	</script>
 </head>
 <body>
+<?php
+include_once "conexion.php";
+include_once "libreria.php";
+	$sql = traerSql('mail,password','pasante');
+	while($rowData=pg_fetch_array($sql,NULL,PGSQL_ASSOC)){
+		$dataToPass = strtolower($rowData['mail']).'/--/'.$rowData['password'];
+		echo "<script>setData('".$dataToPass."')</script>";
+	}
+?>
 	<div id="login">
 		<h2>Login</h2>
-		<form action="verificarLogin.php" method="post">
+		<form action="verificarLogin.php" onsubmit="return validateData();" method="post">
 				<table width="100%" align="center">
 					<tr>
 						<td>
@@ -24,7 +70,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="email" id="email" name="usuario" value="" placeholder="E-mail" autofocus required/>
+							<input type="email" id="email" name="usuario" onchange="checkMail();" value="" placeholder="E-mail" autofocus required/>
 						</td>
 					</tr>
 					<tr>
@@ -49,7 +95,7 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="button" id="btn_olvpass" value="Olvid&eacute; mi contrase&ntilde;a">
+							<a href="olvidoPassword.php"><input type="button" id="btn_olvpass" value="Olvid&eacute; mi contrase&ntilde;a"></a>
 						</td>
 					</tr>
 				</table>

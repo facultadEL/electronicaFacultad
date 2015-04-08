@@ -60,6 +60,18 @@
 			//Setea el hidden con el password
 			$('#hiddenPass').val(pass);
 		});
+
+		function checkMail2()
+		{
+			var mail1 = $('#mail').val();
+			var mail2 = $('#mail2').val();
+			if(mail1 == mail2)
+			{
+				alert("No se puede utilizar el mismo mail");
+				$('#mail2').val("");
+				$('#mail2').focus();
+			}
+		}
 	</script>
 </head>
 <body>
@@ -267,7 +279,7 @@ include_once "conexion.php";
 								<label for="mail2">Mail 2: </label>
 							</td>
 							<td colspan="2">
-								<input id="mail2" name="mail2" type="email" placeholder="Opcional" class="campoText" value="<?php echo $mail2; ?>"/>
+								<input id="mail2" name="mail2" type="email" onchange="checkMail2();" placeholder="Opcional" class="campoText" value="<?php echo $mail2; ?>"/>
 							</td>
 						</tr>
 						<tr width="100%">
