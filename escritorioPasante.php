@@ -2,12 +2,13 @@
 	session_start();
 /*	echo 'Rol: '.$_SESSION['rol_fk'].'<br>';
 	echo 'id: '.$_SESSION['id'].'<br>';*/
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type='text/javascript' src="jquery.min-1.9.1.js"></script>
 <script src="jquery.mask.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/escritorioPasante.css">
 <title><?php echo 'Bienvenido, '.$_SESSION['nombre'];?></title>
@@ -54,6 +55,7 @@ include_once "libreria.php";
 $enviado = $_REQUEST['enviado'];
 if ($enviado == 1) { //para que no se ejecute el código en caso de no tener un archivo cargado
 $nombre_idea = ucwords($_REQUEST['nombre']);
+$archivo = $_REQUEST['add_idea'];
 $id = $_SESSION['id'];
 
 	//$destino = loadFileToServer('aca va la carpeta destino');
@@ -98,17 +100,11 @@ if ($hayIdea == 0) {
 <body>
 <div id="formulario">
 <h2>Seguimiento de la Idea</h2>
-<nav id="menu">
-	<ul> 
-		<li><a href="enDesarrollo.php">Perfil</a></li>
-		<li><a href="enDesarrollo.php">Menú2</a></li>
-		<li><a href="enDesarrollo.php">Cerrar Sesi&oacute;n</a></li>
-	</ul>
-</nav>
-<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
-<table align="center" width="100%" >
+<?php include_once "menuPasante.html";?>
+<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
+<!-- <table id="tablaCuerpo" align="center">
 	<tr width="100%">
-		<td width="9%" align="center" rowspan="4">
+		<td width="1%" align="center" rowspan="4">
 			<label for="add_idea"><img id="imagen" src="img/add-idea.png" width="180" height="180"></label>
 			<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
 		</td>
@@ -117,7 +113,7 @@ if ($hayIdea == 0) {
 		</td>
 	</tr>
 		<tr>
-		<td width="7%" align="right">
+		<td width="2%" align="right">
 			<label for="nombre">Archivo: </label>
 		</td>
 		<td width="10%" align="left">
@@ -125,35 +121,88 @@ if ($hayIdea == 0) {
 		</td>
 	</tr>
 	<tr>
-		<td width="7%" align="right">
-			<label for="nombre">Nombre idea: </label>
+		<td width="2%" align="right">
+			<label for="nombre">Nombre: </label>
 		</td>
 		<td width="10%" align="left">
 			<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
 		</td>
 	</tr>
 	<tr>
-		<td width="7%" align="right">
+		<td width="2%" align="right">
 			<label for="estado" class="lbl_estado">Estado: </label>
 		</td>
 		<td width="10%" align="left">
 			<?php
-				$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
-				while($rowEstado=pg_fetch_array($consultaEstado)){
-					if ($rowEstado['id'] == 1){
-                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
-					}
+				//$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
+				//while($rowEstado=pg_fetch_array($consultaEstado)){
+				//	if ($rowEstado['id'] == 1){
+                //    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
+				//	}
 					//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
-				}
+				//}
 			?>
 		</td>
 	</tr>
-</table>
+</table> -->
+
+<div id="tablaCuerpo">
+		<table id="tablaImagen" align="left">
+			<tr>
+				<td>
+					<label for="add_idea">
+						<img id="imagen" src="img/add-idea2.png" title="Click aqu&iacute; para subir un PDF">
+					</label>
+					<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
+				</td>
+			</tr>
+		</table>
+		<table id="tablaDatos">
+			<tr width="100%">
+				<td width="70%" colspan="2">
+					<h1>No tienes ninguna idea subida</h1>
+				</td>
+			</tr>
+				<tr>
+				<td width="3%" align="right">
+					<label for="nombre">Archivo: </label>
+				</td>
+				<td width="20%" align="left">
+					<input id="path" name="path" type="text" class="campoText" value="" disabled="true" />
+				</td>
+			</tr>
+			<tr>
+				<td width="3%" align="right">
+					<label for="nombre">Nombre: </label>
+				</td>
+				<td width="20%" align="left">
+					<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
+				</td>
+			</tr>
+			<tr>
+				<td width="3%" align="right">
+					<label for="estado">Estado: </label>
+				</td>
+				<td width="20%" class="lbl_estado" align="left">
+					<?php
+						$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
+						while($rowEstado=pg_fetch_array($consultaEstado)){
+							if ($rowEstado['id'] == 1){
+		                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
+							}
+							echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
+						}
+					?>
+				</td>
+			</tr>
+		</table>
+</div>
+</center>
 <table id="tablaBtn" align="center">
 	<tr width="100%">	
 		<td width="100%" align="center">
-			<input class="submit" type="submit" value="Guardar"/>
-		</td>
+			<input id="enviar" class="submit" type="submit" value=""/>
+ 		</td>
 	</tr>
 </table>
 </form>
@@ -163,57 +212,59 @@ if ($hayIdea == 0) {
 	<body>
 	<div id="formulario">
 	<h2>Seguimiento de la Idea</h2>
-	<nav id="menu">
-		<ul> 
-			<li><a href="enDesarrollo.php">Perfil</a></li>
-			<li><a href="enDesarrollo.php">Menú2</a></li>
-			<li><a href="enDesarrollo.php">Cerrar Sesi&oacute;n</a></li>
-		</ul>
-	</nav>
-	<form class="nueva_idea" name="con_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
-	<table align="center" width="100%">
-		<tr width="100%">
-			<td width="10%" align="center" rowspan="4">
-				<label for="add_idea"><img id="imagen" src="img/uploaded-idea.png" width="180" height="180"></label>
-				<!-- <input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/> -->
-			</td>
-			<td width="39%"  colspan="2">
-				<h1>Hay idea</h1>
-			</td>
-		</tr>
+	<?php include_once "menuPasante.html";?>
+	<form class="nueva_idea" name="con_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
+		
+	<div id="tablaCuerpo">
+		<table id="tablaImagen" align="left">
 			<tr>
-			<td width="7%" align="right">
-				<label for="nombre">Archivo: </label>
-			</td>
-			<td width="10%" align="left">
-				<l1><?php echo $archivo; ?></l1>
-			</td>
-		</tr>
-		<tr>
-			<td width="7%" align="right">
-				<label for="nombre">Nombre idea: </label>
-			</td>
-			<td width="10%" align="left">
-				<l1><?php echo $nombre_idea; ?></l1>
-			</td>
-		</tr>
-		<tr>
-			<td width="7%" align="right">
-				<label for="estado" class="lbl_estado">Estado: </label>
-			</td>
-			<td width="10%" align="left">
-				<?php
-					$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
-					while($rowEstado=pg_fetch_array($consultaEstado)){
-						if ($rowEstado['id'] == $estado){
-	                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
+				<td>
+					<label>
+						<img id="imagen2" src="img/uploaded-idea.png" title="Click aqu&iacute; para subir un PDF">
+					</label>
+				</td>
+			</tr>
+		</table>
+		<table id="tablaDatos">
+			<tr width="100%">
+				<td width="70%" id="textoCI" colspan="2">
+					<h1>Existe una idea!</h1>
+				</td>
+			</tr>
+				<tr>
+				<td width="3%" id="textoCI">
+					<label for="nombre">Archivo: </label>
+				</td>
+				<td width="20%" id="campoCI">
+					<l1><?php echo $archivo; ?></l1>
+				</td>
+			</tr>
+			<tr>
+				<td width="3%" id="textoCI">
+					<label for="nombre">Nombre: </label>
+				</td>
+				<td width="20%" id="campoCI">
+					<l1><?php echo $nombre_idea; ?></l1>
+				</td>
+			</tr>
+			<tr>
+				<td width="3%" id="textoCI">
+					<label for="estado">Estado: </label>
+				</td>
+				<td width="20%" id="campoCI">
+					<?php
+						$consultaEstado=traerSql('id,nombre','idea');
+						while($rowEstado=pg_fetch_array($consultaEstado)){
+							if ($rowEstado['id'] == $estado){
+		                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
+							}
+							//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
 						}
-						//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
-					}
-				?>
-			</td>
-		</tr>
-	</table>
+					?>
+				</td>
+			</tr>
+		</table>
+</div>		
 	<table id="tablaBtn" align="center">
 		<tr width="100%">
 			<tr><td><br></td></tr>

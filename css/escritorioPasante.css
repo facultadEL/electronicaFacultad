@@ -4,6 +4,10 @@ body {
 	font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	line-height: 1em;
+	width: 100%;
+	margin-left: 0%;
+	margin-right: 0%;
+	margin-bottom: 5%;
 }
 h2 {
 	background-color: #489785; /*color de fondo del login.. #f95252*/
@@ -13,18 +17,19 @@ h2 {
 	letter-spacing: 1px;
 	color: #fff; /*color del texto*/
 	font-size: 28px;
-	padding: 20px 26px;
+	padding: 2% 2.6%;
 	text-align: center;
-	margin-bottom: 0px;
+	margin-bottom: 0%;
 	border-top: 3px Solid #6E6E6E;
 }
 .nueva_idea {
-	padding: 5px 40px 20px 20px;
+	padding: 2%;
 	background: #FAFAFA;
 	-webkit-border-radius: 0px 0px 10px 10px;
 	-moz-border-radius: 0px 0px 10px 10px;
 	border-radius: 0px 0px 10px 10px;
-	margin-top: 0px;
+	margin-top: 0%;
+	text-align: center;
 }
 #menu { 
 	/*background: #F2F2F2;
@@ -38,8 +43,8 @@ h2 {
     overflow: hidden;
 }
 #menu ul{
-	margin: 15px;
-    padding: 15px 0px 15px 0px;
+	margin: 1.5%;
+    padding: 1.5% 0% 1.5% 0%;
     float: center;
     list-style: none;
     background: #444
@@ -53,26 +58,15 @@ h2 {
 #menu li {
 	display: inline;
 	float: center;
-/*	color: #000;
-	padding: 10px 30px 10px 30px;
-	margin-right: 10px;
-	margin-left: 10px;
-	font: bold 16px Calibri, verdana, sans-serif; 
-	border: 1px Solid #6E6E6E;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	-moz-transition: -moz-transform 1s ease-in-out 0.1s; 
-	-webkit-transition: -webkit-transform 1s ease-in-out 0.1s;*/
 }
 #menu a {
     float:center;
-    padding: 6px;
+    padding: 0.6%;
     text-decoration: none;
     border-radius: 4px;
     color: #555;
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
-    font: bold 1.1em/1 'trebuchet MS', Arial, Helvetica;
+    font: bold 16px 'trebuchet MS', Arial, Helvetica;
     letter-spacing: 1px;
     text-transform: uppercase;
     border-width: 1px;
@@ -93,48 +87,74 @@ h2 {
 }
 
 #formulario{
-	width: 960px;
+	width: 80%;
 	box-shadow: 0px 0px 20px 4px #6E6E6E;  /*3 nro. Es el difuminado. 4 nro. es el tamaño*/
-	margin: 50px auto; /* margen superior */
-	margin-bottom: 200px;
-	-webkit-border-radius: 10px 10px 10px 10px;
-	-moz-border-radius: 10px 10px 10px 10px;
-	border-radius: 10px 10px 10px 10px;
+	margin: 5% auto; /* margen superior */
+	margin-bottom: 0%;
+	padding-right: 0%;
+	padding-left: 0%;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 	border-bottom: 3px Solid #6E6E6E;
 	border-right: 3px Solid #6E6E6E;
 	border-left: 3px Solid #6E6E6E;
-	
+	text-align: center;
 }
 #add_idea{
-	visibility: hidden;
-	/*display: none;*/
+	display: none;
 }
 #imagen{
-	padding: 20px 0px 0px 0px;
+	width: 50%;
+	height: 50%;
+	padding: 1%;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #69beec;
+	cursor: pointer;
+}
+#imagen:hover{
+	box-shadow:0px 0px 20px 2px  #0b6493;
+	-moz-box-shadow: 0px 0px 20px 2px  #0b6493;
+	-webkit-box-shadow: 0px 0px 20px 2px  #0b6493;
+}
+#imagen2{
+	width: 50%;
+	height: 50%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	text-align: center;
+	vertical-align: middle;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #69beec;
 }
 label {
 	font-family: Calibri;
 	font-size: 20px;
 	font-weight: normal;
 	color: #336699;
-	text-transform: capitalize;
-	padding-right: 5px;
+	padding-right: 1%;
 }
-lbl_estado{
+.lbl_estado{
 	font-family: Calibri;
 	font-size: 20px;
 	font-weight: normal;
 	color: #336699;
-	text-transform: capitalize;
-	padding-right: 5px;
+	padding: 1.5%;
 }
 .campoText{
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	color: #424242;
-	padding: 5px;
-	width: 350px;
+	padding: 1.5%;
+	margin: 0.3%;
+	width: 90%;
 	height: 15px;
 	font-size: 16px;
 	font-weight: normal;
@@ -149,7 +169,7 @@ l1{
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	color: #424242;
-	padding: 5px;
+	padding: 2%;
 	font-size: 16px;
 	font-weight: normal;
 	text-align: left;
@@ -161,8 +181,40 @@ h1{
 	font-size: 26px;
 	font-weight: normal;
 	text-align: center;
-	padding-bottom: 10px;
+	padding-bottom: 1%;
 	color: #086A87;
+}
+
+#tablaCuerpo{
+	width: 100%;
+	display: inline-block;
+	margin: 0%;
+	padding: 0%;
+	margin-bottom: 2%;
+}
+#tablaImagen{
+	padding: 0%;
+	margin-right: 2%;
+	margin-left: 0%;
+	margin-top: 1%;
+	width: 27%;
+	text-align: right;
+	vertical-align: middle;
+}
+#tablaDatos{
+	padding: 0%;
+	margin: 0%;
+	width: 70%;
+	text-align: center;
+}
+
+#textoCI{
+	padding: 1%;
+	text-align: right;
+}
+
+#campoCI{
+	text-align: left;
 }
 
 .submit{
@@ -171,28 +223,25 @@ h1{
 	border-radius: 10px;
 	background-color: #A4A4A4;
 	color: #fff;
-	display: block;
-	margin: 10px auto;
+	margin: 5% auto;
 	cursor: pointer;
-	width: 120px;
+	width: 1000%;
 	height: 40px;
 	border: none;
-	font: bold 16px Calibri, sans-serif;
-	background-image: url('../img/floppy.png');
+	background-image: url('../img/floppy2.png');
 	background-repeat: no-repeat;
-	background-position: 12px;
-	padding-left: 40px;
-	-webkit-background-size: 30px 30px;           /* Safari 3.0 */
-    -moz-background-size: 30px 30px;           /* Gecko 1.9.2 (Firefox 3.6) */
-    -o-background-size: 30px 30px;           /* Opera 9.5 */
-    background-size: 30px 30px;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
-    margin-left: 5px;
+	background-position: 1%;
+	-webkit-background-size: 100% 75%;
+    -moz-background-size: 100% 75%;
+    -o-background-size: 100% 75%;
+    background-size: 100% 75%;
 }
 .submit:hover {
-	box-shadow:0px 0px 15px 0px  #000;
+	box-shadow:0px 0px 1px 1px  #000;
 	-moz-box-shadow: 0px 0px 15px 0px  #000;
 	-webkit-box-shadow: 0px 0px 15px 0px  #000;
 }
+
 #btn_cancelar{
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;

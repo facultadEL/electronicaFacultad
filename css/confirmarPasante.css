@@ -5,6 +5,9 @@ body {
 	font-size: 14px;
 	line-height: 1em;
 	width: 100%;
+	padding: 0%;
+	margin: 0%;
+	margin-bottom: 5%;
 }
 h2 {
 	background-color: #489785; /*color de fondo del login.. #f95252*/
@@ -16,11 +19,10 @@ h2 {
 	font-size: 28px;
 	padding: 2% 2.6%;
 	text-align: center;
-	margin-bottom: 0px;
+	margin-bottom: 0%;
 	border-top: 3px Solid #6E6E6E;
 }
 .nueva_idea {
-	/*padding: 5px 40px 20px 20px;*/
 	padding: 2%;
 	background: #FAFAFA;
 	-webkit-border-radius: 0px 0px 10px 10px;
@@ -63,16 +65,16 @@ h2 {
     border-radius: 4px;
     color: #555;
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
-    font: bold 1.1em/1 'trebuchet MS', Arial, Helvetica;
+    font: bold 16px 'trebuchet MS', Arial, Helvetica;
     letter-spacing: 1px;
     text-transform: uppercase;
     border-width: 1px;
     border-style: solid;
     border-color: #fff #ccc #999 #eee;
     background: #c1c1c1;
-    background: linear-gradient(#f5f5f5, #c1c1c1);            
- }
- #menu a:hover, #menu a:focus {
+    background: linear-gradient(#f5f5f5, #c1c1c1);    
+}
+#menu a:hover, #menu a:focus {
     outline: 0;
     color: #fff;
     text-shadow: 0 1px 0 rgba(0,0,0,.2);
@@ -89,9 +91,10 @@ h2 {
 	margin: 5% auto; /* margen superior */
 	margin-bottom: 0%;
 	padding-right: 0%;
-	-webkit-border-radius: 10px 10px 10px 10px;
-	-moz-border-radius: 10px 10px 10px 10px;
-	border-radius: 10px 10px 10px 10px;
+	padding-left: 0%;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 	border-bottom: 3px Solid #6E6E6E;
 	border-right: 3px Solid #6E6E6E;
 	border-left: 3px Solid #6E6E6E;
@@ -102,7 +105,7 @@ label {
 	font-family: Calibri;
 	font-size: 20px;
 	font-weight: normal;
-	color: #336699;
+	color: #fff;
 	text-transform: capitalize;
 }
 
@@ -112,7 +115,7 @@ l1{
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	color: #424242;
-	padding: 5px;
+	padding: 2.5%;
 	font-size: 16px;
 	font-weight: normal;
 	text-align: left;
@@ -120,34 +123,6 @@ l1{
 	border: none;
 }
 
-.submit{
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	background-color: #A4A4A4;
-	color: #fff;
-	display: block;
-	margin: 2% auto;
-	cursor: pointer;
-	width: 120px;
-	height: 40px;
-	border: none;
-	font: bold 16px Calibri, sans-serif;
-	background-image: url('../img/floppy.png');
-	background-repeat: no-repeat;
-	background-position: 12px;
-	padding-left: 40px;
-	-webkit-background-size: 30px 30px;           /* Safari 3.0 */
-    -moz-background-size: 30px 30px;           /* Gecko 1.9.2 (Firefox 3.6) */
-    -o-background-size: 30px 30px;           /* Opera 9.5 */
-    background-size: 30px 30px;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
-    margin-left: 5px;
-}
-.submit:hover {
-	box-shadow:0px 0px 15px 0px  #000;
-	-moz-box-shadow: 0px 0px 15px 0px  #000;
-	-webkit-box-shadow: 0px 0px 15px 0px  #000;
-}
 #btn_confirm{
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -155,21 +130,47 @@ l1{
 	background-color: #eee;
 	color: #489785;
 	cursor: pointer;
-	width: 120px;
+	width: 70%;
+	height: 40px;
+	border: none;
+	font: bold 16px Calibri, sans-serif;
+	background-image: url('../img/off.png');
+	background-repeat: no-repeat;
+	background-position: 10%;
+	padding-left: 20%;
+	-webkit-background-size: 30px 30px;           /* Safari 3.0 */
+    -moz-background-size: 30px 30px;           /* Gecko 1.9.2 (Firefox 3.6) */
+    -o-background-size: 30px 30px;           /* Opera 9.5 */
+    background-size: 30px 30px;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
+    margin-right: 2.5%;
+}
+#btn_confirm:hover {
+	box-shadow: 0px 0px 15px 0px  #489785;
+	-moz-box-shadow: 0px 0px 15px 0px  #489785;
+	-webkit-box-shadow: 0px 0px 15px 0px  #489785;
+}
+#btn_cancelar{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #eee;
+	color: #489785;
+	cursor: pointer;
+	width: 70%;
 	height: 40px;
 	border: none;
 	font: bold 16px Calibri, sans-serif;
 	background-image: url('../img/on.png');
 	background-repeat: no-repeat;
-	background-position: 12px;
-	padding-left: 40px;
+	background-position: 10%;
+	padding-left: 20%;
 	-webkit-background-size: 30px 30px;           /* Safari 3.0 */
     -moz-background-size: 30px 30px;           /* Gecko 1.9.2 (Firefox 3.6) */
     -o-background-size: 30px 30px;           /* Opera 9.5 */
     background-size: 30px 30px;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
-    margin-right: 5px;
+    margin-right: 2.5%;
 }
-#btn_confirm:hover {
+#btn_cancelar:hover {
 	box-shadow: 0px 0px 15px 0px  #489785;
 	-moz-box-shadow: 0px 0px 15px 0px  #489785;
 	-webkit-box-shadow: 0px 0px 15px 0px  #489785;
@@ -178,21 +179,11 @@ a {
 	text-decoration: none;
 }
 
-#tablaBtn{
-	margin-bottom: 3%;
-}
-
-#tablaTitulo{
+/*#tablaTitulo{
 	width: 90%;
 	padding: 0.5%;
 	margin-bottom: 2%;
 	border-bottom: 2px solid;
-}
-
-#tdTitulo{
-	padding: 1%;
-	text-align: center;
-	width: 33%;
 }
 
 #tablaCampos{
@@ -201,9 +192,66 @@ a {
 	margin-bottom: 2%;
 	text-align: right;
 }
+*/
+#tdTitulo{
+	text-align: center;
+	width: 30%;
+}
 
-#tdBtn{
-	padding: 0.2%;
-	text-align: left;
-	width: 20%;
+#tablaGral{
+	width: 90%;
+	padding: 0.5%;
+	margin-bottom: 2%;
+	margin-top: 2%;
+	margin-right: 0%;
+	margin-left: 05;
+	text-align: center;
+}
+
+#tablaTitulo{
+	width: 90%;
+	padding: 0.5%;
+	background-color: #6d6d6d;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	height: 40px;
+	box-shadow: 0px 0px 15px 5px  #489785;
+	-moz-box-shadow: 0px 0px 15px 5px  #489785;
+	-webkit-box-shadow: 0px 0px 15px 5px  #489785;
+	margin-bottom: 2%;
+}
+
+#tablaCampos{
+	width: 90%;
+	padding: 0.5%;
+}
+
+hr{
+	border: 1;
+	height: 2px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: #C0C0C0;
+	width: 95%;
+	margin-top: 3%;
+}
+
+legend{
+	font-family: Tahoma;
+	font-size: 16px;
+	font-weight: normal;
+	color: #444;
+	text-transform: capitalize;
+	text-align: center;
+	text-decoration: underline;
+	font-style: italic;
+	margin-bottom: 2%;
+	margin-top: 1%;
+}
+
+#add_idea{
+	border: none;
+	text-decoration: none;
+	text-transform: none;
 }

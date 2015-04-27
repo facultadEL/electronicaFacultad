@@ -3,5 +3,6 @@
 	nombre character varying,
 	apellido character varying,
 	mail character varying,
-	telefono character varying
+	telefono character varying,
+	usuario_fk
 );

@@ -1,7 +1,11 @@
 <?php
 	session_start(); // al volver al index si existe una session, esta sera destruida, existen formas de conservarlas como con un if(session_start()!= NULL). Pero por el momento para el ejemplo no es valido.
- 	 	$_SESSION['usuario'] = NULL;
+
+	if ($_SESSION['usuario'] != NULL) {
+		$_SESSION['usuario'] = NULL;
  	 	$_SESSION['password'] = NULL;
+	}
+
 	session_destroy(); // Se destruye la session existente de esta forma no permite el duplicado.
 ?>
 <!doctype html>
@@ -53,7 +57,7 @@
 <?php
 include_once "conexion.php";
 include_once "libreria.php";
-	$sql = traerSql('mail,password','pasante');
+	$sql = traerSql('mail,password','usuario');
 	while($rowData=pg_fetch_array($sql,NULL,PGSQL_ASSOC)){
 		$dataToPass = strtolower($rowData['mail']).'/--/'.$rowData['password'];
 		echo "<script>setData('".$dataToPass."')</script>";

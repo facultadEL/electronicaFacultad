@@ -20,47 +20,67 @@ include_once "libreria.php";
 <body>
 <div id="formulario">
 <h2>Confirmar Alumno</h2>
-<nav id="menu">
-	<ul> 
-		<li><a href="enDesarrollo.php">Perfil</a></li>
-		<li><a href="enDesarrollo.php">Menú2</a></li>
-		<li><a href="enDesarrollo.php">Cerrar Sesi&oacute;n</a></li>
-	</ul>
-</nav>
-<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
+<?php include_once "menu.html";?>
+<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
 
+<center>
+<div id="tablaGral">
 <table id="tablaTitulo" align="center">
 	<tr>
 		<td id="tdTitulo"><label>Pasante</label></td>
 		<td id="tdTitulo"><label>Legajo</label></td>
-		<td id="tdTitulo"><label>Confirmado</label></td>
+		<td id="tdTitulo"><label>Confirmar</label></td>
 	</tr>
 </table>
 <table id="tablaCampos" align="center">
 	<?php
-		$nuevoAlumno = pg_query("SELECT id, nombre, apellido, confirmado, nro_legajo FROM pasante WHERE confirmado = false;");
-		while($rowNewPasante=pg_fetch_array($nuevoAlumno,NULL,PGSQL_ASSOC)){
-			$id = $rowNewPasante['id'];
-			$nombre = $rowNewPasante['nombre'];
-			$apellido = $rowNewPasante['apellido'];
-			$confirmado = $rowNewPasante['confirmado'];
-			$nro_legajo = $rowNewPasante['nro_legajo'];
+		$noConfirmado = traerSqlCondicion('id, nombre, apellido, nro_legajo','pasante','confirmado = false');
+		while($rowNoConfirmado=pg_fetch_array($noConfirmado,NULL,PGSQL_ASSOC)){
+			$id = $rowNoConfirmado['id'];
+			$nombre = $rowNoConfirmado['nombre'];
+			$apellido = $rowNoConfirmado['apellido'];
+			//$confirmado = $rowNoConfirmado['confirmado'];
+			$nro_legajo = $rowNoConfirmado['nro_legajo'];
 			echo '<tr>';
 				echo '<td id="tdTitulo"><l1>'.$apellido.', '.$nombre.'</l1></td>';
-				echo '<td id="tdBtn"><l1>'.$nro_legajo.'</l1></td>';
-				//hacer un if para que diferencie los botones segun el estado del alumno --> $confirmado
-				echo '<td id="tdBtn"><a href="confirmado.php"><input type="button" id="btn_confirm" value="Confirmar"></a></td>';
+				echo '<td id="tdTitulo"><l1>'.$nro_legajo.'</l1></td>';
+				echo '<td id="tdTitulo"><a href="confirmado.php?idPasante='.$id.'"><input type="button" id="btn_confirm" value="No Confirmado"></a></td>';
 			echo '</tr>';
 		}
 	?>
 </table>
-<!-- <table id="tablaBtn" align="center">
-	<tr width="100%">	
-		<td width="100%" align="center">
-			<input class="submit" type="submit" value="Guardar"/>
-		</td>
+</div>
+<hr width="100%">
+<legend>Agregados Recientemente</legend>
+<div id="tablaGral">
+<table id="tablaTitulo" align="center">
+	<tr>
+		<td id="tdTitulo"><label>Pasante</label></td>
+		<td id="tdTitulo"><label>Legajo</label></td>
+		<td id="tdTitulo"><label>Cancelar Confirmaci&oacute;n</label></td>
 	</tr>
-</table> -->
+</table>
+<table id="tablaCampos" align="center">
+	<?php
+		//Utilizar la función diasRestantes y solo mostrar lo agregados en el último mes
+		$confirmado = traerSqlCondicion('id, nombre, apellido, nro_legajo','pasante','confirmado = true');
+		while($rowConfirmado=pg_fetch_array($confirmado,NULL,PGSQL_ASSOC)){
+			$id = $rowConfirmado['id'];
+			$nombre = $rowConfirmado['nombre'];
+			$apellido = $rowConfirmado['apellido'];
+			//$confirmado = $rowConfirmado['confirmado'];
+			$nro_legajo = $rowConfirmado['nro_legajo'];
+
+			echo '<tr>';
+				echo '<td id="tdTitulo"><l1>'.$apellido.', '.$nombre.'</l1></td>';
+				echo '<td id="tdTitulo"><l1>'.$nro_legajo.'</l1></td>';
+				echo '<td id="tdTitulo"><a href="confirmado.php?idPasante='.$id.'"><input type="button" id="btn_cancelar" value="Confirmado"></a></td>';
+			echo '</tr>';
+		}
+	?>
+</table>
+</div>
+</center>
 </form>
 </div>
 </body>

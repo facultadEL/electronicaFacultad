@@ -172,7 +172,7 @@ include_once "conexion.php";
 								<label for="nrodni">N&deg; DNI:</label>
 							</td>
 							<td colspan="5">
-								<input id="nrodni" name="nrodni" type="text" class="campoText" onkeyup="maskDni()" onfocus="this.value = '';" pattern="[0-9]{1,2}+[.]{1}[0-9]{3}+[.]{1}[0-9]{3}" value="<?php echo $nrodni; ?>" maxlength="10" required/>
+								<input id="nrodni" name="nrodni" type="text" class="campoText" onkeyup="maskDni()" onfocus="this.value = '';" pattern="[0-9]{1,2}+[.]{1}[0-9]{3}+[.]{1}[0-9]{3}" value="<?php echo $nrodni; ?>" maxlength="10" autocomplete="off" required/>
 							</td>
 						</tr>
 						<tr width="100%">

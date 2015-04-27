@@ -38,8 +38,18 @@ $id_Pasante = $_REQUEST['idPasante'];
 		$codpos2 = $_REQUEST['codpos2'];
 		$empresa_trabaja = ucwords($_REQUEST['empresa_trabaja']);
 		$perfil_laboral = ucfirst($_REQUEST['perfil_laboral']);
+		$fecreg = date(Ymd);
 		//echo 'password: '.$password;
 
+		$error = 0;
+		$sql = "INSERT INTO usuario(mail,password,rol_fk)VALUES('$mail','$password',1);";
+		$error = guardarSql($sql);
+		if ($error == 1) {
+			echo '<script language="JavaScript"> 	alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
+		}else{
+			$usuario_fk = traerUltimo('usuario');	
+		}
+		
 
 		//la linea de abajo va en el cuerpo cuando se suba al servidor
 		//<a href=".'"http://extension.frvm.utn.edu.ar/electronicaFacultad/enDesarrollo.php?idPasante='.$traerId.'" target="_blank"'.">
@@ -70,7 +80,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 		// $maximoAlumno = $maximoAlumno + 1;
 		// $id_Alumno = $maximoAlumno;
 
-		$newPasante="INSERT INTO pasante(nombre, apellido, nro_legajo, tipodni, nrodni, fec_nacimiento, loc_nacimiento, prov_viviendo, loc_viviendo, codpos, calle, nrocalle, piso, dpto, carrera_fk, caracfijo, nrofijo, caraccel, nrocelular, mail, mail2, facebook, twitter, password, prov_trabajo, loc_trabajo, codpos2, empresa_trabaja, perfil_laboral,rol_fk)VALUES('$nombre','$apellido','$nro_legajo','$tipodni','$nrodni','$fec_nacimiento','$loc_nacimiento','$prov_viviendo','$loc_viviendo','$codpos','$calle','$nrocalle','$piso','$dpto',2,'$caracfijo','$nrofijo','$caraccel','$nrocelular','$mail','$mail2','$facebook','$twitter','$password','$prov_trabajo','$loc_trabajo','$codpos2','$empresa_trabaja','$perfil_laboral',1);";
+		$newPasante="INSERT INTO pasante(nombre, apellido, nro_legajo, tipodni, nrodni, fec_nacimiento, loc_nacimiento, prov_viviendo, loc_viviendo, codpos, calle, nrocalle, piso, dpto, carrera_fk, caracfijo, nrofijo, caraccel, nrocelular, mail, mail2, facebook, twitter, prov_trabajo, loc_trabajo, codpos2, empresa_trabaja, perfil_laboral,fecreg,usuario_fk)VALUES('$nombre','$apellido','$nro_legajo','$tipodni','$nrodni','$fec_nacimiento','$loc_nacimiento','$prov_viviendo','$loc_viviendo','$codpos','$calle','$nrocalle','$piso','$dpto',2,'$caracfijo','$nrofijo','$caraccel','$nrocelular','$mail','$mail2','$facebook','$twitter','$prov_trabajo','$loc_trabajo','$codpos2','$empresa_trabaja','$perfil_laboral','$fecreg','$usuario_fk');";
 			$error=0;
 			if (!pg_query($conn, $newPasante)){
 				$errorpg = pg_last_error($conn);
@@ -116,7 +126,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 		$mail2 = $_REQUEST['mail2'];
 		$facebook = ucwords($_REQUEST['facebook']);
 		$twitter = ucwords($_REQUEST['twitter']);
-		$password = $_REQUEST['password'];
+		//$password = $_REQUEST['password'];
 		$prov_trabajo = ucwords($_REQUEST['prov_trabajo']);
 		$loc_trabajo = ucwords($_REQUEST['loc_trabajo']);
 		$codpos2 = $_REQUEST['codpos2'];
@@ -137,7 +147,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 		// 		$cont++;
 		// 	}
 		// }
-		$modifPasante="UPDATE pasante SET nombre='$nombre', apellido='$apellido', nro_legajo='$nro_legajo', tipodni='$tipodni', nrodni='$nrodni', fec_nacimiento='$fec_nacimiento',loc_nacimiento='$loc_nacimiento', prov_viviendo='$prov_viviendo', loc_viviendo='$loc_viviendo', codpos='$codpos', calle='$calle', nrocalle='$nrocalle', piso='$piso', dpto='$dpto', carrera_fk=2, caracfijo='$caracfijo', nrofijo='$nrofijo', caraccel='$caraccel', nrocelular='$nrocelular', mail='$mail', mail2='$mail2', facebook='$facebook', twitter='$twitter', password='$password', prov_trabajo='$prov_trabajo', loc_trabajo='$loc_trabajo', codpos2='$codpos2', empresa_trabaja='$empresa_trabaja', perfil_laboral='$perfil_laboral' WHERE id = $id_Pasante;";
+		$modifPasante="UPDATE pasante SET nombre='$nombre', apellido='$apellido', nro_legajo='$nro_legajo', tipodni='$tipodni', nrodni='$nrodni', fec_nacimiento='$fec_nacimiento',loc_nacimiento='$loc_nacimiento', prov_viviendo='$prov_viviendo', loc_viviendo='$loc_viviendo', codpos='$codpos', calle='$calle', nrocalle='$nrocalle', piso='$piso', dpto='$dpto', carrera_fk=2, caracfijo='$caracfijo', nrofijo='$nrofijo', caraccel='$caraccel', nrocelular='$nrocelular', mail='$mail', mail2='$mail2', facebook='$facebook', twitter='$twitter', prov_trabajo='$prov_trabajo', loc_trabajo='$loc_trabajo', codpos2='$codpos2', empresa_trabaja='$empresa_trabaja', perfil_laboral='$perfil_laboral' WHERE id = $id_Pasante;";
 		// if($cont == 0){
 		// 	$nuevoSeguimiento = "INSERT INTO seguimiento(id_seguimiento, alumno_fk, carrera_fk, num_res_cd_fk, num_nota_fk, num_res_cs_fk) VALUES('$maxId','$id_Alumno','$carrera_alumno',1,1,1);";
 		// 	$sql = $modAlumno.$nuevoSeguimiento;

@@ -51,6 +51,13 @@ function traerId($tabla){
 	$maxId = $rowId['max'] + 1;
 	return $maxId;
 }
+function traerUltimo($tabla){
+    $sqlId = pg_query('SELECT max(id) FROM '.$tabla);
+    $rowId = pg_fetch_array($sqlId);
+    $maxId = $rowId['max'];
+    return $maxId;
+}
+
 
 //Muestra el mensaje javascript y redirecciona a los lugares que le mandemos
 function mostrarMensaje($msg,$redireccion){

@@ -24,13 +24,12 @@
   mail2 character varying,
   facebook character varying,
   twitter character varying,
-  password character varying,
+  usuario_fk integer references usuario(id),
   prov_trabajo character varying,
   loc_trabajo character varying,
   codpos2 character varying,
   empresa_trabaja character varying,
   perfil_laboral character varying,
   logueado boolean default false,
-  primera_vez boolean default TRUE,
-  rol_fk integer references rol(id)
+  fecreg date
 );
