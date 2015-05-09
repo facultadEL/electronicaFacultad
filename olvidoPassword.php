@@ -1,7 +1,6 @@
 <?php
 	session_start();
-/*	echo 'Rol: '.$_SESSION['rol_fk'].'<br>';
-	echo 'id: '.$_SESSION['id'].'<br>';*/
+	//include_once "chekearLogin.php";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -40,6 +39,8 @@ $sql = traerSql('mail', 'pasante');
 while ($rowVerifMail = pg_fetch_array($sql,NULL,PGSQL_ASSOC)) {
 	echo "<script>setMail('".$rowVerifMail['mail']."')</script>";
 }
+
+include_once "cerrar_conexion.php";
 ?>
 <div id="formulario">
 <h2>Recuperar Contrase&ntilde;a</h2>

@@ -12,20 +12,26 @@
 
 		function maskDni()
 		{
-			valDni = $('#nrodni').val();
-			switch(valDni.length)
-			{
-				case 7:
-				case 9:
-					mascara = "0.000.000";
-					break;
-				case 8:
-				case 10:
-					mascara = "00.000.000";
-					break;
-			}
-			$('#nrodni').mask(mascara);
-		}
+	    	var mascara;
+	        valDni = $('#nrodni').val();
+	        switch(valDni.length)
+	        {
+	            case 7:
+	            case 9:
+	                mascara = "0.000.000";
+	                break;
+	            case 8:
+	            case 10:
+	                mascara = "00.000.000";
+	                break;
+	            default:
+	            	mascara = null;
+	        }
+	        if(mascara != null)
+	        {
+	        	$('#nrodni').mask(mascara);
+	        }
+	    }
 
 		function setMail(mailToSet)
 		{
@@ -76,7 +82,8 @@
 </head>
 <body>
 <?php
-$id_Pasante = $_REQUEST['idPasante'];
+//$id_Pasante = $_REQUEST['idPasante'];
+$id_Pasante = (empty($_REQUEST['idPasante'])) ? 0 : $_REQUEST['idPasante'];
 //echo 'id_Pasante '.$id_Pasante.'<br>';
 include_once "conexion.php";
 	if ($id_Pasante != 0){
@@ -119,6 +126,7 @@ include_once "conexion.php";
 	while($rowVerifMail=pg_fetch_array($verificarMail,NULL,PGSQL_ASSOC)){
 		echo "<script>setMail('".$rowVerifMail['mail']."')</script>";
 	}
+
 ?>
 <div id="formulario">
 <h2>Formulario de Inscripci&oacute;n</h2>
@@ -172,7 +180,8 @@ include_once "conexion.php";
 								<label for="nrodni">N&deg; DNI:</label>
 							</td>
 							<td colspan="5">
-								<input id="nrodni" name="nrodni" type="text" class="campoText" onkeyup="maskDni()" onfocus="this.value = '';" pattern="[0-9]{1,2}+[.]{1}[0-9]{3}+[.]{1}[0-9]{3}" value="<?php echo $nrodni; ?>" maxlength="10" autocomplete="off" required/>
+								<!-- <input id="nrodni" name="nrodni" type="text" class="campoText" onkeyup="maskDni()" onfocus="this.value = '';" pattern="[0-9]{1,2}+[.]{1}[0-9]{3}+[.]{1}[0-9]{3}" value="<?php //echo $nrodni; ?>" maxlength="10" autocomplete="off" required/> -->
+								<input id="nrodni" name="nrodni" type="text" class="campoText" onkeyup="maskDni()" onfocus="this.value = '';" pattern="([0-9]{1}|[0-9]{2}).[0-9]{3}.[0-9]{3}" value="<?php echo $nrodni; ?>" maxlength="10" autocomplete="off" required/>
 							</td>
 						</tr>
 						<tr width="100%">
@@ -350,7 +359,9 @@ include_once "conexion.php";
 				<a href="verAlumno.php?idAlumno=<?php echo $id_Pasante;?>&titulo_pasante=<?php echo $carrera_fk;?>"><input type="button" id="btn_cancelar" value="Cancelar"></a>
 			<?php }else{?>
 				<a href="login.php"><input type="button" id="btn_cancelar" value="Cancelar"></a>
-			<?php }; ?>
+			<?php }; 
+				include_once "cerrar_conexion.php";
+			?>
 		</td>	
 		<td width="50%" align="left">
 			<input class="submit" type="submit" value="Guardar"/>

@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include_once "chekearLogin.php";
 /*	echo 'Rol: '.$_SESSION['rol_fk'].'<br>';
 	echo 'id: '.$_SESSION['id'].'<br>';*/
 ?>
@@ -20,7 +21,7 @@ include_once "libreria.php";
 <body>
 <div id="formulario">
 <h2>Confirmar Alumno</h2>
-<?php include_once "menu.html";?>
+<?php include_once "menuAdmin.html";?>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
 
 <center>
@@ -63,20 +64,26 @@ include_once "libreria.php";
 <table id="tablaCampos" align="center">
 	<?php
 		//Utilizar la función diasRestantes y solo mostrar lo agregados en el último mes
-		$confirmado = traerSqlCondicion('id, nombre, apellido, nro_legajo','pasante','confirmado = true');
+		$confirmado = traerSqlCondicion('id, nombre, apellido, nro_legajo, fecreg','pasante','confirmado = true');
 		while($rowConfirmado=pg_fetch_array($confirmado,NULL,PGSQL_ASSOC)){
-			$id = $rowConfirmado['id'];
-			$nombre = $rowConfirmado['nombre'];
-			$apellido = $rowConfirmado['apellido'];
-			//$confirmado = $rowConfirmado['confirmado'];
-			$nro_legajo = $rowConfirmado['nro_legajo'];
+			echo $rowConfirmado['fecreg'];
+			if (diasRestantes($rowConfirmado['fecreg']) < 31)
+			{
+				$id = $rowConfirmado['id'];
+				$nombre = $rowConfirmado['nombre'];
+				$apellido = $rowConfirmado['apellido'];
+				//$confirmado = $rowConfirmado['confirmado'];
+				$nro_legajo = $rowConfirmado['nro_legajo'];
 
-			echo '<tr>';
-				echo '<td id="tdTitulo"><l1>'.$apellido.', '.$nombre.'</l1></td>';
-				echo '<td id="tdTitulo"><l1>'.$nro_legajo.'</l1></td>';
-				echo '<td id="tdTitulo"><a href="confirmado.php?idPasante='.$id.'"><input type="button" id="btn_cancelar" value="Confirmado"></a></td>';
-			echo '</tr>';
+				echo '<tr>';
+					echo '<td id="tdTitulo"><l1>'.$apellido.', '.$nombre.'</l1></td>';
+					echo '<td id="tdTitulo"><l1>'.$nro_legajo.'</l1></td>';
+					echo '<td id="tdTitulo"><a href="confirmado.php?idPasante='.$id.'"><input type="button" id="btn_cancelar" value="Confirmado"></a></td>';
+				echo '</tr>';
+			}
 		}
+
+include_once "cerrar_conexion.php";
 	?>
 </table>
 </div>

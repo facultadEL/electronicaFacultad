@@ -30,5 +30,8 @@ $rowbuscarPass = pg_fetch_array($buscarPass,NULL,PGSQL_ASSOC);
     $to = $recuperarPass;
 
     enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
-    echo '<script language="JavaScript"> alert("Verifique su casilla de correo, le enviamos un mail con los datos solicitados"); window.location ="login.php"; </script>';
+
+include_once "cerrar_conexion.php";
+
+echo '<script language="JavaScript"> alert("Verifique su casilla de correo, le enviamos un mail con los datos solicitados"); window.location ="login.php"; </script>';
 ?>

@@ -5,7 +5,7 @@ $password = $_REQUEST['password'];
 //echo 'usuario: '.$usuario.'<br>';
 //echo 'password: '.$password.'<br>';
 
-
+echo '<meta charset="UTF-8"/>';
 
 include_once "conexion.php";
 include_once "libreria.php";
@@ -22,35 +22,40 @@ while($rowLogin=pg_fetch_array($usuario_bd,NULL,PGSQL_ASSOC)){
 	$primera_vez = $rowLogin['primera_vez'];
 	$idUsuario = $rowLogin['id'];
 }
-    if ($rowLogin['rol_fk'] == 1) {
+    if ($_SESSION['rol_fk'] == 1) {
     	$otrosDatos = traerSqlCondicion('nombre,apellido,confirmado,id,usuario_fk','pasante','usuario_fk='.$idUsuario);
-    	$_SESSION['nombre'] = $rowLogin['nombre'];
-    	$_SESSION['apellido'] = $rowLogin['apellido'];
-    	$_SESSION['id'] = $rowLogin['id'];
-    	$confirmado = $rowLogin['confirmado'];
-    	//echo 'pasante';
+    	$rowOD = pg_fetch_array($otrosDatos);
+    	$_SESSION['nombre'] = $rowOD['nombre'];
+    	$_SESSION['apellido'] = $rowOD['apellido'];
+    	$_SESSION['id_Pasante'] = $rowOD['id'];
+    	$confirmado = $rowOD['confirmado'];
     }else{
     	$otrosDatos = traerSqlCondicion('nombre,apellido,id,usuario_fk','profesor','usuario_fk='.$idUsuario);
-    	$_SESSION['nombre'] = $rowLogin['nombre'];
-    	$_SESSION['apellido'] = $rowLogin['apellido'];
-    	$_SESSION['id'] = $rowLogin['id'];
+    	$rowOD = pg_fetch_array($otrosDatos);
+    	$_SESSION['nombre'] = $rowOD['nombre'];
+    	$_SESSION['apellido'] = $rowOD['apellido'];
+    	$_SESSION['id_Profesor'] = $rowOD['id'];
     	//echo 'profe';
     }
     
     
-	if ($primera_vez == 't'){
-    	if ($_SESSION['rol_fk'] == 1) {
-    		echo '<script language="JavaScript"> window.location ="cambiarPassGenerado.php" </script>';
-    	}
+    if ($habili = 't') {
+    	if ($primera_vez == 't'){
+	    	if ($_SESSION['rol_fk'] == 1) {
+	    		echo '<script language="JavaScript"> window.location ="cambiarPassGenerado.php" </script>';
+	    	}
+	    }else{
+	    	if ($_SESSION['rol_fk'] == 1) {
+		    	if ($confirmado == 't') {
+		    		//echo '<script language="JavaScript"> window.location ="escritorioPasante.php?enviado=0"	</script>';
+		    		echo '<script language="JavaScript"> window.location ="escritorioPasante.php"	</script>';
+		    	}else{
+			    	echo '<script language="JavaScript"> alert("Su solicitud está en espera de aprobación"); window.location ="login.php" </script>';
+			    }
+			}
+	    }
     }else{
-    	if ($_SESSION['rol_fk'] == 1) {
-	    	if ($confirmado == 't') {
-	    		echo '<script language="JavaScript"> window.location ="escritorioPasante.php?enviado=0"	</script>';
-	    	}else{
-		    	echo '<meta charset="utf-8">';
-		    	echo '<script language="JavaScript"> alert("Su solicitud está en espera de aprobación"); window.location ="login.php" </script>';
-		    }
-		}
+    	echo '<script language="JavaScript"> alert("Su cuenta está deshabilitada"); window.location ="login.php" </script>';
     }
 
     if ($_SESSION['rol_fk'] == 2) {
@@ -107,4 +112,6 @@ while($rowLogin=pg_fetch_array($usuario_bd,NULL,PGSQL_ASSOC)){
 //		echo '<script language="JavaScript"> alert("Datos incorrectos"); window.location ="login.php"; </script>';
 //	}
 //}
+include_once "cerrar_conexion.php";
+
 ?>

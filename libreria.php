@@ -3,7 +3,7 @@
 <script type='text/javascript' src="codeLibrary.js"></script>
 <?php
 //Actualizada a la fecha 30/09/2014 
-//error_reporting(E_ALL);
+//error_reporting(E_ALL & ~E_NOTICE);
 //Guarda la consulta de base de datos, siempre y cuando se le envie el sql y la conexion a la base;
     //Devuelve el error para hacer el javascript para mostrar los mensajes segun el guardado
 function guardarSql($sqlGuardar){
@@ -73,8 +73,7 @@ function diasRestantes($f){
         $mesActual = date('m');
         $anioActual = date('Y');
         $fechaActual = $anioActual.'-'.$mesActual.'-'.$diaActual;
-        //$vFecha = explode('-', $f);
-        //if(())
+        
         $datetime1 = date_create($fechaActual);
         $datetime2 = date_create($f);
         $interval = date_diff($datetime1, $datetime2);

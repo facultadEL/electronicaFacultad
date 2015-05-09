@@ -45,4 +45,6 @@ $rowPasante=pg_fetch_array($sql,NULL,PGSQL_ASSOC);
 			echo '<script language="JavaScript"> window.location = "confirmarPasante.php";</script>';
 		}
     }
+
+include_once "cerrar_conexion.php";
 ?>

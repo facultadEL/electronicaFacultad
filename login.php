@@ -1,7 +1,8 @@
 <?php
 	session_start(); // al volver al index si existe una session, esta sera destruida, existen formas de conservarlas como con un if(session_start()!= NULL). Pero por el momento para el ejemplo no es valido.
 
-	if ($_SESSION['usuario'] != NULL) {
+$usuario = (empty($_SESSION['usuario'])) ? NULL : $_SESSION['usuario'];
+	if ($usuario != NULL) {
 		$_SESSION['usuario'] = NULL;
  	 	$_SESSION['password'] = NULL;
 	}
@@ -62,6 +63,7 @@ include_once "libreria.php";
 		$dataToPass = strtolower($rowData['mail']).'/--/'.$rowData['password'];
 		echo "<script>setData('".$dataToPass."')</script>";
 	}
+include_once "cerrar_conexion.php";
 ?>
 	<div id="login">
 		<h2>Login</h2>
@@ -105,6 +107,6 @@ include_once "libreria.php";
 				</table>
 		</form>
 	</div> <!-- end login -->
-<p><a href="registrarPasante.php?idPasante=0"><input type="button" id="btn_sincta" value="No tengo cuenta"></a></p>
+<p><a href="registrarPasante.php"><input type="button" id="btn_sincta" value="No tengo cuenta"></a></p>
 </body>	
 </html>

@@ -91,7 +91,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 			}
 		   pg_query($termino);
 
-				
+		include "cerrar_conexion.php";
 		if ($error==1){
 			echo '<script language="JavaScript"> 	alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
@@ -164,7 +164,8 @@ $id_Pasante = $_REQUEST['idPasante'];
 				$termino = "COMMIT";
 			}
 		   pg_query($termino);
-				
+		
+		include "cerrar_conexion.php";				
 		if ($error==1){
 			echo '<script language="JavaScript"> alert("Los datos no se modificaron correctamente. Pongase en contacto con el administrador");</script>';
 		}else{

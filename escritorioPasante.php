@@ -1,7 +1,7 @@
 <?php
 	session_start();
-/*	echo 'Rol: '.$_SESSION['rol_fk'].'<br>';
-	echo 'id: '.$_SESSION['id'].'<br>';*/
+
+	include_once "chekearLogin.php";
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -51,26 +51,26 @@
 include_once "conexion.php";
 include_once "libreria.php";
 
-
-$enviado = $_REQUEST['enviado'];
-if ($enviado == 1) { //para que no se ejecute el código en caso de no tener un archivo cargado
+$enviado = (empty($_REQUEST['enviado'])) ? 0 : $_REQUEST['enviado'];
+//$enviado = $_REQUEST['enviado'];
+//if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
+if ($enviado == 1) {
 $nombre_idea = ucwords($_REQUEST['nombre']);
+echo 'nombre idea: '.$nombre_idea;
 $archivo = $_REQUEST['add_idea'];
-$id = $_SESSION['id'];
-
+$id = $_SESSION['id_Pasante'];
+$id_new_idea = traerId('idea');
 	//$destino = loadFileToServer('aca va la carpeta destino');
 	$destino = '/electronica/archivo.pdf';
-	$newIdea="INSERT INTO idea(nombre, archivo, estado, pasante_fk)VALUES('$nombre_idea','$destino',1,'$id');";
-	$error=0;
-		if (!pg_query($conn, $newIdea)){
-			$errorpg = pg_last_error($conn);
-			$termino = "ROLLBACK";
-			$error=1;
-		}else{
-			$termino = "COMMIT";
-		}
-		pg_query($termino);
-			
+	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id');";
+	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',1);";
+	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',2);";
+	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',3);";
+	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',4);";
+	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',5);";
+
+	$error = GuardarSql($newIdea);
+	
 		if ($error==1){
 			echo '<script language="JavaScript"> alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
@@ -80,7 +80,7 @@ $id = $_SESSION['id'];
 }else{
 	//$hayIdea = 0;
 
-$id = $_SESSION['id'];
+$id = $_SESSION['id_Pasante'];
 $hayIdea = 0;
 	$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
 	while($rowIdea=pg_fetch_array($consultarIdea,NULL,PGSQL_ASSOC)){
@@ -101,50 +101,7 @@ if ($hayIdea == 0) {
 <div id="formulario">
 <h2>Seguimiento de la Idea</h2>
 <?php include_once "menuPasante.html";?>
-<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
-<!-- <table id="tablaCuerpo" align="center">
-	<tr width="100%">
-		<td width="1%" align="center" rowspan="4">
-			<label for="add_idea"><img id="imagen" src="img/add-idea.png" width="180" height="180"></label>
-			<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
-		</td>
-		<td width="40%" colspan="2">
-			<h1>No tienes ninguna idea subida</h1>
-		</td>
-	</tr>
-		<tr>
-		<td width="2%" align="right">
-			<label for="nombre">Archivo: </label>
-		</td>
-		<td width="10%" align="left">
-			<input id="path" name="path" type="text" class="campoText" value="" disabled="true" />
-		</td>
-	</tr>
-	<tr>
-		<td width="2%" align="right">
-			<label for="nombre">Nombre: </label>
-		</td>
-		<td width="10%" align="left">
-			<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
-		</td>
-	</tr>
-	<tr>
-		<td width="2%" align="right">
-			<label for="estado" class="lbl_estado">Estado: </label>
-		</td>
-		<td width="10%" align="left">
-			<?php
-				//$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
-				//while($rowEstado=pg_fetch_array($consultaEstado)){
-				//	if ($rowEstado['id'] == 1){
-                //    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
-				//	}
-					//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
-				//}
-			?>
-		</td>
-	</tr>
-</table> -->
+<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
 
 <div id="tablaCuerpo">
 		<table id="tablaImagen" align="left">
@@ -168,7 +125,7 @@ if ($hayIdea == 0) {
 					<label for="nombre">Archivo: </label>
 				</td>
 				<td width="20%" align="left">
-					<input id="path" name="path" type="text" class="campoText" value="" disabled="true" />
+					<input id="path" name="path" type="text" class="campoText" value="" readonly="true"/>
 				</td>
 			</tr>
 			<tr>
@@ -185,12 +142,13 @@ if ($hayIdea == 0) {
 				</td>
 				<td width="20%" class="lbl_estado" align="left">
 					<?php
-						$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
+						$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=1');
+						//$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
 						while($rowEstado=pg_fetch_array($consultaEstado)){
-							if ($rowEstado['id'] == 1){
+							//if ($rowEstado['id'] == 1){
 		                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							}
-							echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
+							//}
+							//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
 						}
 					?>
 				</td>
@@ -220,7 +178,7 @@ if ($hayIdea == 0) {
 			<tr>
 				<td>
 					<label>
-						<img id="imagen2" src="img/uploaded-idea.png" title="Click aqu&iacute; para subir un PDF">
+						<img id="imagen2" src="img/uploaded-idea.png">
 					</label>
 				</td>
 			</tr>
@@ -253,30 +211,98 @@ if ($hayIdea == 0) {
 				</td>
 				<td width="20%" id="campoCI">
 					<?php
-						$consultaEstado=traerSql('id,nombre','idea');
-						while($rowEstado=pg_fetch_array($consultaEstado)){
-							if ($rowEstado['id'] == $estado){
-		                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							}
-							//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
+						$contAP = 0;
+						$visto = 0;
+						$estXprofe=traerSqlCondicion('ideaaprobada,visto','ideaxprofesor','idea='.$id_Idea);
+						while($rowEstXProfe=pg_fetch_array($estXprofe)){
+							if ($rowEstXProfe['ideaaprobada'] == 't') {
+		                    	$contAP++;
+		                    }
+		                    if ($rowEstXProfe['visto'] == 't') {
+		                    	$visto++;
+		                    }
+		                }
+						//echo 'contNA: '.$contAP.'<br>';
+						if ($contAP == 5 && $visto == 5) {
+							$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=3');
+							$rowEstado=pg_fetch_array($consultaEstado);
+								echo '<l1>'.$rowEstado['nombre'].'</l1>';
+						}
+						if ($visto > 0 && $visto == $contAP && $contAP != 5) {
+							$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
+							$rowEstado=pg_fetch_array($consultaEstado);
+								echo '<l1>'.$rowEstado['nombre'].'</l1>';		
+						}else{
+							if ($visto > 0 && $contAP < 5) {
+									$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=4');
+									$rowEstado=pg_fetch_array($consultaEstado);
+										echo '<l1>'.$rowEstado['nombre'].'</l1>';
+							}	
+						}
+						if ($visto == 0) {
+							$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
+								$rowEstado=pg_fetch_array($consultaEstado);
+									echo '<l1>'.$rowEstado['nombre'].'</l1>';
 						}
 					?>
 				</td>
 			</tr>
 		</table>
 </div>		
-	<table id="tablaBtn" align="center">
-		<tr width="100%">
-			<tr><td><br></td></tr>
-			<td width="100%" align="center">
-				<l1>Para hacer: Acá poner la calificación de cada profesor de la idea. </l1>
-				<!-- <input class="submit" type="submit" value="Guardar"/>  ver si se va a poner un botón y cual?--> 
-			</td>
+	<table id="tablaCalif" class="table-hover" align="center" width="100%" border="0">
+		<thead>
+			<tr width="100%">
+				<th class="td" width="100%" colspan="5" align="center">
+					<l2>CALIFICACIONES</l2>
+					<!-- <input class="submit" type="submit" value="Guardar"/>  ver si se va a poner un botón y cual?--> 
+				</th>
+			</tr>
+		
+		<tr>
+			<?php
+				$sql = traerSql('id,nombre,apellido','profesor');
+				while ($rowIdeaXProfe = pg_fetch_array($sql)){
+					echo '<td class="td" width="20%"><l2>'.$rowIdeaXProfe['nombre'].', '.$rowIdeaXProfe['apellido'].'</l2></td>';
+				}
+			?>
 		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<?php
+			$cont = 0;
+			//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
+			$sql = traerSqlCondicion('id,idea,profesor,ideaaprobada,visto','ideaxprofesor','idea = '.$id_Idea.' ORDER BY id');
+			while ($rowIdeaXProfe = pg_fetch_array($sql)){
+				$calificacion = $rowIdeaXProfe['ideaaprobada'];
+				if ($rowIdeaXProfe['visto'] == 'f') {
+					echo '<td class="azul td"><l2>No Evaluado</l2></td>';
+				}else{
+					if ($calificacion == 't') {
+						echo '<td class="verde td"><l2>Aprobada</l2></td>';
+					}else{
+						echo '<td class="rojo td"><l2>No Aprobada</l2></td>';
+					}
+				}
+				$cont++;
+			}
+		?>
+		</tr>
+		<tr>
+			<?php
+				$sql = traerSql('id,nombre','profesor');
+				while ($rowIdeaXProfe = pg_fetch_array($sql)){
+					echo '<td class="contactar"><a href="sendToProfe.php?idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
+				}
+			?>
+		</tr>
+		</tbody>
 	</table>
 	</form>
 	</div>
 	</body>
 
-<?php	} ?>
+<?php	}
+include_once "cerrar_conexion.php";
+ ?>
 </html>
