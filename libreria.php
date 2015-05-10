@@ -1,5 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type='text/javascript' src="jquery.min-1.9.1.js"></script>
 <script type='text/javascript' src="codeLibrary.js"></script>
 <?php
 //Actualizada a la fecha 30/09/2014 
@@ -76,7 +76,7 @@ function diasRestantes($f){
         
         $datetime1 = date_create($fechaActual);
         $datetime2 = date_create($f);
-        $interval = date_diff($datetime1, $datetime2);
+        $interval = date_diff($datetime2, $datetime1);
         return $interval->format('%R%a días');
 }
 

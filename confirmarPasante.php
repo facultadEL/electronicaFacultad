@@ -66,13 +66,11 @@ include_once "libreria.php";
 		//Utilizar la función diasRestantes y solo mostrar lo agregados en el último mes
 		$confirmado = traerSqlCondicion('id, nombre, apellido, nro_legajo, fecreg','pasante','confirmado = true');
 		while($rowConfirmado=pg_fetch_array($confirmado,NULL,PGSQL_ASSOC)){
-			echo $rowConfirmado['fecreg'];
-			if (diasRestantes($rowConfirmado['fecreg']) < 31)
+			if (diasRestantes($rowConfirmado['fecreg']) < 30)
 			{
 				$id = $rowConfirmado['id'];
 				$nombre = $rowConfirmado['nombre'];
 				$apellido = $rowConfirmado['apellido'];
-				//$confirmado = $rowConfirmado['confirmado'];
 				$nro_legajo = $rowConfirmado['nro_legajo'];
 
 				echo '<tr>';
@@ -83,7 +81,7 @@ include_once "libreria.php";
 			}
 		}
 
-include_once "cerrar_conexion.php";
+		include_once "cerrar_conexion.php";
 	?>
 </table>
 </div>
