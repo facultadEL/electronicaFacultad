@@ -4,8 +4,8 @@
 	include_once "chekearLogin.php";
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE>
+<html lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type='text/javascript' src="jquery.min-1.9.1.js"></script>
@@ -56,21 +56,27 @@ $enviado = (empty($_REQUEST['enviado'])) ? 0 : $_REQUEST['enviado'];
 //if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
 if ($enviado == 1) {
 $nombre_idea = ucwords($_REQUEST['nombre']);
-echo 'nombre idea: '.$nombre_idea;
+//echo 'nombre idea: '.$nombre_idea;
 $archivo = $_REQUEST['add_idea'];
 $id = $_SESSION['id_Pasante'];
 $id_new_idea = traerId('idea');
 	//$destino = loadFileToServer('aca va la carpeta destino');
 	$destino = '/electronica/archivo.pdf';
+	$cont = 0;
 	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id');";
-	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',1);";
-	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',2);";
-	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',3);";
-	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',4);";
-	$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',5);";
+
+	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
+	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
+		$id_profe[$cont] = $rowIdP['id'];
+    	//echo 'idProfesor: '.$id_profe[$cont];
+    	$cont++;
+    }
+    
+	for ($i=0; $i < $cont ; $i++) { 
+		$newIdea .= "INSERT INTO ideaxprofesor(idea, profesor)VALUES('$id_new_idea',$id_profe[$i]);";
+	}
 
 	$error = GuardarSql($newIdea);
-	
 		if ($error==1){
 			echo '<script language="JavaScript"> alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
@@ -78,29 +84,27 @@ $id_new_idea = traerId('idea');
 			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "escritorioPasante.php";</script>';
 		}
 }else{
-	//$hayIdea = 0;
+	$id = $_SESSION['id_Pasante'];
+	$hayIdea = 0;
+		$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
+		while($rowIdea=pg_fetch_array($consultarIdea,NULL,PGSQL_ASSOC)){
+			$id_Pasante = $rowIdea['pasante_fk'];
+			$id_Idea = (empty($rowIdea['id'])) ? 0 : $rowIdea['id'];
+			$nombre_idea = $rowIdea['nombre'];
+			$estado = $rowIdea['estado'];
+			$archivo = $rowIdea['archivo'];
 
-$id = $_SESSION['id_Pasante'];
-$hayIdea = 0;
-	$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
-	while($rowIdea=pg_fetch_array($consultarIdea,NULL,PGSQL_ASSOC)){
-		$id_Pasante = $rowIdea['pasante_fk'];
-		$id_Idea = $rowIdea['id'];
-		$nombre_idea = $rowIdea['nombre'];
-		$estado = $rowIdea['estado'];
-		$archivo = $rowIdea['archivo'];
-		
-		if ($id_Idea != 0 && $enviado == 0  || $id_Idea != NULL && $enviado == 0) {
-			$hayIdea = 1;
+			if ($id_Idea != 0) {
+				$hayIdea = 1;
+			}
 		}
 	}
-}
 if ($hayIdea == 0) { 
 ?>
 <body>
 <div id="formulario">
 <h2>Seguimiento de la Idea</h2>
-<?php include_once "menuPasante.html";?>
+<?php include_once "menuPasante.html"; ?>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">
 
 <div id="tablaCuerpo">
@@ -136,23 +140,23 @@ if ($hayIdea == 0) {
 					<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
 				</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td width="3%" align="right">
 					<label for="estado">Estado: </label>
 				</td>
 				<td width="20%" class="lbl_estado" align="left">
 					<?php
-						$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=1');
+						//$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=1');
 						//$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
-						while($rowEstado=pg_fetch_array($consultaEstado)){
+						//while($rowEstado=pg_fetch_array($consultaEstado)){
 							//if ($rowEstado['id'] == 1){
-		                    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
+		                //    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
 							//}
 							//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
-						}
+						//}
 					?>
 				</td>
-			</tr>
+			</tr> -->
 		</table>
 </div>
 </center>
@@ -249,7 +253,7 @@ if ($hayIdea == 0) {
 			</tr>
 		</table>
 </div>		
-	<table id="tablaCalif" class="table-hover" align="center" width="100%" border="0">
+	<table id="tablaCalif" align="center" width="100%" border="0">
 		<thead>
 			<tr width="100%">
 				<th class="td" width="100%" colspan="5" align="center">
@@ -260,7 +264,8 @@ if ($hayIdea == 0) {
 		
 		<tr>
 			<?php
-				$sql = traerSql('id,nombre,apellido','profesor');
+				//$sql = traerSql('id,nombre,apellido','profesor');
+				$sql = traerSqlCondicion('profesor.id, profesor.nombre, apellido, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
 				while ($rowIdeaXProfe = pg_fetch_array($sql)){
 					echo '<td class="td" width="20%"><l2>'.$rowIdeaXProfe['nombre'].', '.$rowIdeaXProfe['apellido'].'</l2></td>';
 				}
@@ -290,7 +295,8 @@ if ($hayIdea == 0) {
 		</tr>
 		<tr>
 			<?php
-				$sql = traerSql('id,nombre','profesor');
+				$sql = traerSqlCondicion('profesor.id, profesor.nombre, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
+				//$sql = traerSql('id,nombre','profesor');
 				while ($rowIdeaXProfe = pg_fetch_array($sql)){
 					echo '<td class="contactar"><a href="sendToProfe.php?idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
 				}

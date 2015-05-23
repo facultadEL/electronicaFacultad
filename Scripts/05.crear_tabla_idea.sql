@@ -3,5 +3,6 @@
 	nombre character varying,
 	archivo character varying,
 	estado integer references estado_idea(id),
-	pasante_fk integer references pasante(id)
+	pasante_fk integer references pasante(id),
+	fecha_registro date
 );

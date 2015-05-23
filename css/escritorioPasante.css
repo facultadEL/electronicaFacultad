@@ -29,6 +29,7 @@ h2 {
 	-moz-border-radius: 0px 0px 10px 10px;
 	border-radius: 0px 0px 10px 10px;
 	margin-top: 0%;
+	margin-bottom: 0%;
 	text-align: center;
 }
 #menu { 
@@ -207,6 +208,7 @@ h1{
 	border-radius: 10px;
 	background: #1a75a3;
 	border: 2px solid #1a75a3;
+	text-align: center;
 }
 .verde{
 	-webkit-border-radius: 10px;
@@ -214,6 +216,7 @@ h1{
 	border-radius: 10px;
 	background: #63a579;
 	border: 2px solid #63a579;
+	text-align: center;
 }
 .rojo{
 	-webkit-border-radius: 10px;
@@ -221,6 +224,7 @@ h1{
 	border-radius: 10px;
 	background: #d87575;
 	border: 2px solid #d87575;
+	text-align: center;
 }
 #tablaCalif{
 	background-color: #d0e9c6;
@@ -238,6 +242,7 @@ h1{
 #tablaCalif .td{
 	padding-top: 1%;
 	padding-bottom: 1%;
+	text-align: center;
 }
 .contactar{
 	-webkit-border-radius: 10px;
@@ -245,6 +250,7 @@ h1{
 	border-radius: 10px;
 	background: #f7eec3;
 	border: 2px solid #141919;
+	text-align: center;
 }
 .color{
 	-webkit-border-radius: 10px;
@@ -252,6 +258,7 @@ h1{
 	border-radius: 10px;
 	background: #444;
 	border: 2px solid #444;
+	text-align: center;
 }
 #tablaCalif tbody tr:hover{
 	background: #f5f5f5;

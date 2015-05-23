@@ -86,8 +86,9 @@
 $id_Pasante = (empty($_REQUEST['idPasante'])) ? 0 : $_REQUEST['idPasante'];
 //echo 'id_Pasante '.$id_Pasante.'<br>';
 include_once "conexion.php";
+include_once "libreria.php";
 	if ($id_Pasante != 0){
-		$sqlPasante = pg_query("SELECT * FROM pasante WHERE id = $id_Pasante");
+		$sqlPasante = traerSqlCondicion('*', 'pasante', 'id='.$id_Pasante);
 		$rowPasante = pg_fetch_array($sqlPasante);
 			$id_Pasante = $rowPasante['id'];
 			$nombre = $rowPasante['nombre'];
@@ -122,7 +123,7 @@ include_once "conexion.php";
 			echo "<script>setPass('".$password."');</script>";
 	}
 
-	$verificarMail=pg_query("SELECT mail FROM pasante;");
+	$verificarMail=traerSql('mail', 'pasante');
 	while($rowVerifMail=pg_fetch_array($verificarMail,NULL,PGSQL_ASSOC)){
 		echo "<script>setMail('".$rowVerifMail['mail']."')</script>";
 	}
@@ -165,7 +166,7 @@ include_once "conexion.php";
 							<td colspan="1">
 								<select id="tipodni" name="tipodni" size="1">
 									<?php
-										$consultaTipoDNI=pg_query("SELECT * FROM tipo_dni");
+										$consultaTipoDNI=traerSql('*','tipo_dni');
 										while($rowTipoDNI=pg_fetch_array($consultaTipoDNI)){
 										if ($tipodni == $rowTipoDNI['id']){
 					                        echo "<option value=".$rowTipoDNI['id']." selected>".$rowTipoDNI['nombre']."</option>";

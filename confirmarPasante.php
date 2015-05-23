@@ -52,7 +52,7 @@ include_once "libreria.php";
 </table>
 </div>
 <hr width="100%">
-<legend>Agregados Recientemente</legend>
+<legend>Confirmados en el &uacute;ltimo mes</legend>
 <div id="tablaGral">
 <table id="tablaTitulo" align="center">
 	<tr>

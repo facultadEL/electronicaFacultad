@@ -2,6 +2,7 @@
 session_start();
 $usuario = $_REQUEST['usuario'];
 $password = $_REQUEST['password'];
+
 //echo 'usuario: '.$usuario.'<br>';
 //echo 'password: '.$password.'<br>';
 
@@ -60,6 +61,10 @@ while($rowLogin=pg_fetch_array($usuario_bd,NULL,PGSQL_ASSOC)){
 
     if ($_SESSION['rol_fk'] == 2) {
     	echo '<script language="JavaScript"> window.location ="escritorioAdmin.php" </script>';
+    }
+
+    if ($_SESSION['rol_fk'] == 3) {
+    	echo '<script language="JavaScript"> window.location ="escritorioProfe.php" </script>';
     }
 
     //Hacer un menú para las opciones del administrador

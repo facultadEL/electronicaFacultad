@@ -15,7 +15,6 @@ $usuario = (empty($_SESSION['usuario'])) ? NULL : $_SESSION['usuario'];
 	<meta charset="utf-8">
 	<title>Login</title>
 	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Varela+Round">
 	<link rel="stylesheet" href="css/login.css">
 	<script>
 		var dataDictionary = [];

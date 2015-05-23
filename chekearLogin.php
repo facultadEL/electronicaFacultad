@@ -1,6 +1,6 @@
 <?php
-if (!$_SESSION["usuario"]) { 
-	require("login.php"); 
-	exit; 
-}
+	if (!$_SESSION["usuario"]) { 
+		require("login.php"); 
+		exit; 
+	}
 ?>

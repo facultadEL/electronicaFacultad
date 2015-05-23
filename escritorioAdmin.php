@@ -1,7 +1,6 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['usuario']))
-		echo '<script type="text/javascript">window.location="login.php"</script>';
+	include_once "chekearLogin.php"
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
