@@ -36,7 +36,7 @@
 				$calificacion = $_REQUEST['calificacion'];
 
 					//$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
-				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor']);
+				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto, ideaaprobada','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' ORDER BY idea.id DESC');
 					while($rowNuevasIdeas = pg_fetch_array($NuevasIdeas)){
 						$id_Idea = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
 						
@@ -50,7 +50,7 @@
 								echo '<td><a href="calificada.php?aprobar=0&idIdea='.$id_Idea.'"><input type="button" id="btn_confirm" value="No"></a>';
 								echo '<a href="calificada.php?aprobar=1&idIdea='.$id_Idea.'"><input type="button" id="btn_confirm" value="Si"></a></td>';
 							}else{
-								if ($calificacion == 0) {
+								if ($rowNuevasIdeas['ideaaprobada'] == 'f') {
 									echo '<td><a href="calificada.php?aprobar=1&idIdea='.$id_Idea.'"><input type="button" id="btn_confirm" value="No Aprobado"></a></td>';
 								}else{
 									echo '<td><a href="calificada.php?aprobar=0&idIdea='.$id_Idea.'"><input type="button" id="btn_confirm" value="Aprobado"></a></td>';

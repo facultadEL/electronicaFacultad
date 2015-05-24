@@ -1,15 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<html lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type='text/javascript' src="codeLibrary.js"></script>
-<script src="jquery.mask.js" type="text/javascript"></script>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="codeLibrary.js"></script>
+<script type="text/javascript" src="jquery.mask.js"></script>
 <link rel="stylesheet" href="css/registroPasante.css">
 	<title>Registro de Usuario</title>
 	<script>
 		var mailDictionary = [];
-
+		
 		function maskDni()
 		{
 	    	var mascara;
@@ -238,7 +238,7 @@ include_once "libreria.php";
 								<label for="nrocalle">N&deg;: </label>
 							</td>
 							<td colspan="1" width="10%">
-								<input id="nrocalle" name="nrocalle" pattern="[0-9]{2,6}" type="text" class="campoNro" size="4" value="<?php echo $nrocalle; ?>" required/>
+								<input id="nrocalle" name="nrocalle" pattern="[0-9]{2,5}" maxlength="5" type="text" class="campoNro" size="4" value="<?php echo $nrocalle; ?>" title="El n&uacute;mero debe tener de 2 a 5 cifras" required/>
 							</td>
 							<td colspan="1" width="10%" align="right">
 								<label for="piso">Piso: </label>

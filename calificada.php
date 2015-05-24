@@ -28,7 +28,7 @@ if ($id_Idea != 0) {
 			if ($error==1){
 				echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el administrador");</script>';
 			}else{
-				echo '<script language="JavaScript"> window.location = "calificarIdea.php?calificacion=0";</script>';
+				echo '<script language="JavaScript"> window.location = "calificarIdea.php";</script>';
 			}
 	    }else{
 	    	$calificarIdea = "UPDATE ideaxprofesor SET ideaaprobada=TRUE, visto=TRUE, fecha_aprobada='$fecha', fecha_desaprobada=NULL WHERE id = $id_Idea;";
@@ -45,7 +45,7 @@ if ($id_Idea != 0) {
 			if ($error==1){
 				echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el administrador");</script>';
 			}else{
-				echo '<script language="JavaScript"> window.location = "calificarIdea.php?calificacion=1";</script>';
+				echo '<script language="JavaScript"> window.location = "calificarIdea.php";</script>';
 			}
 	    }
 }else{
