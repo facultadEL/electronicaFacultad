@@ -67,6 +67,10 @@ while($rowLogin=pg_fetch_array($usuario_bd,NULL,PGSQL_ASSOC)){
     	echo '<script language="JavaScript"> window.location ="escritorioProfe.php" </script>';
     }
 
+    if ($_SESSION['rol_fk'] == 4) {
+    	echo '<script language="JavaScript"> window.location ="escritorioSeguidor.php" </script>';
+    }
+
     //Hacer un menú para las opciones del administrador
 
 

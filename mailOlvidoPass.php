@@ -8,7 +8,7 @@ $recuperarPass = $_REQUEST['recuperarPass'];
 //$sql = traerSqlCondicion('mail','pasante', 'UPPER(mail) LIKE UPPER("'.$recuperarPass.'")'); //no me funciona la libreria para este caso. Tal vez tengo mal la sintaxis
 //echo $sql;
 
-$buscarPass = pg_query("SELECT mail,password FROM pasante WHERE UPPER(mail) LIKE UPPER('{$recuperarPass}')");
+$buscarPass = pg_query("SELECT mail,password FROM usuario WHERE UPPER(mail) LIKE UPPER('{$recuperarPass}')");
 $rowbuscarPass = pg_fetch_array($buscarPass,NULL,PGSQL_ASSOC);
 	$passRecuperado = $rowbuscarPass['password'];
 	$cuerpo = "

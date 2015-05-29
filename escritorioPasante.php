@@ -215,39 +215,42 @@ if ($hayIdea == 0) {
 				</td>
 				<td width="20%" id="campoCI">
 					<?php
-						$contAP = 0;
-						$visto = 0;
-						$estXprofe=traerSqlCondicion('ideaaprobada,visto','ideaxprofesor','idea='.$id_Idea);
-						while($rowEstXProfe=pg_fetch_array($estXprofe)){
-							if ($rowEstXProfe['ideaaprobada'] == 't') {
-		                    	$contAP++;
-		                    }
-		                    if ($rowEstXProfe['visto'] == 't') {
-		                    	$visto++;
-		                    }
-		                }
+						$estado_idea=traerSqlCondicion('estado, estado_idea.nombre','idea INNER JOIN estado_idea ON estado_idea.id = idea.estado','idea.id ='.$id_Idea);
+						$row_estado_idea=pg_fetch_array($estado_idea);
+						echo '<l1>'.$row_estado_idea['nombre'].'</l1>';
+						//$contAP = 0;
+						//$visto = 0;
+						// $estXprofe=traerSqlCondicion('ideaaprobada,visto','ideaxprofesor','idea='.$id_Idea);
+						// while($rowEstXProfe=pg_fetch_array($estXprofe)){
+						// 	if ($rowEstXProfe['ideaaprobada'] == 't') {
+		    //                 	$contAP++;
+		    //                 }
+		    //                 if ($rowEstXProfe['visto'] == 't') {
+		    //                 	$visto++;
+		    //                 }
+		    //             }
 						//echo 'contNA: '.$contAP.'<br>';
-						if ($contAP == 5 && $visto == 5) {
-							$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=3');
-							$rowEstado=pg_fetch_array($consultaEstado);
-								echo '<l1>'.$rowEstado['nombre'].'</l1>';
-						}
-						if ($visto > 0 && $visto == $contAP && $contAP != 5) {
-							$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
-							$rowEstado=pg_fetch_array($consultaEstado);
-								echo '<l1>'.$rowEstado['nombre'].'</l1>';		
-						}else{
-							if ($visto > 0 && $contAP < 5) {
-									$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=4');
-									$rowEstado=pg_fetch_array($consultaEstado);
-										echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							}	
-						}
-						if ($visto == 0) {
-							$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
-								$rowEstado=pg_fetch_array($consultaEstado);
-									echo '<l1>'.$rowEstado['nombre'].'</l1>';
-						}
+						// if ($contAP == 5 && $visto == 5) {
+						// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=3');
+						// 	$rowEstado=pg_fetch_array($consultaEstado);
+						// 		echo '<l1>'.$rowEstado['nombre'].'</l1>';
+						// }
+						// if ($visto > 0 && $visto == $contAP && $contAP != 5) {
+						// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
+						// 	$rowEstado=pg_fetch_array($consultaEstado);
+						// 		echo '<l1>'.$rowEstado['nombre'].'</l1>';		
+						// }else{
+						// 	if ($visto > 0 && $contAP < 5) {
+						// 			$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=4');
+						// 			$rowEstado=pg_fetch_array($consultaEstado);
+						// 				echo '<l1>'.$rowEstado['nombre'].'</l1>';
+						// 	}	
+						// }
+						// if ($visto == 0) {
+						// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
+						// 		$rowEstado=pg_fetch_array($consultaEstado);
+						// 			echo '<l1>'.$rowEstado['nombre'].'</l1>';
+						// }
 					?>
 				</td>
 			</tr>
