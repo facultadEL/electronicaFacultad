@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="codeLibrary.js"></script>
-<script type="text/javascript" src="jquery.mask.js"></script>
+<script type="text/javascript" src="cryptor.js"></script>
 <link rel="stylesheet" href="css/registroPasante.css">
 	<title>Registro de Usuario</title>
 	<script>
@@ -61,10 +61,12 @@
 				lDD();
 				longValue = 8;
 				var pass = gP(longValue);
+				var pass_encriptado = encrypt(pass, 'eof');
 
 			}
 			//Setea el hidden con el password
 			$('#hiddenPass').val(pass);
+			$('#hiddenPassEnc').val(pass_encriptado);
 		});
 
 		function checkMail2()
@@ -145,6 +147,7 @@ include_once "libreria.php";
 							<td width="30%">
 								<input id="nombre" name="nombre" type="text" class="campoText" value="<?php echo $nombre; ?>" required autofocus/>
 								<input type="hidden" name="password" id="hiddenPass"/>
+								<input type="hidden" name="pass_encriptado" id="hiddenPassEnc"/>
 							</td>
 							<td width="10%" align="right">
 								<label for="apellido">Apellido: </label>

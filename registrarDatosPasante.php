@@ -32,7 +32,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 		$mail2 = $_REQUEST['mail2'];
 		$facebook = ucwords($_REQUEST['facebook']);
 		$twitter = ucwords($_REQUEST['twitter']);
-		$password = $_REQUEST['password'];
+		$password = $_REQUEST['pass_encriptado'];
 		$prov_trabajo = ucwords($_REQUEST['prov_trabajo']);
 		$loc_trabajo = ucwords($_REQUEST['loc_trabajo']);
 		$codpos2 = $_REQUEST['codpos2'];
@@ -85,7 +85,7 @@ $id_Pasante = $_REQUEST['idPasante'];
             </div>
         </div>
         ";
-        $asunto2 = "Confirmar Pasante";
+        $asunto2 = "Dpto Electronica";
         $sendFrom2 = "dpto-electronica@frvm.utn.edu.ar";
         $from_name2 = "Dpto Electronica";
         //$to = "etell@frvm.utn.edu.ar";
