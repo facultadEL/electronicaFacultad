@@ -30,6 +30,7 @@
   codpos2 character varying,
   empresa_trabaja character varying,
   perfil_laboral character varying,
+  confirmado boolean default false,
   logueado boolean default false,
   fecreg date
 );

@@ -75,7 +75,7 @@ include_once "cerrar_conexion.php";
 					</tr>
 					<tr>
 						<td>
-							<input type="email" id="email" name="usuario" onchange="checkMail();" value="" placeholder="E-mail" autofocus required/>
+							<input type="email" id="email" name="usuario" value="" placeholder="E-mail" autofocus required/>
 						</td>
 					</tr>
 					<tr>

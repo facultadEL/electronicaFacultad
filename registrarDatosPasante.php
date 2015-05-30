@@ -43,16 +43,14 @@ $id_Pasante = $_REQUEST['idPasante'];
 
 		$error = 0;
 		$sql = "INSERT INTO usuario(mail,password,rol_fk)VALUES('$mail','$password',1);";
+		//echo $sql;
 		$error = guardarSql($sql);
 		if ($error == 1) {
 			echo '<script language="JavaScript"> 	alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 		}else{
 			$usuario_fk = traerUltimo('usuario');	
+			//echo 'usuario: '.$usuario_fk;
 		}
-		
-
-		//la linea de abajo va en el cuerpo cuando se suba al servidor
-		//<a href=".'"http://extension.frvm.utn.edu.ar/electronicaFacultad/enDesarrollo.php?idPasante='.$traerId.'" target="_blank"'.">
 
 
 		$traerId = traerId('pasante');
@@ -63,16 +61,35 @@ $id_Pasante = $_REQUEST['idPasante'];
 
                 La persona <strong>$nombre $apellido</strong> complet&oacute; el formulario de inscripci&oacute;n.<br/><br />
                 
-                Presione aqu&iacute; para confirmarlo, <a href=".'"localhost/lpm19-practicas/electronicaFacultad/confirmarAlumno.php?idPasante='.$traerId.'" target="_blank"'.">Confirmar</a>.<br /><br />
+                Presione aqu&iacute; para confirmarlo, <a href=".'"http://extension.frvm.utn.edu.ar/electronicaFacultad/confirmarPasante.php?idPasante='.$traerId.'" target="_blank"'.">Confirmar</a>.<br /><br />
                 <br />
             </div>
         </div>
         ";
-        $asunto = "Confirmar Alumno";
+        $asunto = "Confirmar Pasante";
         $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
         $from_name = "Dpto Electronica";
         //$to = "etell@frvm.utn.edu.ar";
         $to = "lucaspm_2005@hotmail.com";
+
+
+		$cuerpo2 = "
+        <div align='left'>
+            <div align='left'>
+                <strong>Usted se ha inscripto correctamente</strong><br/><br/>
+
+                Por favor espere la confirmaci&oacute;n de su registro, se le enviar&aacute; un mail con sus datos de usuario.<br /><br />
+                
+                Muchas Gracias.<br /><br />
+                <br />
+            </div>
+        </div>
+        ";
+        $asunto2 = "Confirmar Pasante";
+        $sendFrom2 = "dpto-electronica@frvm.utn.edu.ar";
+        $from_name2 = "Dpto Electronica";
+        //$to = "etell@frvm.utn.edu.ar";
+        $to2 = $mail;
 		
 		// $consultaMax = pg_query("SELECT max(id) FROM pasante");
 		// $rowMax = pg_fetch_array($consultaMax);
@@ -81,6 +98,7 @@ $id_Pasante = $_REQUEST['idPasante'];
 		// $id_Alumno = $maximoAlumno;
 
 		$newPasante="INSERT INTO pasante(nombre, apellido, nro_legajo, tipodni, nrodni, fec_nacimiento, loc_nacimiento, prov_viviendo, loc_viviendo, codpos, calle, nrocalle, piso, dpto, carrera_fk, caracfijo, nrofijo, caraccel, nrocelular, mail, mail2, facebook, twitter, prov_trabajo, loc_trabajo, codpos2, empresa_trabaja, perfil_laboral,fecreg,usuario_fk)VALUES('$nombre','$apellido','$nro_legajo','$tipodni','$nrodni','$fec_nacimiento','$loc_nacimiento','$prov_viviendo','$loc_viviendo','$codpos','$calle','$nrocalle','$piso','$dpto',2,'$caracfijo','$nrofijo','$caraccel','$nrocelular','$mail','$mail2','$facebook','$twitter','$prov_trabajo','$loc_trabajo','$codpos2','$empresa_trabaja','$perfil_laboral','$fecreg','$usuario_fk');";
+		//echo 'newPasante: '.$newPasante;
 			$error=0;
 			if (!pg_query($conn, $newPasante)){
 				$errorpg = pg_last_error($conn);
@@ -97,7 +115,8 @@ $id_Pasante = $_REQUEST['idPasante'];
 			//echo $errorpg;
 		}else{
 			enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
-			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "login.php?registrado=1";</script>';
+			enviarMail($cuerpo2,$asunto2,$sendFrom2,$from_name2,$to2);
+			echo '<script language="JavaScript"> alert("Verifique su casilla de mail, le enviamos un correo."); window.location = "login.php?registrado=1";</script>';
 		}
 	}else{
 		//aca va el update

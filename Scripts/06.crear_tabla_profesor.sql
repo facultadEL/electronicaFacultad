@@ -4,5 +4,5 @@
 	apellido character varying,
 	mail character varying,
 	telefono character varying,
-	usuario_fk references usuario(id)
+	usuario_fk integer references usuario(id)
 );

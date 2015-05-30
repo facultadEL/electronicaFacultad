@@ -60,10 +60,11 @@ $nombre_idea = ucwords($_REQUEST['nombre']);
 $archivo = $_REQUEST['add_idea'];
 $id = $_SESSION['id_Pasante'];
 $id_new_idea = traerId('idea');
-	//$destino = loadFileToServer('aca va la carpeta destino');
-	$destino = '/electronica/archivo.pdf';
+	$destino = loadFileToServer('electronicaFacultad');
+	$fecha_registro = date(Ymd);
+	//$destino = '/electronica/archivo.pdf';
 	$cont = 0;
-	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id');";
+	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk, fecha_registro)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id','$fecha_registro');";
 
 	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
 	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){

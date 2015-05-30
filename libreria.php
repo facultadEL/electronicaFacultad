@@ -102,16 +102,16 @@ Se le tiene que mandar:
 */
 function loadFileToServer($placeToLoad) {
     
-	$nombre_archivoPdf = $_FILES['archivoPdf']['name'];
-	$tipo_archivo = $_FILES['archivoPdf']['type'];
-	$tamano_archivo = $_FILES['archivoPdf']['size'];
-	$filePdf = $_FILES['archivoPdf']['tmp_name'];
+	$nombre_archivoPdf = $_FILES['add_idea']['name'];
+	$tipo_archivo = $_FILES['add_idea']['type'];
+	$tamano_archivo = $_FILES['add_idea']['size'];
+	$filePdf = $_FILES['add_idea']['tmp_name'];
 	
 	$ftp_server = "190.114.198.126";
 	$ftp_user_name = "fernandoserassioextension";
 	$ftp_user_pass = "fernando2013";
-	$destino_Pdf = "web/".$placeToLoad."/archivos/".$nombre_archivoPdf;
-	$destinoPdf = "archivos/".$nombre_archivoPdf;
+	$destino_Pdf = "web/".$placeToLoad."/ideas/".$nombre_archivoPdf;
+	$destinoPdf = "ideas/".$nombre_archivoPdf;
 	$vacio = "archivos/";
 	
 	//conexión

@@ -10,28 +10,28 @@
 	<script>
 		var mailDictionary = [];
 		
-		function maskDni()
-		{
-	    	var mascara;
-	        valDni = $('#nrodni').val();
-	        switch(valDni.length)
-	        {
-	            case 7:
-	            case 9:
-	                mascara = "0.000.000";
-	                break;
-	            case 8:
-	            case 10:
-	                mascara = "00.000.000";
-	                break;
-	            default:
-	            	mascara = null;
-	        }
-	        if(mascara != null)
-	        {
-	        	$('#nrodni').mask(mascara);
-	        }
-	    }
+		// function maskDni()
+		// {
+	 //    	var mascara;
+	 //        valDni = $('#nrodni').val();
+	 //        switch(valDni.length)
+	 //        {
+	 //            case 7:
+	 //            case 9:
+	 //                mascara = "0.000.000";
+	 //                break;
+	 //            case 8:
+	 //            case 10:
+	 //                mascara = "00.000.000";
+	 //                break;
+	 //            default:
+	 //            	mascara = null;
+	 //        }
+	 //        if(mascara != null)
+	 //        {
+	 //        	$('#nrodni').mask(mascara);
+	 //        }
+	 //    }
 
 		function setMail(mailToSet)
 		{
@@ -182,7 +182,7 @@ include_once "libreria.php";
 							</td>
 							<td colspan="5">
 								<!-- <input id="nrodni" name="nrodni" type="text" class="campoText" onkeyup="maskDni()" onfocus="this.value = '';" pattern="[0-9]{1,2}+[.]{1}[0-9]{3}+[.]{1}[0-9]{3}" value="<?php //echo $nrodni; ?>" maxlength="10" autocomplete="off" required/> -->
-								<input id="nrodni" name="nrodni" type="text" class="campoText" onkeyup="maskDni()" onfocus="this.value = '';" pattern="([0-9]{1}|[0-9]{2}).[0-9]{3}.[0-9]{3}" value="<?php echo $nrodni; ?>" maxlength="10" autocomplete="off" required/>
+								<input id="nrodni" name="nrodni" type="text" class="campoText" pattern="([0-9]{1}|[0-9]{2})[0-9]{3}[0-9]{3}" value="<?php echo $nrodni; ?>" maxlength="10" title="Solo n&uacute;meros" autocomplete="off" required/>
 							</td>
 						</tr>
 						<tr width="100%">

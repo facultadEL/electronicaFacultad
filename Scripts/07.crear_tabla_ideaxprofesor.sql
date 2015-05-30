@@ -5,5 +5,5 @@
 	ideaaprobada boolean
 	fecha_aprobada date,
 	fecha_desaprobada date,
-	visto boolean
+	visto boolean default false
 );

@@ -4,5 +4,6 @@
 	archivo_pdf character varying,
 	fecha_registro_pdf date,
 	descripcion text,
+	seguidor_profe integer references profesor(id),
 	visto boolean default false
 );
