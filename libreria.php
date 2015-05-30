@@ -112,7 +112,7 @@ function loadFileToServer($placeToLoad) {
 	$ftp_user_pass = "fernando2013";
 	$destino_Pdf = "web/".$placeToLoad."/ideas/".$nombre_archivoPdf;
 	$destinoPdf = "ideas/".$nombre_archivoPdf;
-	$vacio = "archivos/";
+	$vacio = "ideas/";
 	
 	//conexión
 	$conn_id = ftp_connect($ftp_server); 

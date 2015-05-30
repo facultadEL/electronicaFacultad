@@ -65,7 +65,7 @@ $id_new_idea = traerId('idea');
 	//$destino = '/electronica/archivo.pdf';
 	$cont = 0;
 	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk, fecha_registro)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id','$fecha_registro');";
-
+	echo $newIdea;
 	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
 	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
 		$id_profe[$cont] = $rowIdP['id'];
@@ -79,7 +79,7 @@ $id_new_idea = traerId('idea');
 
 	$error = GuardarSql($newIdea);
 		if ($error==1){
-			echo '<script language="JavaScript"> alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
+			//echo '<script language="JavaScript"> alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
 		}else{
 			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "escritorioPasante.php";</script>';
