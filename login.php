@@ -105,10 +105,11 @@ $usuario = (empty($_SESSION['usuario'])) ? NULL : $_SESSION['usuario'];
 <?php
 include_once "conexion.php";
 include_once "libreria.php";
-	$sql = traerSql('mail,password','usuario');
+	$sql = traerSql('mail,password','usuario ORDER BY id');
 	while($rowData=pg_fetch_array($sql,NULL,PGSQL_ASSOC)){
 		$dataToPass = strtolower($rowData['mail']).'/--/'.$rowData['password'];
 		echo "<script>setData('".$dataToPass."')</script>";
+		//echo $dataToPass.'<br>';
 	}
 include_once "cerrar_conexion.php";
 ?>
