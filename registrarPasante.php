@@ -269,7 +269,7 @@ include_once "libreria.php";
 								<input id="caracfijo" name="caracfijo" type="text" class="campoNro" pattern="[1-9]{2,4}" placeholder="Sin 0" value="<?php echo $caracfijo; ?>" size="3" maxlength="5"/>
 							</td>
 							<td width="35%">
-								<input id="nrofijo" name="nrofijo" type="text" class="campoTextTel" value="<?php echo $nrofijo; ?>"/>
+								<input id="nrofijo" name="nrofijo" type="text" class="campoTextTel" pattern="[0-9]{6,8}" value="<?php echo $nrofijo; ?>"/>
 							</td>
 							<td width="10%" align="right">
 								<label for="caraccel">Celular: </label>

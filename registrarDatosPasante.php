@@ -1,8 +1,15 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/loaders.css"/>
 </head>
 <body>
+<!-- <div style="width: 140px; height: 120px;" class="loader">
+	<div class="loader-inner ball-rotate">
+		<div style="background: #444;">  		
+		</div>
+	</div>
+</div> -->
 <?php
 include_once "conexion.php";
 include_once "libreria.php";
