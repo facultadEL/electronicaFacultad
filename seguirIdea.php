@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include_once "chekearLogin.php"
+	include_once "chekearLogin.php";
 
 ?>
 <!DOCTYPE html>

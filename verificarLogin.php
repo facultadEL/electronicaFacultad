@@ -40,7 +40,7 @@ while($rowLogin=pg_fetch_array($usuario_bd,NULL,PGSQL_ASSOC)){
     }
     
     
-    if ($habili = 't') {
+    if ($habili == 't') {
     	if ($primera_vez == 't'){
 	    	if ($_SESSION['rol_fk'] == 1) {
 	    		echo '<script language="JavaScript"> window.location ="cambiarPassGenerado.php" </script>';

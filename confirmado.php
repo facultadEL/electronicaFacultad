@@ -60,7 +60,7 @@ $rowPasante=pg_fetch_array($sql,NULL,PGSQL_ASSOC);
 			echo '<script language="JavaScript"> alert("Los datos no se modificaron correctamente. Pongase en contacto con el administrador");</script>';
 		}else{
 			if ($enviado == 'f'){
-				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
+				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL);
 			}
 			echo '<script language="JavaScript"> window.location = "confirmarPasante.php";</script>';
 		}

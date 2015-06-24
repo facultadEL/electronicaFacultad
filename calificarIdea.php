@@ -1,9 +1,9 @@
 <?php
 	session_start();
-	include_once "chekearLogin.php"
+	include_once "chekearLogin.php";
 
 ?>
-<!DOCTYPE>
+<!DOCTYPE html5>
 <html lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -44,7 +44,7 @@
 							echo '<td>'.$rowNuevasIdeas['nro_legajo'].'</td>';
 							echo '<td>'.$rowNuevasIdeas['mail'].'</td>';
 							echo '<td>'.$rowNuevasIdeas['nomidea'].'</td>';
-							echo '<td><a href="'.$rowNuevasIdeas['archivo'].'><input type="button" id="btn_verincs" value="Ver" title="Ver archivo de la Idea" alt="ver"></a></td>';
+							echo '<td><a href="'.$rowNuevasIdeas['archivo'].'"><input type="button" id="btn_verincs" value="Ver" title="Ver archivo de la Idea" alt="ver"></a></td>';
 							if ($rowNuevasIdeas['visto'] == 'f') {
 								echo '<td><a href="calificada.php?aprobar=0&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="No"></a>';
 								echo '<a href="calificada.php?aprobar=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Si"></a></td>';

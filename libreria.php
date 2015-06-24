@@ -148,7 +148,7 @@ require ("PHPMailer_5.2.1/class.phpmailer.php");
 // $from_name = nombre remitente
 // $to = dirección a donde enviamos
 
-function enviarMail($c,$a,$sendFrom,$from_name,$to){
+function enviarMail($c,$a,$sendFrom,$from_name,$to,$copia_oculta){
         
     $cuerpo = $c;
     $asunto = $a;
@@ -168,7 +168,7 @@ function enviarMail($c,$a,$sendFrom,$from_name,$to){
     $mail->AddAddress($to, ''); // Esta es la dirección a donde enviamos
 
     //$mail->AddCC("cuenta@dominio.com"); // Copia
-    //$mail->AddBCC("cuenta@dominio.com"); // Copia oculta
+    $mail->AddBCC($copia_oculta); // Copia oculta
     $mail->IsHTML(true); // El correo se envía como HTML
     $mail->Subject = $asunto; // Asunto
     $mail->Body = $cuerpo; // Mensaje a enviar

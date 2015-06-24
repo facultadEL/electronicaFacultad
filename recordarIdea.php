@@ -29,7 +29,7 @@ while($rowVisto = pg_fetch_array($sql)){
     $from_name = "Dpto Electronica";
     $to = $mail;
 
-	    enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
+	    enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL);
     }
 
 include_once "cerrar_conexion.php";

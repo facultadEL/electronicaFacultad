@@ -2,8 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="jquery.mask.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/registroPasante.css">
 	<title>P&aacute;gina en Desarrollo</title>
 </head>

@@ -66,7 +66,7 @@
 			}
 			//Setea el hidden con el password
 			$('#hiddenPass').val(pass);
-			$('#hiddenPassEnc').val(pass_encriptado);
+			//$('#hiddenPassEnc').val(pass_encriptado);
 		});
 
 		function checkMail2()

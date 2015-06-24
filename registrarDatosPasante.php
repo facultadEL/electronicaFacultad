@@ -39,7 +39,8 @@ $id_Pasante = $_REQUEST['idPasante'];
 		$mail2 = $_REQUEST['mail2'];
 		$facebook = ucwords($_REQUEST['facebook']);
 		$twitter = ucwords($_REQUEST['twitter']);
-		$password = $_REQUEST['pass_encriptado'];
+		//$password = $_REQUEST['pass_encriptado'];
+		$password = $_REQUEST['password'];
 		$prov_trabajo = ucwords($_REQUEST['prov_trabajo']);
 		$loc_trabajo = ucwords($_REQUEST['loc_trabajo']);
 		$codpos2 = $_REQUEST['codpos2'];
@@ -76,8 +77,8 @@ $id_Pasante = $_REQUEST['idPasante'];
         $asunto = "Confirmar Pasante";
         $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
         $from_name = "Dpto Electronica";
-        //$to = "etell@frvm.utn.edu.ar";
-        $to = "lucaspm_2005@hotmail.com";
+        $to = "etell@frvm.utn.edu.ar";
+        //$to = "lucaspm_2005@hotmail.com";
 
 
 		$cuerpo2 = "
@@ -121,8 +122,8 @@ $id_Pasante = $_REQUEST['idPasante'];
 			echo '<script language="JavaScript"> 	alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
 		}else{
-			enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
-			enviarMail($cuerpo2,$asunto2,$sendFrom2,$from_name2,$to2);
+			enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL);
+			enviarMail($cuerpo2,$asunto2,$sendFrom2,$from_name2,$to2,NULL);
 			echo '<script language="JavaScript"> alert("Verifique su casilla de mail, le enviamos un correo."); window.location = "login.php?registrado=1";</script>';
 		}
 	}else{

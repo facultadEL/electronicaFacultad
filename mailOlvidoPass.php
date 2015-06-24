@@ -29,7 +29,7 @@ $rowbuscarPass = pg_fetch_array($buscarPass,NULL,PGSQL_ASSOC);
     $from_name = "Dpto Electronica";
     $to = $recuperarPass;
 
-    enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
+    enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL);
 
 include_once "cerrar_conexion.php";
 

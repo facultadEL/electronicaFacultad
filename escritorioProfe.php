@@ -1,14 +1,13 @@
 <?php
 	session_start();
-	include_once "chekearLogin.php"
+	include_once "chekearLogin.php";
 
 ?>
-<!DOCTYPE>
+<!DOCTYPE html5>
 <html lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type='text/javascript' src="jquery.min-1.9.1.js"></script>
-<script src="jquery.mask.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/escritorioProfe.css">
 <title><?php echo 'Bienvenido, '.$_SESSION['nombre'];?></title>
 

@@ -18,8 +18,10 @@ $asunto = "Consulta idea";
 $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 $from_name = "Dpto Electronica";
 $to = $mail;
+$copia_oculta = "etell@frvm.utn.edu.ar";
 
-enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to);
+
+enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$copia_oculta);
 
 include_once "cerrar_conexion.php";
 
