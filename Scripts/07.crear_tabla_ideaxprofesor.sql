@@ -5,5 +5,6 @@
 	ideaaprobada boolean
 	fecha_aprobada date,
 	fecha_desaprobada date,
+	observacion text,
 	visto boolean default false
 );

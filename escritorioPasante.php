@@ -87,13 +87,14 @@ $id_new_idea = traerId('idea');
 }else{
 	$id = $_SESSION['id_Pasante'];
 	$hayIdea = 0;
-		$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
+		$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado, fecha_registro FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
 		while($rowIdea=pg_fetch_array($consultarIdea,NULL,PGSQL_ASSOC)){
 			$id_Pasante = $rowIdea['pasante_fk'];
 			$id_Idea = (empty($rowIdea['id'])) ? 0 : $rowIdea['id'];
 			$nombre_idea = $rowIdea['nombre'];
 			$estado = $rowIdea['estado'];
 			$archivo = $rowIdea['archivo'];
+			$fecha_registro = $rowIdea['fecha_registro'];
 
 			if ($id_Idea != 0) {
 				$hayIdea = 1;
@@ -255,6 +256,14 @@ if ($hayIdea == 0) {
 					?>
 				</td>
 			</tr>
+			<tr>
+				<td width="3%" id="textoCI">
+					<label for="nombre">Fecha Registro: </label>
+				</td>
+				<td width="20%" id="campoCI">
+					<l1><?php echo $fecha_registro = setDate($fecha_registro); ?></l1>
+				</td>
+			</tr>
 		</table>
 </div>		
 	<table id="tablaCalif" align="center" width="100%" border="0">
@@ -297,6 +306,53 @@ if ($hayIdea == 0) {
 			}
 		?>
 		</tr>
+
+		<tr>
+		<?php
+			$cont = 0;
+			//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
+			$sql = traerSqlCondicion('id,idea,ideaaprobada,visto,fecha_aprobada, fecha_desaprobada','ideaxprofesor','idea = '.$id_Idea.' ORDER BY id');
+			while ($rowIdeaXProfe = pg_fetch_array($sql)){
+				$calificacion = $rowIdeaXProfe['ideaaprobada'];
+				$fecha_aprobada = $rowIdeaXProfe['fecha_aprobada'];
+				$fecha_desaprobada = $rowIdeaXProfe['fecha_desaprobada'];
+				if ($rowIdeaXProfe['visto'] == 't') {
+					if ($calificacion == 't') {
+						echo '<td class="fecha td">'.$fecha_aprobada = setDate($fecha_aprobada).'</td>';
+					}else{
+						echo '<td class="fecha td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
+					}
+				}else{
+					echo '<td class="fecha td"><l2></l2></td>';
+				}
+				$cont++;
+			}
+		?>
+		</tr>
+
+		<tr>
+		<?php
+			$cont = 0;
+			//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
+			$sql = traerSqlCondicion('id,idea,ideaaprobada,visto, observacion','ideaxprofesor','idea = '.$id_Idea.' ORDER BY id');
+			while ($rowIdeaXProfe = pg_fetch_array($sql)){
+				$calificacion = $rowIdeaXProfe['ideaaprobada'];
+				$observacion = $rowIdeaXProfe['observacion'];
+				if ($rowIdeaXProfe['visto'] == 't') {
+					//if ($calificacion == 't') {
+						echo '<td class="observa td">'.$observacion.'</td>';
+					// }else{
+					// 	echo '<td class="observa td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
+					// }
+				}else{
+					echo '<td class="observa td"><l2></l2></td>';
+				}
+				$cont++;
+			}
+		?>
+		</tr>
+
+
 		<tr>
 			<?php
 				$sql = traerSqlCondicion('profesor.id, profesor.nombre, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
