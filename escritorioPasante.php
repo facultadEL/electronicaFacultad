@@ -66,7 +66,7 @@ $id_new_idea = traerId('idea');
 	$cont = 0;
 	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk, fecha_registro)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id','$fecha_registro');";
 	echo $newIdea;
-	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
+	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk IN(2,3)');
 	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
 		$id_profe[$cont] = $rowIdP['id'];
     	//echo 'idProfesor: '.$id_profe[$cont];
@@ -290,7 +290,7 @@ if ($hayIdea == 0) {
 		<?php
 			$cont = 0;
 			//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-			$sql = traerSqlCondicion('id,idea,profesor,ideaaprobada,visto','ideaxprofesor','idea = '.$id_Idea.' ORDER BY id');
+			$sql = traerSqlCondicion('ideaxprofesor.id,idea,profesor,ideaaprobada,visto','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
 			while ($rowIdeaXProfe = pg_fetch_array($sql)){
 				$calificacion = $rowIdeaXProfe['ideaaprobada'];
 				if ($rowIdeaXProfe['visto'] == 'f') {
@@ -311,7 +311,7 @@ if ($hayIdea == 0) {
 		<?php
 			$cont = 0;
 			//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-			$sql = traerSqlCondicion('id,idea,ideaaprobada,visto,fecha_aprobada, fecha_desaprobada','ideaxprofesor','idea = '.$id_Idea.' ORDER BY id');
+			$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto,fecha_aprobada, fecha_desaprobada','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
 			while ($rowIdeaXProfe = pg_fetch_array($sql)){
 				$calificacion = $rowIdeaXProfe['ideaaprobada'];
 				$fecha_aprobada = $rowIdeaXProfe['fecha_aprobada'];
@@ -334,7 +334,7 @@ if ($hayIdea == 0) {
 		<?php
 			$cont = 0;
 			//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-			$sql = traerSqlCondicion('id,idea,ideaaprobada,visto, observacion','ideaxprofesor','idea = '.$id_Idea.' ORDER BY id');
+			$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto, observacion','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
 			while ($rowIdeaXProfe = pg_fetch_array($sql)){
 				$calificacion = $rowIdeaXProfe['ideaaprobada'];
 				$observacion = $rowIdeaXProfe['observacion'];

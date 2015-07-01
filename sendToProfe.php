@@ -18,6 +18,12 @@ include_once "conexion.php";
 include_once "libreria.php";
 
 $id_Profesor = (empty($_REQUEST['idProfesor'])) ? 0 : $_REQUEST['idProfesor'];
+//$vernotas = (empty($_REQUEST['vernotas'])) ? 0 : $_REQUEST['vernotas'];
+//$vernotasadmin = (empty($_REQUEST['vernotasadmin'])) ? 0 : $_REQUEST['vernotasadmin'];
+$idIdea = (empty($_REQUEST['idea'])) ? 0 : $_REQUEST['idea'];
+//echo 'notasAdm: '.$vernotasadmin.'<br>';
+//echo 'notas: '.$vernotas.'<br>';
+
 //$enviado = $_REQUEST['enviado'];
 //if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
 
@@ -56,7 +62,16 @@ $id_Profesor = (empty($_REQUEST['idProfesor'])) ? 0 : $_REQUEST['idProfesor'];
 <table id="tablaBtn">
 	<tr>	
 		<td>
-			<td width="50%" align="right"><a href="escritorioPasante.php"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>
+			<?php 
+				if ($_SESSION['rol_fk'] == 3) {
+					echo '<td width="50%" align="right"><a href="ver_notas.php?idea='.$idIdea.'"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>';
+				}elseif ($_SESSION['rol_fk'] == 2){
+					echo '<td width="50%" align="right"><a href="ver_notas_admin.php?idea='.$idIdea.'"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>';
+				}elseif ($_SESSION['rol_fk'] == 1){
+					echo '<td width="50%" align="right"><a href="escritorioPasante.php"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>';
+				}
+			?>
+			
 			<td width="50%" align="left"><input class="submit" type="submit" value="Enviar"/></td>
  		</td>
 	</tr>

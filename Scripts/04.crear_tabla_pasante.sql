@@ -32,5 +32,7 @@
   perfil_laboral character varying,
   confirmado boolean default false,
   logueado boolean default false,
-  fecreg date
+  fecreg date,
+  usuario_fk integer references usuario(id),
+  enviado boolean default false
 );

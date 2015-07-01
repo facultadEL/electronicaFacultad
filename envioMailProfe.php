@@ -8,6 +8,8 @@ include_once "conexion.php";
 include_once "libreria.php";
 
 $cuerpo = trim($_REQUEST['msj']); //trim limpia los espacios al principio y al final de contenido enviado en el campo
+$cuerpo .= '<br><br> Enviado por:'.$_SESSION['nombre'].', '.$_SESSION['apellido'].'.';
+
 $id_Profesor = $_REQUEST['idProfesor'];
 
 $sql = traerSql('mail','profesor','id='.$id_Profesor);
@@ -18,12 +20,22 @@ $asunto = "Consulta idea";
 $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 $from_name = "Dpto Electronica";
 $to = $mail;
-$copia_oculta = "etell@frvm.utn.edu.ar";
+if ($_SESSION['rol_fk'] == 2) {
+	$copia_oculta = NULL;
+}else{
+	$copia_oculta = "etell@frvm.utn.edu.ar";
+}
 
 
 enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$copia_oculta);
 
 include_once "cerrar_conexion.php";
 
-echo '<script language="JavaScript"> window.location = "escritorioPasante.php";</script>';
+if ($_SESSION['rol_fk'] == 2) {
+	echo '<script language="JavaScript"> window.location = "enCursoAdmin.php";</script>';
+}elseif ($_SESSION['rol_fk'] == 1) {
+	echo '<script language="JavaScript"> window.location = "escritorioPasante.php";</script>';
+}elseif ($_SESSION['rol_fk'] == 3) {
+	echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
+}
 ?>

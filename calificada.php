@@ -6,6 +6,7 @@ include_once "libreria.php";
 
 $id_IdeaXprofe = $_REQUEST['idIdeaXprofe'];
 $aprobar = $_REQUEST['aprobar'];
+$iec = (empty($_REQUEST['iec'])) ? 0 : $_REQUEST['iec'];
 
 if ($id_IdeaXprofe != 0) {
 
@@ -17,10 +18,9 @@ if ($id_IdeaXprofe != 0) {
 	    $fecha = date(Ymd);
 
 	    if ($aprobar == 0){
+				$calificarIdea = "UPDATE idea SET estado=4 WHERE id = $id_idea;";
+	    		$calificarIdea .= "UPDATE ideaxprofesor SET ideaaprobada=FALSE, visto=TRUE, fecha_desaprobada='$fecha', fecha_aprobada=NULL WHERE id = $id_IdeaXprofe;";
 
-			//se entra acá lo desaprueba entonces el estado debe volver a 2 que sería pendiente de aprobación
-			$calificarIdea = "UPDATE idea SET estado=2 WHERE id = $id_idea;";
-	    	$calificarIdea .= "UPDATE ideaxprofesor SET ideaaprobada=FALSE, visto=TRUE, fecha_desaprobada='$fecha', fecha_aprobada=NULL WHERE id = $id_IdeaXprofe;";
 				$error=0;
 				if (!pg_query($conn, $calificarIdea)){
 					$errorpg = pg_last_error($conn);
@@ -34,15 +34,23 @@ if ($id_IdeaXprofe != 0) {
 			if ($error==1){
 				echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el administrador");</script>';
 			}else{
-				echo '<script language="JavaScript"> window.location = "calificarIdea.php";</script>';
+				if ($iec == 1) {
+					echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
+				}else{
+					echo '<script language="JavaScript"> window.location = "calificarIdea.php";</script>';
+				}
 			}
 	    }else{
 	    	//Veo si la calificación tiene 5 aprobados para cambiarle el estado
 	    	$cantAprobados = contarRegistro('ideaaprobada','ideaxprofesor','idea = '.$id_idea.' AND ideaaprobada = TRUE AND profesor != '.$id_profesor);
 
+	    	$cant_NoAprobados = contarRegistro('ideaaprobada','ideaxprofesor','idea = '.$id_idea.' AND ideaaprobada = FALSE AND profesor != '.$id_profesor);
+
 			if ($cantAprobados == 4) {//pregunto por 4 porque como se van a ejecutar las consultas al mismo tiempo si entró a este if quiere decir que la aprobó y que es el quinto aprobado.
 				$calificarIdea = "UPDATE idea SET estado=3 WHERE id = $id_idea;";
 				//$calificarIdea .= "INSERT INTO informe_idea(idea,archivo_pdf,fecha_registro_pdf,descripcion)VALUES($id_idea,NULL,NULL,NULL)"			
+			}elseif ($cant_NoAprobados == 0 && $cantAprobados < 4) {
+				$calificarIdea = "UPDATE idea SET estado=2 WHERE id = $id_idea;";
 			}
 
 	    	$calificarIdea .= "UPDATE ideaxprofesor SET ideaaprobada=TRUE, visto=TRUE, fecha_aprobada='$fecha', fecha_desaprobada=NULL WHERE id = $id_IdeaXprofe;";
@@ -60,7 +68,11 @@ if ($id_IdeaXprofe != 0) {
 			if ($error==1){
 				echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el administrador");</script>';
 			}else{
-				echo '<script language="JavaScript"> window.location = "calificarIdea.php";</script>';
+				if ($iec == 1) {
+					echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
+				}else{
+					echo '<script language="JavaScript"> window.location = "calificarIdea.php";</script>';
+				}
 			}
 	    }
 }else{
