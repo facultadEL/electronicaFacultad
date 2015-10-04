@@ -2,8 +2,7 @@
 
 -- DROP TABLE nivel_carrera;
 
-CREATE TABLE nivel_carrera
-(
+CREATE TABLE nivel_carrera(
   id serial NOT NULL primary key,
   nombre character varying
 );

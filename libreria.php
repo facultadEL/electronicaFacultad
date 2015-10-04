@@ -57,7 +57,16 @@ function traerUltimo($tabla){
     $maxId = $rowId['max'];
     return $maxId;
 }
-
+function traer_dato($campo,$tabla,$condicion){
+    if($condicion==NULL){
+        $sql_dato = pg_query("SELECT $campo".' AS "campo"'." FROM ".$tabla);
+    }else{
+        $sql_dato = pg_query("SELECT $campo".' AS "campo"'." FROM $tabla WHERE ".$condicion);
+    }
+    $rowDato = pg_fetch_array($sql_dato);
+    $dato = $rowDato['campo'];
+    return $dato;
+}
 
 //Muestra el mensaje javascript y redirecciona a los lugares que le mandemos
 function mostrarMensaje($msg,$redireccion){

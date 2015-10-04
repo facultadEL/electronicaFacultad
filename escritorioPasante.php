@@ -65,7 +65,7 @@ $id_new_idea = traerId('idea');
 	//$destino = '/electronica/archivo.pdf';
 	$cont = 0;
 	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk, fecha_registro)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id','$fecha_registro');";
-	echo $newIdea;
+	//echo $newIdea;
 	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk IN(2,3)');
 	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
 		$id_profe[$cont] = $rowIdP['id'];
@@ -95,9 +95,14 @@ $id_new_idea = traerId('idea');
 			$estado = $rowIdea['estado'];
 			$archivo = $rowIdea['archivo'];
 			$fecha_registro = $rowIdea['fecha_registro'];
-
+			
 			if ($id_Idea != 0) {
-				$hayIdea = 1;
+				$cant_NoAprobados = contarRegistro('ideaaprobada','ideaxprofesor','idea = '.$id_Idea.' AND ideaaprobada = FALSE');
+				if ($cant_NoAprobados > 0) {
+					$hayIdea = 0;
+				}else{
+					$hayIdea = 1;
+				}
 			}
 		}
 	}

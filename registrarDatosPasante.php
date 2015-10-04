@@ -77,8 +77,8 @@ $id_Pasante = $_REQUEST['idPasante'];
         $asunto = "Confirmar Pasante";
         $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
         $from_name = "Dpto Electronica";
-        $to = "etell@frvm.utn.edu.ar";
-        //$to = "lucaspm_2005@hotmail.com";
+        //$to = "etell@frvm.utn.edu.ar";
+        $to = "lucas.peraltam@outlook.com.com";
 
 
 		$cuerpo2 = "
@@ -97,7 +97,8 @@ $id_Pasante = $_REQUEST['idPasante'];
         $sendFrom2 = "dpto-electronica@frvm.utn.edu.ar";
         $from_name2 = "Dpto Electronica";
         //$to = "etell@frvm.utn.edu.ar";
-        $to2 = $mail;
+        //$to2 = $mail;
+        $to2 = "lucas.peraltam@outlook.com.com";
 		
 		// $consultaMax = pg_query("SELECT max(id) FROM pasante");
 		// $rowMax = pg_fetch_array($consultaMax);
