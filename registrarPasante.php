@@ -9,29 +9,6 @@
 	<title>Registro de Usuario</title>
 	<script>
 		var mailDictionary = [];
-		
-		// function maskDni()
-		// {
-	 //    	var mascara;
-	 //        valDni = $('#nrodni').val();
-	 //        switch(valDni.length)
-	 //        {
-	 //            case 7:
-	 //            case 9:
-	 //                mascara = "0.000.000";
-	 //                break;
-	 //            case 8:
-	 //            case 10:
-	 //                mascara = "00.000.000";
-	 //                break;
-	 //            default:
-	 //            	mascara = null;
-	 //        }
-	 //        if(mascara != null)
-	 //        {
-	 //        	$('#nrodni').mask(mascara);
-	 //        }
-	 //    }
 
 		function setMail(mailToSet)
 		{
@@ -49,28 +26,27 @@
 			}
 		}
 
-		function setPass(passToSet){
-			pass = passToSet;
-		}
-		//Esto se ejecuta cuando la página ya esta cargada
-		$(document).ready(function(){
-			//Acá se controla si trae un password. Lo trae cargado en caso de que sea un update de datos
-			//Si no lo trae cargado, lo genera por primera vez que se registra.
-			if (pass == null) {
-				sD();
-				lDD();
-				longValue = 8;
-				var pass = gP(longValue);
-				var pass_encriptado = encrypt(pass, 'eof');
+		// function setPass(passToSet){
+		// 	pass = passToSet;
+		// }
+		// //Esto se ejecuta cuando la página ya esta cargada
+		// $(document).ready(function(){
+		// 	//Acá se controla si trae un password. Lo trae cargado en caso de que sea un update de datos
+		// 	//Si no lo trae cargado, lo genera por primera vez que se registra.
+		// 	if (pass == null) {
+		// 		sD();
+		// 		lDD();
+		// 		longValue = 8;
+		// 		var pass = gP(longValue);
+		// 		var pass_encriptado = encrypt(pass, 'eof');
 
-			}
-			//Setea el hidden con el password
-			$('#hiddenPass').val(pass);
-			//$('#hiddenPassEnc').val(pass_encriptado);
-		});
+		// 	}
+		// 	//Setea el hidden con el password
+		// 	$('#hiddenPass').val(pass);
+		// 	//$('#hiddenPassEnc').val(pass_encriptado);
+		// });
 
-		function checkMail2()
-		{
+		function checkMail2(){
 			var mail1 = $('#mail').val();
 			var mail2 = $('#mail2').val();
 			if(mail1 == mail2)
@@ -122,7 +98,6 @@ include_once "libreria.php";
 			$codpos2 = $rowPasante['codpos2'];
 			$empresa_trabaja = $rowPasante['empresa_trabaja'];
 			$perfil_laboral = $rowPasante['perfil_laboral'];
-			echo "<script>setPass('".$password."');</script>";
 	}
 
 	$verificarMail=traerSql('mail', 'pasante');
@@ -146,8 +121,6 @@ include_once "libreria.php";
 							</td>
 							<td width="30%">
 								<input id="nombre" name="nombre" type="text" class="campoText" value="<?php echo $nombre; ?>" required autofocus/>
-								<input type="hidden" name="password" id="hiddenPass"/>
-								<input type="hidden" name="pass_encriptado" id="hiddenPassEnc"/>
 							</td>
 							<td width="10%" align="right">
 								<label for="apellido">Apellido: </label>

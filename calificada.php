@@ -46,7 +46,7 @@ if ($id_IdeaXprofe != 0) {
 				$asunto = "Informacion sobre la idea";
 				$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 				$from_name = "Dpto Electronica";
-				//$to = "etell@frvm.utn.edu.ar";
+				//$to2 = "etell@frvm.utn.edu.ar";
 				$to = $mail_pasante;
 				$to2 = "lucas.peraltam@outlook.com";
 
@@ -78,7 +78,26 @@ if ($id_IdeaXprofe != 0) {
 	    	$cant_NoAprobados = contarRegistro('ideaaprobada','ideaxprofesor','idea = '.$id_idea.' AND ideaaprobada = FALSE AND profesor != '.$id_profesor);
 
 			if ($cantAprobados == 4) {//pregunto por 4 porque como se van a ejecutar las consultas al mismo tiempo si entró a este if quiere decir que la aprobó y que es el quinto aprobado.
+
+				$cuerpo = "
+					<div align='left'>
+					    <div align='left'>
+					        <strong>Idea aprobada</strong><br/><br/>
+
+					        Su idea ha sido aprobada, para continuar deber&iacute;a comunicar firmar el convenio de la pasant&iacute;a.<br/><br />
+					    </div>
+					</div>
+				";
+				$asunto = "Informacion sobre la idea";
+				$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
+				$from_name = "Dpto Electronica";
+				//$to2 = "etell@frvm.utn.edu.ar";
+				$to = $mail_pasante;
+				$to2 = "lucas.peraltam@outlook.com";
+
+
 				$calificarIdea = "UPDATE idea SET estado=3 WHERE id = $id_idea;";
+				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2);
 				//$calificarIdea .= "INSERT INTO informe_idea(idea,archivo_pdf,fecha_registro_pdf,descripcion)VALUES($id_idea,NULL,NULL,NULL)"			
 			}elseif ($cant_NoAprobados == 0 && $cantAprobados < 4) {
 				$calificarIdea = "UPDATE idea SET estado=2 WHERE id = $id_idea;";

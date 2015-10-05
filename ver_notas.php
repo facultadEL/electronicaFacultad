@@ -126,17 +126,16 @@ $idIdea = (empty($_REQUEST['idea'])) ? 0 : $_REQUEST['idea'];
 		<?php
 			$cont = 0;
 			if ($visto == 1) {
-				$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto,fecha_aprobada, fecha_desaprobada','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$idIdea.' AND rol_fk <> 2 ORDER BY id');
+				$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto,fecha_calif','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$idIdea.' AND rol_fk <> 2 ORDER BY id');
 				while ($rowIdeaXProfe = pg_fetch_array($sql)){
 					$calificacion = $rowIdeaXProfe['ideaaprobada'];
-					$fecha_aprobada = $rowIdeaXProfe['fecha_aprobada'];
-					$fecha_desaprobada = $rowIdeaXProfe['fecha_desaprobada'];
+					$fecha_calif = $rowIdeaXProfe['fecha_calif'];
 					if ($rowIdeaXProfe['visto'] == 't') {
-						if ($calificacion == 't') {
-							echo '<td class="fecha td">'.$fecha_aprobada = setDate($fecha_aprobada).'</td>';
-						}else{
-							echo '<td class="fecha td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
-						}
+						//if ($calificacion == 't') {
+							echo '<td class="fecha td">'.$fecha_calif = setDate($fecha_calif).'</td>';
+						//}else{
+						//	echo '<td class="fecha td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
+						//}
 					}else{
 						echo '<td class="fecha td"><l2></l2></td>';
 					}
