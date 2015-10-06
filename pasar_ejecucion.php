@@ -5,8 +5,26 @@ include_once "conexion.php";
 include_once "libreria.php";
 
 $idea = (empty($_REQUEST['idea'])) ? 0 : $_REQUEST['idea'];
-//$aprobar = $_REQUEST['aprobar'];
-//$iec = (empty($_REQUEST['iec'])) ? 0 : $_REQUEST['iec'];
+$id_constatador = traerUltimo('constatador');
+$mail_constatador = traer_dato('mail','constatador','id = '.$id_constatador);
+
+$cuerpo = "
+	<div align='left'>
+	    <div align='left'>
+	        <strong>Idea en Ejecuci&oacute;n</strong><br/><br/>
+
+	        Tiene una idea nueva en ejecuci&oacute;n.<br/><br />
+
+	        Presione aqu&iacute; para ir a la idea, <a href=".'"http://extension.frvm.utn.edu.ar/electronicaFacultad/escritorioConstatador.php" target="_blank"'.">Ir</a>.<br /><br />
+	    </div>
+	</div>
+";
+$asunto = "Nueva idea";
+$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
+$from_name = "Dpto Electronica";
+//$to2 = "etell@frvm.utn.edu.ar";
+$to = $mail_constatador;
+$to2 = "lucas.peraltam@outlook.com";
 
 if ($idea != 0) {
 
@@ -16,6 +34,7 @@ if ($idea != 0) {
 	if ($error==1){
 		echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el programador");</script>';
 	}else{
+		enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2);
 		echo '<script language="JavaScript"> window.location = "ideas_aprob.php";</script>';
 	}
 }else{

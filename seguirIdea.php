@@ -16,7 +16,7 @@
 <body>
 <div id="formulario">
 <h2>Calificar Ideas</h2>
-<?php include_once "menuProfe.html";?>
+<?php include_once "menuConstatador.html";?>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
 	<div class="calificarIdea">
 		<table id="tablaIdeas" align="center">
@@ -33,9 +33,9 @@
 				include_once "libreria.php";
 
 					//$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
-				$NuevasIdeas = traerSqlCondicion('idea.id, idea.nombre as nomidea, archivo, pasante_fk, pasante.nombre as nompasante, apellido, nro_legajo, mail','idea INNER JOIN pasante ON idea.pasante_fk = pasante.id','estado = 3 ORDER BY idea.id DESC');
+				$NuevasIdeas = traerSqlCondicion('idea.id, idea.nombre as nomidea, archivo, pasante_fk, pasante.nombre as nompasante, apellido, nro_legajo, mail','idea INNER JOIN pasante ON idea.pasante_fk = pasante.id','estado = 5 ORDER BY idea.id DESC');
 					while($rowNuevasIdeas = pg_fetch_array($NuevasIdeas)){
-						$id_IdeaXprofe = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
+						$id_idea = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
 						
 						echo '<tr>';
 							echo '<td>'.$rowNuevasIdeas['apellido'].', '.$rowNuevasIdeas['nompasante'].'</td>';
@@ -43,7 +43,7 @@
 							echo '<td>'.$rowNuevasIdeas['mail'].'</td>';
 							echo '<td>'.$rowNuevasIdeas['nomidea'].'</td>';
 							echo '<td><a href="'.$rowNuevasIdeas['archivo'].'"><input type="button" id="btn_verincs" value="Ver" title="Ver archivo de la Idea" alt="ver"></a></td>';
-							echo '<td>Subir PDF</td>';
+							echo '<td><a href="pdf_constatador.php?idea='.$id_idea.'"><input type="button" id="btn_subpdf" value="Subir PDF" title="Subir seguimiento de la Idea" alt="Subir PDF"></a></td>';
 						echo '</tr>';
 					}
 					

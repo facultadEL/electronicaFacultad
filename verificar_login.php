@@ -31,6 +31,13 @@ while($rowLogin=pg_fetch_array($usuario_bd)){
     	$_SESSION['apellido'] = $rowOD['apellido'];
     	$_SESSION['id_Pasante'] = $rowOD['id'];
     	$confirmado = $rowOD['confirmado'];
+    }elseif($_SESSION['rol_fk'] == 4){
+        $otrosDatos = traerSqlCondicion('nombre,apellido,id,usuario_fk','constatador','usuario_fk='.$idUsuario);
+        $rowOD = pg_fetch_array($otrosDatos);
+        $_SESSION['nombre'] = $rowOD['nombre'];
+        $_SESSION['apellido'] = $rowOD['apellido'];
+        $_SESSION['id_Constatador'] = $rowOD['id'];
+        //echo 'profe';
     }else{
     	$otrosDatos = traerSqlCondicion('nombre,apellido,id,usuario_fk','profesor','usuario_fk='.$idUsuario);
     	$rowOD = pg_fetch_array($otrosDatos);
@@ -67,7 +74,7 @@ while($rowLogin=pg_fetch_array($usuario_bd)){
     }
 
     if ($_SESSION['rol_fk'] == 4) {
-    	echo '<script language="JavaScript"> window.location ="escritorioSeguidor.php" </script>';
+    	echo '<script language="JavaScript"> window.location ="escritorioConstatador.php" </script>';
     }
 
     //Hacer un menú para las opciones del administrador

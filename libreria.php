@@ -115,6 +115,8 @@ function loadFileToServer($placeToLoad) {
 	$tipo_archivo = $_FILES['add_idea']['type'];
 	$tamano_archivo = $_FILES['add_idea']['size'];
 	$filePdf = $_FILES['add_idea']['tmp_name'];
+
+    $nombre_archivoPdf = str_replace(" ", "-", $nombre_archivoPdf);
 	
 	$ftp_server = "190.114.198.126";
 	$ftp_user_name = "fernandoserassioextension";
@@ -122,7 +124,7 @@ function loadFileToServer($placeToLoad) {
 	$destino_Pdf = "web/".$placeToLoad."/ideas/".$nombre_archivoPdf;
 	$destinoPdf = "ideas/".$nombre_archivoPdf;
 	$vacio = "ideas/";
-	
+
 	//conexión
 	$conn_id = ftp_connect($ftp_server); 
 	// logeo
@@ -136,8 +138,7 @@ function loadFileToServer($placeToLoad) {
     //   }else{
     //       echo "Conectado a $ftp_server, for user $ftp_user_name";
     //   }
-
-    if ($nombre_archivoPdf <> NULL){
+    if (!empty($nombre_archivoPdf)) {
         $uploadPdf = ftp_put($conn_id, $destino_Pdf, $filePdf, FTP_BINARY);
     }
 	return $destinoPdf;
@@ -166,8 +167,10 @@ function enviarMail($c,$a,$sendFrom,$from_name,$to,$copia_oculta){
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = "ssl"; 
     $mail->Host = "smtp.gmail.com"; // dirección del servidor
-    $mail->Username = "extensionfrvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
+    //$mail->Username = "dpto.electronica.frvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
+    //$mail->Password = "axEL1234."; // Contraseña
 
+    $mail->Username = "extensionfrvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
     $mail->Password = "4537500frvm"; // Contraseña
 
     $mail->Port = 465; // Puerto a utilizar

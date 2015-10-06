@@ -15,15 +15,21 @@
 <body>
 <div id="formulario">
 <h2><?php echo 'Hola, '.$_SESSION['nombre'];?></h2>
-<?php include_once "menuSeguidor.html";?>
+<?php include_once "menuConstatador.html";?>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
 	<?php
-		//include_once "conexion.php";
-		//include_once "libreria.php";
+		include_once "conexion.php";
+		include_once "libreria.php";
 
-			//$cantNuevasIdeas = contarRegistro('idea','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id','profesor ='.$_SESSION['id_Profesor'].' AND visto = false AND estado = 3');
-			//echo '<center><h1>Hay <strong>'.$cantNuevasIdeas.'</strong> ideas nuevas</h1></center>';
-		//include_once "cerrar_conexion.php";
+			$cantNuevasIdeas = contarRegistro('id','idea','estado = 5');
+			if ($cantNuevasIdeas = 1){
+				echo '<center><h1>Hay <strong>'.$cantNuevasIdeas.'</strong> idea en ejecuci&oacute;n</h1></center>';
+			}elseif ($cantNuevasIdeas < 1){
+				echo '<center><h1>No tiene ideas en ejecuci&oacute;n</h1></center>';
+			}else{
+				echo '<center><h1>Hay <strong>'.$cantNuevasIdeas.'</strong> ideas en ejecuci&oacute;n</h1></center>';
+			}
+		include_once "cerrar_conexion.php";
 	?>
 <div id="tablaCuerpo">
 </div>

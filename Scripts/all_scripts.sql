@@ -13,7 +13,7 @@ CREATE TABLE rol(
 INSERT INTO rol(nombre)VALUES('Alumno');
 INSERT INTO rol(nombre)VALUES('Administrador');
 INSERT INTO rol(nombre)VALUES('Profesor');
-INSERT INTO rol(nombre)VALUES('Seguimiento');
+INSERT INTO rol(nombre)VALUES('Constatador');
 
 CREATE TABLE usuario(
 	id serial NOT NULL primary key,
@@ -28,8 +28,8 @@ INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(2,'ram
 INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(3,'gutiejose@hotmail.com','10d644b3d8776238df17bddf6553bcc2',3,FALSE,TRUE);
 INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(4,'maballes@arnet.com.ar','6f70e24eab5c9baf3d0137c6b467a678',3,FALSE,TRUE);
 INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(5,'fmsalvatico@hotmail.com','060baa8ecd2478c5c560ebd1125516f0',3,FALSE,TRUE);
---INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(6,'ing_oliveros@arnet.com.ar','seguimiento',4,FALSE,TRUE);
 INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(6,'etell@frvm.utn.edu.ar','21232f297a57a5a743894a0e4a801fc3',2,FALSE,TRUE);
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(7,'ing_oliveros@arnet.com.ar','8090af55fa8de93895ee60c16c4c88b8',4,FALSE,TRUE);
 
 CREATE TABLE tipo_dni(
   id serial NOT NULL primary key,
@@ -122,7 +122,6 @@ INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(2,'Ramon
 INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(3,'José','Gutierrez','gutiejose@hotmail.com','',3);
 INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(4,'Miguel','Ballesteros','maballes@arnet.com.ar','',4);
 INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(5,'Franco','Salvatico','fmsalvatico@hotmail.com','',5);
---INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(6,'Hugo','Oliveros','ing_oliveros@arnet.com.ar','',6);
 INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(6,'Eduardo','Tell','etell@frvm.utn.edu.ar','',6);
 
 CREATE TABLE ideaxprofesor(
@@ -142,6 +141,14 @@ CREATE TABLE informe_idea(
 	fecha_registro_pdf date,
 	descripcion text,
 	constatador integer references constatador(id),
-	visto boolean default false,
 	es_final boolean default false
 );
+
+CREATE TABLE constatador(
+	id serial NOT NULL primary key,
+	nombre character varying,
+	apellido character varying,
+	mail character varying,
+	usuario_fk integer references usuario(id)
+);
+INSERT INTO constatador(id,nombre,apellido,mail,usuario_fk)VALUES(1,'Hugo','Oliveros','ing_oliveros@arnet.com.ar',7);
