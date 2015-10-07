@@ -53,22 +53,30 @@ include_once "libreria.php";
 
 $enviado = (empty($_REQUEST['enviado'])) ? 0 : $_REQUEST['enviado'];
 $id_idea = (empty($_REQUEST['idea'])) ? 0 : $_REQUEST['idea'];
-//$enviado = $_REQUEST['enviado'];
 //if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
 if ($enviado == 1) {
 	$id_idea = (empty($_REQUEST['idea'])) ? 0 : $_REQUEST['idea'];
 	$archivo = $_REQUEST['add_idea'];
-	//$destino = loadFileToServer('electronicaFacultad');
+	$destino = loadFileToServer('electronicaFacultad');
 	$fecha_registro = date(Ymd);
 	$id_Constatador = $_SESSION['id_Constatador'];
 	$esFinal = ($_REQUEST['esFinal'] == 0) ? 'FALSE' : 'TRUE';
 	$newPDF="INSERT INTO informe_idea(idea, archivo_pdf, fecha_registro_pdf, constatador, es_final)VALUES($id_idea,'$destino','$fecha_registro',$id_Constatador,$esFinal);";
-	$mail_profe = '';
+	if($_REQUEST['esFinal'] == 1){
+		$cant_mails = 6;
+		$mail_profe = '';
+		$mail_pasante = traer_dato('mail','idea INNER JOIN pasante ON pasante.id = idea.pasante_fk','idea.id = '.$id_idea).';';
+	}else{
+		$mail_profe = traer_dato('mail','idea INNER JOIN pasante ON pasante.id = idea.pasante_fk','idea.id = '.$id_idea).';';
+		$cant_mails = 7;
+	}
 	$profe = traerSqlCondicion('profesor.id,profesor.mail,rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk IN(2,3)');
 	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
 		$mail_profe .= $rowIdP['mail'].';';
     }
-
+    //$mail_profe = "lucas.peraltam@outlook.com;lpm19.2009@gmail.com;eze.olea.f@gmail.com;";
+    echo 'lista: '.$mail_profe.'<br>';
+    //echo 'destino: '.$destino.'<br>';
     $cuerpo = "
 		<div align='left'>
 		    <div align='left'>
@@ -83,11 +91,14 @@ if ($enviado == 1) {
 	$asunto = "Seguimiento de la idea";
 	$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 	$from_name = "Dpto Electronica";
-	//$to2 = "etell@frvm.utn.edu.ar";
-	$to = $mail_profe."lucas.peraltam@outlook.com";
-	$to2 = "lucas.peraltam@outlook.com";
 
-	enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2);
+	$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
+	$from_name = "Dpto Electronica";
+	//$to2 = "etell@frvm.utn.edu.ar";
+	$to = $mail_profe.'<br>';
+	//$to2 = "lucas.peraltam@outlook.com";
+
+	//enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL,$cant_mails);
 	
 	if($_REQUEST['esFinal'] == 0){
 		$error = GuardarSql($newPDF);
@@ -99,6 +110,17 @@ if ($enviado == 1) {
 		}
 	}else{
 		//es final
+		$cuerpo2 = "
+			<div align='left'>
+			    <div align='left'>
+			        <strong>Final del seguimiento</strong><br/><br/>
+
+			        Se agreg&oacute; el &uacute;ltimo PDF con el seguimiento. El siguiente paso es que subas tu informe final.
+			    </div>
+			</div>
+		";
+		$asunto2 = "Final del Seguimiento de la idea";
+		enviarMail($cuerpo2,$asunto2,$sendFrom,$from_name,$mail_pasante,NULL,1);
 		$newPDF .= "UPDATE idea SET estado=6 WHERE id = $id_idea;";
 		$error = GuardarSql($newPDF);
 		if ($error==1){

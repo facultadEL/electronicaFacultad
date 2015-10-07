@@ -110,7 +110,6 @@ Se le tiene que mandar:
 - fileTmpName = La informacion obtenida de $_FILES['archivoPdf']['tmp_name'];
 */
 function loadFileToServer($placeToLoad) {
-    
 	$nombre_archivoPdf = $_FILES['add_idea']['name'];
 	$tipo_archivo = $_FILES['add_idea']['type'];
 	$tamano_archivo = $_FILES['add_idea']['size'];
@@ -157,8 +156,9 @@ require ("PHPMailer_5.2.1/class.phpmailer.php");
 // $sendFrom = dirección remitente
 // $from_name = nombre remitente
 // $to = dirección a donde enviamos
+// $cant_mail = cantidad de mails a enviar
 
-function enviarMail($c,$a,$sendFrom,$from_name,$to,$copia_oculta){
+function enviarMail($c,$a,$sendFrom,$from_name,$to,$copia_oculta,$cant_mail){
         
     $cuerpo = $c;
     $asunto = $a;
@@ -176,8 +176,11 @@ function enviarMail($c,$a,$sendFrom,$from_name,$to,$copia_oculta){
     $mail->Port = 465; // Puerto a utilizar
     $mail->From = $sendFrom; // dirección remitente
     $mail->FromName = $from_name; // nombre remitente
-
-    $mail->AddAddress($to, ''); // Esta es la dirección a donde enviamos
+    
+    $to = explode(';', $to);
+    for ($i=0; $i < $cant_mail; $i++) { 
+        $mail->AddAddress($to[$i], ''); // Esta es la dirección a donde enviamos
+    }
 
     //$mail->AddCC("cuenta@dominio.com"); // Copia
     $mail->AddBCC($copia_oculta); // Copia oculta
