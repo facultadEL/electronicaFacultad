@@ -6,11 +6,11 @@ include_once "libreria.php";
 
 $id_Pasante = $_REQUEST['idPasante'];
 
-$sql = traerSqlCondicion('pasante.id,confirmado,usuario.mail as mailuser,password, enviado','pasante INNER JOIN usuario ON pasante.usuario_fk = usuario.id','pasante.id='.$id_Pasante);
+$sql = traerSqlCondicion('pasante.id,nrodni,confirmado,usuario.mail as mailuser,password, enviado','pasante INNER JOIN usuario ON pasante.usuario_fk = usuario.id','pasante.id='.$id_Pasante);
 $rowPasante=pg_fetch_array($sql,NULL,PGSQL_ASSOC);
     $confirmado = $rowPasante['confirmado'];
     $mail = $rowPasante['mailuser'];
-    $password = $rowPasante['password'];
+    $password = $rowPasante['nrodni'];
     $enviado = $rowPasante['enviado'];
     // echo 'pass: '.$password;
     // echo 'usuario:'.$mail;
@@ -60,7 +60,7 @@ $rowPasante=pg_fetch_array($sql,NULL,PGSQL_ASSOC);
 			echo '<script language="JavaScript"> alert("Los datos no se modificaron correctamente. Pongase en contacto con el administrador");</script>';
 		}else{
 			if ($enviado == 'f'){
-				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL);
+				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL,1);
 			}
 			echo '<script language="JavaScript"> window.location = "confirmarPasante.php";</script>';
 		}

@@ -19,7 +19,8 @@ while($rowLogin=pg_fetch_array($usuario_bd)){
 	//echo 'encuentra';
 	$_SESSION['usuario'] = $usuario;
 	$_SESSION['rol_fk'] = $rowLogin['rol_fk'];
-	$habili = $rowLogin['habilitado'];
+    $habili = $rowLogin['habilitado'];
+	$confirmado = $rowLogin['confirmado'];
 	$primera_vez = $rowLogin['primera_vez'];
 	$idUsuario = $rowLogin['id'];
 }
@@ -49,32 +50,31 @@ while($rowLogin=pg_fetch_array($usuario_bd)){
     
     
     if ($habili == 't') {
-    	if ($primera_vez == 't'){
-	    	if ($_SESSION['rol_fk'] == 1) {
-	    		echo '<script language="JavaScript"> window.location ="cambiarPassGenerado.php" </script>';
-	    	}
-	    }else{
-	    	if ($_SESSION['rol_fk'] == 1) {
-		    	if ($confirmado == 't') {
-		    		//echo '<script language="JavaScript"> window.location ="escritorioPasante.php?enviado=0"	</script>';
-		    		echo '<script language="JavaScript"> window.location ="escritorioPasante.php"	</script>';
-		    	}else{
-			    	echo '<script language="JavaScript"> alert("Su solicitud está en espera de aprobación"); window.location ="login.php" </script>';
-			    }
-			}
-	    }
-    }
+        if ($_SESSION['rol_fk'] == 1) {
+            if ($confirmado == 't') {
+                if ($primera_vez == 't'){
+                    echo '<script language="JavaScript"> window.location ="cambiarPassGenerado.php" </script>';
+                }else{
+                    echo '<script language="JavaScript"> window.location ="escritorioPasante.php"   </script>';
+                }
+            }else{
+                echo '<script language="JavaScript"> alert("Su solicitud está en espera de aprobación"); window.location ="login.php" </script>';
+            }
+        }
 
-    if ($_SESSION['rol_fk'] == 2) {
-    	echo '<script language="JavaScript"> window.location ="escritorioAdmin.php" </script>';
-    }
+        if ($_SESSION['rol_fk'] == 2) {
+            echo '<script language="JavaScript"> window.location ="escritorioAdmin.php" </script>';
+        }
 
-    if ($_SESSION['rol_fk'] == 3) {
-    	echo '<script language="JavaScript"> window.location ="escritorioProfe.php" </script>';
-    }
+        if ($_SESSION['rol_fk'] == 3) {
+            echo '<script language="JavaScript"> window.location ="escritorioProfe.php" </script>';
+        }
 
-    if ($_SESSION['rol_fk'] == 4) {
-    	echo '<script language="JavaScript"> window.location ="escritorioConstatador.php" </script>';
+        if ($_SESSION['rol_fk'] == 4) {
+            echo '<script language="JavaScript"> window.location ="escritorioConstatador.php" </script>';
+        }
+    }else{
+        echo '<script language="JavaScript"> alert("Su usuario está deshabilitado"); window.location ="login.php" </script>';
     }
 
     //Hacer un menú para las opciones del administrador

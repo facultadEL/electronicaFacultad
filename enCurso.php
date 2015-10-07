@@ -26,9 +26,9 @@
 				<th>Mail</th>
 				<th>Idea</th>
 				<th>Archivo</th>
-				<th>Observaciones</th>
+				<!-- <th>Observaciones</th> -->
 				<th>Calificaciones</th>
-				<th>Calificaci&oacute;n</th>
+				<!-- <th>Calificaci&oacute;n</th> -->
 			</tr>
 			<?php
 				include_once "conexion.php";
@@ -41,26 +41,6 @@
 					while($rowNuevasIdeas = pg_fetch_array($NuevasIdeas)){
 						$id_IdeaXprofe = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
 						
-						// echo '<tr>';
-						// 	echo '<td>'.$rowNuevasIdeas['apellido'].', '.$rowNuevasIdeas['nompasante'].'</td>';
-						// 	echo '<td>'.$rowNuevasIdeas['nro_legajo'].'</td>';
-						// 	echo '<td>'.$rowNuevasIdeas['mail'].'</td>';
-						// 	echo '<td>'.$rowNuevasIdeas['nomidea'].'</td>';
-						// 	echo '<td><a href="'.$rowNuevasIdeas['archivo'].'" target="_blank"><input type="button" id="btn_verincs" value="Ver" title="Ver archivo de la Idea" alt="ver"></a></td>';
-						// 	echo '<td><a href="add_observa.php?idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_observa" value="Agregar" title="Agregar Observaciones sobre la idea"></a></td>';
-						// 	echo '<td><a href="ver_notas.php"><input type="button" id="btn_verincs" value="Ver" title="Ver las calificaciones de los dem&aacute;s profesores"></a></td>';
-						// 	if ($rowNuevasIdeas['visto'] == 'f') {
-						// 		echo '<td><a href="calificada.php?aprobar=0&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="No"></a>';
-						// 		echo '<a href="calificada.php?aprobar=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Si"></a></td>';
-						// 	}else{
-						// 		if ($rowNuevasIdeas['ideaaprobada'] == 'f') {
-						// 			echo '<td><a href="calificada.php?aprobar=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="No Aprobado"></a></td>';
-						// 		}else{
-						// 			echo '<td><a href="calificada.php?aprobar=0&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Aprobado"></a></td>';
-						// 		}
-						// 	}
-						// echo '</tr>';
-
 						if ($rowNuevasIdeas['visto'] == 't') {
 
 						echo '<tr>';
@@ -69,22 +49,16 @@
 							echo '<td>'.$rowNuevasIdeas['mail'].'</td>';
 							echo '<td>'.$rowNuevasIdeas['nomidea'].'</td>';
 							echo '<td><a href="'.$rowNuevasIdeas['archivo'].'" target="_blank"><input type="button" id="btn_verincs" value="Ver" title="Ver archivo de la Idea" alt="ver"></a></td>';
-							echo '<td><a href="add_observa.php?idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_observa" value="Agregar" title="Agregar Observaciones sobre la idea"></a></td>';
+							//PREGUNTAR SI PUEDE SEGUIR AGREGANDO OBSERVACIONES UNA VEZ CALIFICADA LA IDEA.
+							//echo '<td><a href="add_observa.php?idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_observa" value="Agregar" title="Agregar Observaciones sobre la idea"></a></td>';
 							echo '<td><a href="ver_notas.php?idea='.$rowNuevasIdeas['idea'].'"><input type="button" id="btn_verincs" value="Ver" title="Ver las calificaciones de los dem&aacute;s profesores"></a></td>';
-							if ($rowNuevasIdeas['ideaaprobada'] == 'f') {
-								echo '<td><a href="calificada.php?aprobar=1&iec=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Aprobar"></a></td>';
-							}else{
-								echo '<td><a href="calificada.php?aprobar=0&iec=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Desaprobar"></a></td>';
-							}
-								//echo '<td><a href="calificada.php?aprobar=0&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="No"></a>';
-								//echo '<a href="calificada.php?aprobar=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Si"></a></td>';
-							 }//else{
-							// 	if ($rowNuevasIdeas['ideaaprobada'] == 'f') {
-							// 		echo '<td><a href="calificada.php?aprobar=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="No Aprobado"></a></td>';
-							// 	}else{
-							// 		echo '<td><a href="calificada.php?aprobar=0&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Aprobado"></a></td>';
-							// 	}
-							//}
+							// if ($rowNuevasIdeas['ideaaprobada'] == 'f') {
+							// 	echo '<td><a href="calificada.php?aprobar=1&iec=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Aprobar"></a></td>';
+							// }else{
+							// 	echo '<td><a href="calificada.php?aprobar=0&iec=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Desaprobar"></a></td>';
+							// }
+								
+						}
 						echo '</tr>';
 					}
 					

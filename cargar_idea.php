@@ -19,7 +19,12 @@
 					<td width="70%" colspan="2">
 					<?php
 						if ($informe_final == 0) {
-							echo '<h1>No tienes ninguna idea subida</h1>';
+							if ($estado_idea == 4) {
+								echo '<h1>Tu idea anterior est&aacute; desaprobada!</h1>';
+								echo '<h3>Sube otra con las correcciones realizadas</h3>';
+							}else{
+								echo '<h1>No tienes ninguna idea subida</h1>';
+							}
 						}else{
 							echo '<h1>Sube tu informe final</h1>';
 						}

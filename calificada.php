@@ -64,7 +64,7 @@ if ($id_IdeaXprofe != 0) {
 			if ($error==1){
 				echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el administrador");</script>';
 			}else{
-				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2);
+				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2,1);
 				if ($iec == 1) {
 					echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
 				}else{
@@ -97,7 +97,7 @@ if ($id_IdeaXprofe != 0) {
 
 
 				$calificarIdea = "UPDATE idea SET estado=3 WHERE id = $id_idea;";
-				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2);
+				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2,1);
 				//$calificarIdea .= "INSERT INTO informe_idea(idea,archivo_pdf,fecha_registro_pdf,descripcion)VALUES($id_idea,NULL,NULL,NULL)"			
 			}elseif ($cant_NoAprobados == 0 && $cantAprobados < 4) {
 				$calificarIdea = "UPDATE idea SET estado=2 WHERE id = $id_idea;";

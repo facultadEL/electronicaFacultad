@@ -71,16 +71,25 @@ if ($cant_ideas == 0) {
 	$cargar_idea = 1;
 }
 if ($cant_ideas > 0 && $cant_informes == 0) {
-	$estado_idea = traer_dato('estado','idea','pasante_fk = '.$id);
+	$sqlEst = traerSqlCondicion('id,estado','idea','pasante_fk = '.$id.' ORDER BY id desc');
+	$rowEI=pg_fetch_array($sqlEst);
+		$id_Idea = $rowEI['id'];
+		$estado_idea = $rowEI['estado'];
 	if ($estado_idea == 4) {
+		//echo 'entra 4';
 		$cargar_idea = 1; //cargar nueva idea ya que no está aprobada la anterior
 	}elseif($estado_idea == 6){
+		//echo 'entra 6';
 		$cargar_informe = 1;
+	}elseif($estado_idea == 2){
+		//echo 'entra 2';
+		$consulta_idea = 1;
 	}else{
+		//echo 'entra';
 		$consulta_idea = 1;
 	}
-	$tiene_idea = 1;
-	$tiene_informe = 0;
+	//$tiene_idea = 1;
+	//$tiene_informe = 0;
 }
 if ($cant_informes > 0) {
 	$estado_informe = traer_dato('estado','informe_final','pasante_fk = '.$id);
@@ -90,24 +99,17 @@ if ($cant_informes > 0) {
 		$consulta_informe_final = 1;
 	}
 
-	$tiene_idea = 0;
-	$informe_final = 1;
+	//$tiene_idea = 0;
+	//$informe_final = 1;
 }
 
 
-
-
-
-
-
-//$enviado = $_REQUEST['enviado'];
-//if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
 if ($enviado == 1) {
-$nombre_idea = ucwords($_REQUEST['nombre']);
+	$nombre_idea = ucwords($_REQUEST['nombre']);
 //echo 'nombre idea: '.$nombre_idea;
-$archivo = $_REQUEST['add_idea'];
-$id = $_SESSION['id_Pasante'];
-$id_new_idea = traerId('idea');
+	$archivo = $_REQUEST['add_idea'];
+//$id = $_SESSION['id_Pasante'];
+	$id_new_idea = traerId('idea');
 	$destino = loadFileToServer('electronicaFacultad');
 	$fecha_registro = date(Ymd);
 	//$destino = '/electronica/archivo.pdf';
@@ -128,13 +130,11 @@ $id_new_idea = traerId('idea');
 	$error = GuardarSql($newIdea);
 		if ($error==1){
 			//echo '<script language="JavaScript"> alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
-			//echo $errorpg;
 		}else{
 			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "escritorioPasante.php";</script>';
 		}
 }else{
-	$id = $_SESSION['id_Pasante'];
-
+	//$id = $_SESSION['id_Pasante'];
 	if ($consulta_informe_final == 1) {
 		$consultarInforme = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado, fecha_registro FROM informe_final i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
 		while($rowInforme=pg_fetch_array($consultarInforme,NULL,PGSQL_ASSOC)){
@@ -160,29 +160,29 @@ $id_new_idea = traerId('idea');
 }
 
 if ($inf_fin == 1) {
-$nombre_idea = ucwords($_REQUEST['nombre']);
-//echo 'nombre idea: '.$nombre_idea;
-$archivo = $_REQUEST['add_idea'];
-$id = $_SESSION['id_Pasante'];
-$id_new_informe = traerId('informe_final');
-	$destino = loadFileToServer('electronicaFacultad');
-	$fecha_registro = date(Ymd);
-	//$destino = '/electronica/archivo.pdf';
-	$cont = 0;
-	$newIdea="INSERT INTO informe_final(id,nombre, archivo, estado, pasante_fk, fecha_registro)VALUES('$id_new_informe','$nombre_idea','$destino',2,'$id','$fecha_registro');";
-	//echo $newIdea;
-	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk IN(2,3)');
-	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
-		$id_profe[$cont] = $rowIdP['id'];
-    	//echo 'idProfesor: '.$id_profe[$cont];
-    	$cont++;
-    }
-    
-	for ($i=0; $i < $cont ; $i++) { 
-		$newIdea .= "INSERT INTO informexprofesor(informe, profesor)VALUES('$id_new_informe',$id_profe[$i]);";
-	}
+	$nombre_idea = ucwords($_REQUEST['nombre']);
+	//echo 'nombre idea: '.$nombre_idea;
+	$archivo = $_REQUEST['add_idea'];
+	//$id = $_SESSION['id_Pasante'];
+	$id_new_informe = traerId('informe_final');
+		$destino = loadFileToServer('electronicaFacultad');
+		$fecha_registro = date(Ymd);
+		//$destino = '/electronica/archivo.pdf';
+		$cont = 0;
+		$newIdea="INSERT INTO informe_final(id,nombre, archivo, estado, pasante_fk, fecha_registro)VALUES('$id_new_informe','$nombre_idea','$destino',2,'$id','$fecha_registro');";
+		//echo $newIdea;
+		$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk IN(2,3)');
+		while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
+			$id_profe[$cont] = $rowIdP['id'];
+	    	//echo 'idProfesor: '.$id_profe[$cont];
+	    	$cont++;
+	    }
+	    
+		for ($i=0; $i < $cont ; $i++) { 
+			$newIdea .= "INSERT INTO informexprofesor(informe, profesor)VALUES('$id_new_informe',$id_profe[$i]);";
+		}
 
-	$error = GuardarSql($newIdea);
+		$error = GuardarSql($newIdea);
 		if ($error==1){
 			//echo '<script language="JavaScript"> alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;

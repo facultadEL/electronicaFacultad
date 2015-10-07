@@ -12,8 +12,7 @@
 <title><?php echo 'Bienvenido, '.$_SESSION['nombre'];?></title>
 <script>
 
-	function checkPass()
-	{
+	function checkPass(){
 		var passActual = $('#passGenerado').val();
 		var passNuevo = $('#passNuevo').val();
 		if(passActual == passNuevo)

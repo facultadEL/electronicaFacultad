@@ -97,7 +97,7 @@ $id_Pasante = $_REQUEST['idPasante'];
         $from_name2 = "Dpto Electronica";
         //$to = "etell@frvm.utn.edu.ar";
         //$to2 = $mail;
-        $to2 = "lucas.peraltam@outlook.com.com";
+        $to2 = $mail;
 		
 		// $consultaMax = pg_query("SELECT max(id) FROM pasante");
 		// $rowMax = pg_fetch_array($consultaMax);
@@ -122,8 +122,8 @@ $id_Pasante = $_REQUEST['idPasante'];
 			echo '<script language="JavaScript"> 	alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
 		}else{
-			enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL);
-			enviarMail($cuerpo2,$asunto2,$sendFrom2,$from_name2,$to2,NULL);
+			enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL,1);
+			enviarMail($cuerpo2,$asunto2,$sendFrom2,$from_name2,$to2,NULL,1);
 			echo '<script language="JavaScript"> alert("Verifique su casilla de mail, le enviamos un correo."); window.location = "login.php?registrado=1";</script>';
 		}
 	}else{

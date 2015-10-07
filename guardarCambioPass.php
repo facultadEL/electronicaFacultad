@@ -1,7 +1,7 @@
 <?php
 session_start();
 //$passActual = $_REQUEST['passGenerado'];
-$passNuevo = $_REQUEST['nuevoPass'];
+$passNuevo = md5($_REQUEST['nuevoPass']);
 //echo 'usuario: '.$usuario.'<br>';
 //echo 'password: '.$password.'<br>';
 $id_Pasante = $_SESSION['id_Pasante'];

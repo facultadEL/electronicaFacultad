@@ -201,6 +201,14 @@ h1{
 	padding-bottom: 1%;
 	color: #086A87;
 }
+h3{
+	font-family: Calibri;
+	font-size: 21px;
+	font-weight: normal;
+	text-align: center;
+	padding-bottom: 1%;
+	color: #086A87;	
+}
 
 .azul{
 	-webkit-border-radius: 10px;
