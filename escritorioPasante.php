@@ -53,6 +53,53 @@ include_once "libreria.php";
 
 $enviado = (empty($_REQUEST['enviado'])) ? 0 : $_REQUEST['enviado'];
 $inf_fin = (empty($_REQUEST['inf_fin'])) ? 0 : $_REQUEST['inf_fin'];
+
+$id = $_SESSION['id_Pasante'];
+
+$cant_ideas = contarRegistro('id','idea','pasante_fk = '.$id);
+$cant_informes = contarRegistro('id','informe_final','pasante_fk = '.$id);
+echo 'cant_ideas: '.$cant_ideas.'<br>';
+echo 'cant_informes: '.$cant_informes.'<br>';
+
+$cargar_idea = 0;
+$consulta_idea = 0;
+//$tiene_idea = 0;
+
+$cargar_informe = 0;
+$consulta_informe_final = 0;
+if ($cant_ideas == 0) {
+	$cargar_idea = 1;
+}
+if ($cant_ideas > 0 && $cant_informes == 0) {
+	$estado_idea = traer_dato('estado','idea','pasante_fk = '.$id);
+	if ($estado_idea == 4) {
+		$cargar_idea = 1; //cargar nueva idea ya que no está aprobada la anterior
+	}elseif($estado_idea == 6){
+		$cargar_informe = 1;
+	}else{
+		$consulta_idea = 1;
+	}
+	$tiene_idea = 1;
+	$tiene_informe = 0;
+}
+if ($cant_informes > 0) {
+	$estado_informe = traer_dato('estado','informe_final','pasante_fk = '.$id);
+	if ($estado_informe == 4) {
+		$cargar_informe = 1; //cargar nuevo informe ya que no está aprobada la anterior
+	}else{
+		$consulta_informe_final = 1;
+	}
+
+	$tiene_idea = 0;
+	$informe_final = 1;
+}
+
+
+
+
+
+
+
 //$enviado = $_REQUEST['enviado'];
 //if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
 if ($enviado == 1) {
@@ -87,59 +134,8 @@ $id_new_idea = traerId('idea');
 		}
 }else{
 	$id = $_SESSION['id_Pasante'];
-	//$hayIdea = 0;
 
-	$cant_ideas = contarRegistro('id','idea','pasante_fk = '.$id);
-	$cant_informes = contarRegistro('id','informe_final','pasante_fk = '.$id);
-	if ($cant_ideas > 0 && $cant_informes == 0) {
-		$estado_idea = traer_dato('estado','idea','pasante_fk = '.$id);
-
-		if ($estado_idea == 4 || $estado_idea == 6) {
-			$hayIdea = 0;
-		}
-		// 	$hayIdea = 0;
-		// 	$informe_final = 0;
-		// }elseif ($estado_idea == 5) {
-		// 	$hayIdea = 1;
-		// 	$informe_final = 0;
-		// }elseif ($estado_idea == 6) {
-		// 	$hayIdea = 0;
-		// 	$informe_final = 1;
-		// }elseif ($estado_idea == 7) {
-		// 	$hayIdea = 1;
-		// 	$informe_final = 1;
-		// }else{
-		// 	$hayIdea = 0;
-		// 	$informe_final = 0;
-		// }
-	}elseif($cant_ideas == 0 && $cant_informes > 0) {
-		$estado_informe = traer_dato('estado','informe_final','pasante_fk = '.$id);
-
-		if ($estado_informe == 4 || $estado_informe == 6) {
-			$informe_final = 0;
-		}
-		// if ($estado_informe == 4) {
-		// 	$hayIdea = 1;
-		// 	$informe_final = 0;
-		// }elseif ($estado_informe == 5) {
-		// 	$hayIdea = 1;
-		// 	$informe_final = 1;
-		// }elseif ($estado_informe == 6) {
-		// 	$hayIdea = 1;
-		// 	$informe_final = 1;
-		// }elseif ($estado_informe == 7) {
-		// 	$hayIdea = 1;
-		// 	$informe_final = 1;
-		// }else{
-		// 	$hayIdea = 1;
-		// 	$informe_final = 0;
-		// }
-	}else{
-		$hayIdea = 1;
-		$informe_final = 0;
-	}
-
-	if ($informe_final == 1) {
+	if ($consulta_informe_final == 1) {
 		$consultarInforme = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado, fecha_registro FROM informe_final i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
 		while($rowInforme=pg_fetch_array($consultarInforme,NULL,PGSQL_ASSOC)){
 			$id_Pasante = $rowInforme['pasante_fk'];
@@ -148,17 +144,9 @@ $id_new_idea = traerId('idea');
 			$estado = $rowInforme['estado'];
 			$archivo = $rowInforme['archivo'];
 			$fecha_registro = $rowInforme['fecha_registro'];
-			
-			// if ($id_Idea != 0) {
-			// 	$cant_NoAprobados = contarRegistro('ideaaprobada','ideaxprofesor','idea = '.$id_Idea.' AND ideaaprobada = FALSE');
-			// 	if ($cant_NoAprobados > 0) {
-			// 		$hayIdea = 0;
-			// 	}else{
-			// 		$hayIdea = 1;
-			// 	}
-			// }
 		}
-	}else{
+	}
+	if ($consulta_idea == 1) {
 		$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado, fecha_registro FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE pasante_fk = $id;");
 		while($rowIdea=pg_fetch_array($consultarIdea,NULL,PGSQL_ASSOC)){
 			$id_Pasante = $rowIdea['pasante_fk'];
@@ -167,15 +155,6 @@ $id_new_idea = traerId('idea');
 			$estado = $rowIdea['estado'];
 			$archivo = $rowIdea['archivo'];
 			$fecha_registro = $rowIdea['fecha_registro'];
-			
-			// if ($id_Idea != 0) {
-			// 	$cant_NoAprobados = contarRegistro('ideaaprobada','ideaxprofesor','idea = '.$id_Idea.' AND ideaaprobada = FALSE');
-			// 	if ($cant_NoAprobados > 0) {
-			// 		$hayIdea = 0;
-			// 	}else{
-			// 		$hayIdea = 1;
-			// 	}
-			// }
 		}
 	}
 }
@@ -212,678 +191,18 @@ $id_new_informe = traerId('informe_final');
 		}
 }
 
-if ($hayIdea == 0) {
-?>
-	<body>
-		<div id="formulario">
-		<h2>Seguimiento de la Idea</h2>
-		<?php
-			include_once "menuPasante.html"; 
-			if ($informe_final == 0) {
-				echo '<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?enviado=1" method="post" enctype="multipart/form-data">';
-			}else{
-				echo '<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?inf_fin=1" method="post" enctype="multipart/form-data">';
-			}
-		?>
+	if ($cargar_idea == 1) {
+		include_once "cargar_idea.php";
+	}
+	if($consulta_idea == 1){ 
+		include_once "consultar_idea_vigente.php";
+	}
+	if ($cargar_informe == 1) { 
+		include_once "cargar_informe_final.php";
+	}
+	if ($consulta_informe_final == 1) { 
+		include_once "consultar_informe_final_vig.php";
+	}
 
-
-		<div id="tablaCuerpo">
-				<table id="tablaImagen" align="left">
-					<tr>
-						<td>
-							<label for="add_idea">
-								<img id="imagen" src="img/add-idea2.png" title="Click aqu&iacute; para subir un PDF">
-							</label>
-							<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
-						</td>
-					</tr>
-				</table>
-				<table id="tablaDatos">
-					<tr width="100%">
-						<td width="70%" colspan="2">
-							<?php
-								if ($informe_final == 0) {
-									echo '<h1>No tienes ninguna idea subida</h1>';
-								}else{
-									echo '<h1>Sube tu informe final</h1>';
-								}
-							?>
-						</td>
-					</tr>
-						<tr>
-						<td width="3%" align="right">
-							<label for="nombre">Archivo: </label>
-						</td>
-						<td width="20%" align="left">
-							<input id="path" name="path" type="text" class="campoText" value="" readonly="true"/>
-						</td>
-					</tr>
-					<tr>
-						<td width="3%" align="right">
-							<label for="nombre">Nombre: </label>
-						</td>
-						<td width="20%" align="left">
-							<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
-						</td>
-					</tr>
-					<!-- <tr>
-						<td width="3%" align="right">
-							<label for="estado">Estado: </label>
-						</td>
-						<td width="20%" class="lbl_estado" align="left">
-							<?php
-								//$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=1');
-								//$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
-								//while($rowEstado=pg_fetch_array($consultaEstado)){
-									//if ($rowEstado['id'] == 1){
-				                //    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
-									//}
-									//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
-								//}
-							?>
-						</td>
-					</tr> -->
-				</table>
-		</div>
-		</center>
-		<table id="tablaBtn" align="center">
-			<tr width="100%">	
-				<td width="100%" align="center">
-					<input id="enviar" class="submit" type="submit" value=""/>
-		 		</td>
-			</tr>
-		</table>
-		</form>
-		</div>
-	</body>
-<?php }elseif($hayIdea != 0){ ?>
-	<body>
-		<div id="formulario">
-		<?php
-			if ($informe_final == 1) {
-				echo '<h2>Seguimiento del informe final</h2>';
-			}else{
-				echo '<h2>Seguimiento de la Idea</h2>';
-			}
-			include_once "menuPasante.html";
-		?>
-		<form class="nueva_idea" name="con_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
-			
-		<div id="tablaCuerpo">
-			<table id="tablaImagen" align="left">
-				<tr>
-					<td>
-						<label>
-							<img id="imagen2" src="img/uploaded-idea.png">
-						</label>
-					</td>
-				</tr>
-			</table>
-			<table id="tablaDatos">
-				<tr width="100%">
-					<td width="70%" id="textoCI" colspan="2">
-						<h1>Existe una idea!</h1>
-					</td>
-				</tr>
-					<tr>
-					<td width="3%" id="textoCI">
-						<label for="nombre">Archivo: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<l1><?php echo $archivo; ?></l1>
-					</td>
-				</tr>
-				<tr>
-					<td width="3%" id="textoCI">
-						<label for="nombre">Nombre: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<l1><?php echo $nombre_idea; ?></l1>
-					</td>
-				</tr>
-				<tr>
-					<td width="3%" id="textoCI">
-						<label for="estado">Estado: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<?php
-							if ($informe_final == 1) {
-								$id_Idea = $id_informe;
-							}
-							$estado_idea=traerSqlCondicion('estado, estado_idea.nombre','idea INNER JOIN estado_idea ON estado_idea.id = idea.estado','idea.id ='.$id_Idea);
-							$row_estado_idea=pg_fetch_array($estado_idea);
-							echo '<l1>'.$row_estado_idea['nombre'].'</l1>';
-							//$contAP = 0;
-							//$visto = 0;
-							// $estXprofe=traerSqlCondicion('ideaaprobada,visto','ideaxprofesor','idea='.$id_Idea);
-							// while($rowEstXProfe=pg_fetch_array($estXprofe)){
-							// 	if ($rowEstXProfe['ideaaprobada'] == 't') {
-			    //                 	$contAP++;
-			    //                 }
-			    //                 if ($rowEstXProfe['visto'] == 't') {
-			    //                 	$visto++;
-			    //                 }
-			    //             }
-							//echo 'contNA: '.$contAP.'<br>';
-							// if ($contAP == 5 && $visto == 5) {
-							// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=3');
-							// 	$rowEstado=pg_fetch_array($consultaEstado);
-							// 		echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							// }
-							// if ($visto > 0 && $visto == $contAP && $contAP != 5) {
-							// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
-							// 	$rowEstado=pg_fetch_array($consultaEstado);
-							// 		echo '<l1>'.$rowEstado['nombre'].'</l1>';		
-							// }else{
-							// 	if ($visto > 0 && $contAP < 5) {
-							// 			$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=4');
-							// 			$rowEstado=pg_fetch_array($consultaEstado);
-							// 				echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							// 	}	
-							// }
-							// if ($visto == 0) {
-							// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
-							// 		$rowEstado=pg_fetch_array($consultaEstado);
-							// 			echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							// }
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td width="3%" id="textoCI">
-						<label for="nombre">Fecha Registro: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<l1><?php echo $fecha_registro = setDate($fecha_registro); ?></l1>
-					</td>
-				</tr>
-			</table>
-	</div>		
-		<table id="tablaCalif" align="center" width="100%" border="0">
-			<thead>
-				<tr width="100%">
-					<th class="td" width="100%" colspan="5" align="center">
-						<l2>CALIFICACIONES</l2>
-						<!-- <input class="submit" type="submit" value="Guardar"/>  ver si se va a poner un botón y cual?--> 
-					</th>
-				</tr>
-			
-			<tr>
-				<?php
-					//$sql = traerSql('id,nombre,apellido','profesor');
-					$sql = traerSqlCondicion('profesor.id, profesor.nombre, apellido, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						echo '<td class="td" width="20%"><l2>'.$rowIdeaXProfe['nombre'].', '.$rowIdeaXProfe['apellido'].'</l2></td>';
-					}
-				?>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-			<?php
-				$cont = 0;
-				//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-				if ($informe_final == 1) {
-					$sql = traerSqlCondicion('informexprofesor.id,informe_final,profesor,informeaprobado,visto','informexprofesor INNER JOIN profesor ON profesor.id = informexprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','informe_final = '.$id_informe.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['informeaprobado'];
-						if ($rowIdeaXProfe['visto'] == 'f') {
-							echo '<td class="azul td"><l2>No Evaluado</l2></td>';
-						}else{
-							if ($calificacion == 't') {
-								echo '<td class="verde td"><l2>Aprobada</l2></td>';
-							}else{
-								echo '<td class="rojo td"><l2>No Aprobada</l2></td>';
-							}
-						}
-						$cont++;
-					}
-				}else{
-					$sql = traerSqlCondicion('ideaxprofesor.id,idea,profesor,ideaaprobada,visto','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['ideaaprobada'];
-						if ($rowIdeaXProfe['visto'] == 'f') {
-							echo '<td class="azul td"><l2>No Evaluado</l2></td>';
-						}else{
-							if ($calificacion == 't') {
-								echo '<td class="verde td"><l2>Aprobada</l2></td>';
-							}else{
-								echo '<td class="rojo td"><l2>No Aprobada</l2></td>';
-							}
-						}
-						$cont++;
-					}
-				}
-			?>
-			</tr>
-
-			<tr>
-			<?php
-				$cont = 0;
-				//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-				if ($informe_final == 1) {
-					$sql = traerSqlCondicion('informexprofesor.id,informe_final,informeaprobado,visto,fecha_calif','informexprofesor INNER JOIN profesor ON profesor.id = informexprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','informe_final = '.$id_informe.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['informeaprobado'];
-						$fecha_calif = $rowIdeaXProfe['fecha_calif'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							echo '<td class="fecha td">'.$fecha_calif = setDate($fecha_calif).'</td>';
-						}else{
-							echo '<td class="fecha td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}else{
-					$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto,fecha_calif, fecha_desaprobada','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['ideaaprobada'];
-						$fecha_calif = $rowIdeaXProfe['fecha_calif'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							echo '<td class="fecha td">'.$fecha_calif = setDate($fecha_calif).'</td>';
-						}else{
-							echo '<td class="fecha td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}
-			?>
-			</tr>
-
-			<tr>
-			<?php
-				$cont = 0;
-				//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-				if ($informe_final == 1) {
-					$sql = traerSqlCondicion('informexprofesor.id,informe_final,informeaprobado,visto, observacion','informexprofesor INNER JOIN profesor ON profesor.id = informexprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','informe_final = '.$id_informe.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['informeaprobado'];
-						$observacion = $rowIdeaXProfe['observacion'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							//if ($calificacion == 't') {
-								echo '<td class="observa td">'.$observacion.'</td>';
-							// }else{
-							// 	echo '<td class="observa td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
-							// }
-						}else{
-							echo '<td class="observa td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}else{
-					$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto, observacion','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['ideaaprobada'];
-						$observacion = $rowIdeaXProfe['observacion'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							//if ($calificacion == 't') {
-								echo '<td class="observa td">'.$observacion.'</td>';
-							// }else{
-							// 	echo '<td class="observa td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
-							// }
-						}else{
-							echo '<td class="observa td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}
-			?>
-			</tr>
-
-
-			<tr>
-				<?php
-					if ($informe_final == 1) {
-						$sql = traerSqlCondicion('profesor.id, profesor.nombre, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
-						//$sql = traerSql('id,nombre','profesor');
-						while ($rowIdeaXProfe = pg_fetch_array($sql)){
-							echo '<td class="contactar"><a href="sendToProfe.php?idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
-						}
-					}else{
-						$sql = traerSqlCondicion('profesor.id, profesor.nombre, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
-						//$sql = traerSql('id,nombre','profesor');
-						while ($rowIdeaXProfe = pg_fetch_array($sql)){
-							echo '<td class="contactar"><a href="sendToProfe.php?idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
-						}
-					}
-				?>
-			</tr>
-			</tbody>
-		</table>
-		</form>
-		</div>
-	</body>
-
-<?php	}elseif ($informe_final == 0) { ?>
-	<body>
-		<div id="formulario">
-		<h2>Seguimiento del Informe Final</h2>
-		<?php include_once "menuPasante.html"; ?>
-
-		<form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="?inf_fin=1" method="post" enctype="multipart/form-data">
-		<div id="tablaCuerpo">
-				<table id="tablaImagen" align="left">
-					<tr>
-						<td>
-							<label for="add_idea">
-								<img id="imagen" src="img/add-idea2.png" title="Click aqu&iacute; para subir un PDF">
-							</label>
-							<input id="add_idea" name="add_idea" type="file" onchange="validarArchivo();directorio();" required/>
-						</td>
-					</tr>
-				</table>
-				<table id="tablaDatos">
-					<tr width="100%">
-						<td width="70%" colspan="2">
-							<?php
-								if ($informe_final == 0) {
-									echo '<h1>No tienes ninguna idea subida</h1>';
-								}else{
-									echo '<h1>Sube tu informe final</h1>';
-								}
-							?>
-						</td>
-					</tr>
-						<tr>
-						<td width="3%" align="right">
-							<label for="nombre">Archivo: </label>
-						</td>
-						<td width="20%" align="left">
-							<input id="path" name="path" type="text" class="campoText" value="" readonly="true"/>
-						</td>
-					</tr>
-					<tr>
-						<td width="3%" align="right">
-							<label for="nombre">Nombre: </label>
-						</td>
-						<td width="20%" align="left">
-							<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
-						</td>
-					</tr>
-					<!-- <tr>
-						<td width="3%" align="right">
-							<label for="estado">Estado: </label>
-						</td>
-						<td width="20%" class="lbl_estado" align="left">
-							<?php
-								//$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=1');
-								//$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
-								//while($rowEstado=pg_fetch_array($consultaEstado)){
-									//if ($rowEstado['id'] == 1){
-				                //    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
-									//}
-									//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
-								//}
-							?>
-						</td>
-					</tr> -->
-				</table>
-		</div>
-		</center>
-		<table id="tablaBtn" align="center">
-			<tr width="100%">	
-				<td width="100%" align="center">
-					<input id="enviar" class="submit" type="submit" value=""/>
-		 		</td>
-			</tr>
-		</table>
-		</form>
-		</div>
-	</body>
-<?php	}elseif ($informe_final == 1) { ?>
-	<body>
-		<div id="formulario">
-		<?php
-			if ($informe_final == 1) {
-				echo '<h2>Seguimiento del informe final</h2>';
-			}else{
-				echo '<h2>Seguimiento de la Idea</h2>';
-			}
-			include_once "menuPasante.html";
-		?>
-		<form class="nueva_idea" name="con_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
-			
-		<div id="tablaCuerpo">
-			<table id="tablaImagen" align="left">
-				<tr>
-					<td>
-						<label>
-							<img id="imagen2" src="img/uploaded-idea.png">
-						</label>
-					</td>
-				</tr>
-			</table>
-			<table id="tablaDatos">
-				<tr width="100%">
-					<td width="70%" id="textoCI" colspan="2">
-						<h1>Existe una idea!</h1>
-					</td>
-				</tr>
-					<tr>
-					<td width="3%" id="textoCI">
-						<label for="nombre">Archivo: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<l1><?php echo $archivo; ?></l1>
-					</td>
-				</tr>
-				<tr>
-					<td width="3%" id="textoCI">
-						<label for="nombre">Nombre: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<l1><?php echo $nombre_idea; ?></l1>
-					</td>
-				</tr>
-				<tr>
-					<td width="3%" id="textoCI">
-						<label for="estado">Estado: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<?php
-							if ($informe_final == 1) {
-								$id_Idea = $id_informe;
-							}
-							$estado_idea=traerSqlCondicion('estado, estado_idea.nombre','idea INNER JOIN estado_idea ON estado_idea.id = idea.estado','idea.id ='.$id_Idea);
-							$row_estado_idea=pg_fetch_array($estado_idea);
-							echo '<l1>'.$row_estado_idea['nombre'].'</l1>';
-							//$contAP = 0;
-							//$visto = 0;
-							// $estXprofe=traerSqlCondicion('ideaaprobada,visto','ideaxprofesor','idea='.$id_Idea);
-							// while($rowEstXProfe=pg_fetch_array($estXprofe)){
-							// 	if ($rowEstXProfe['ideaaprobada'] == 't') {
-			    //                 	$contAP++;
-			    //                 }
-			    //                 if ($rowEstXProfe['visto'] == 't') {
-			    //                 	$visto++;
-			    //                 }
-			    //             }
-							//echo 'contNA: '.$contAP.'<br>';
-							// if ($contAP == 5 && $visto == 5) {
-							// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=3');
-							// 	$rowEstado=pg_fetch_array($consultaEstado);
-							// 		echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							// }
-							// if ($visto > 0 && $visto == $contAP && $contAP != 5) {
-							// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
-							// 	$rowEstado=pg_fetch_array($consultaEstado);
-							// 		echo '<l1>'.$rowEstado['nombre'].'</l1>';		
-							// }else{
-							// 	if ($visto > 0 && $contAP < 5) {
-							// 			$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=4');
-							// 			$rowEstado=pg_fetch_array($consultaEstado);
-							// 				echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							// 	}	
-							// }
-							// if ($visto == 0) {
-							// 	$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=2');
-							// 		$rowEstado=pg_fetch_array($consultaEstado);
-							// 			echo '<l1>'.$rowEstado['nombre'].'</l1>';
-							// }
-						?>
-					</td>
-				</tr>
-				<tr>
-					<td width="3%" id="textoCI">
-						<label for="nombre">Fecha Registro: </label>
-					</td>
-					<td width="20%" id="campoCI">
-						<l1><?php echo $fecha_registro = setDate($fecha_registro); ?></l1>
-					</td>
-				</tr>
-			</table>
-	</div>		
-		<table id="tablaCalif" align="center" width="100%" border="0">
-			<thead>
-				<tr width="100%">
-					<th class="td" width="100%" colspan="5" align="center">
-						<l2>CALIFICACIONES</l2>
-						<!-- <input class="submit" type="submit" value="Guardar"/>  ver si se va a poner un botón y cual?--> 
-					</th>
-				</tr>
-			
-			<tr>
-				<?php
-					//$sql = traerSql('id,nombre,apellido','profesor');
-					$sql = traerSqlCondicion('profesor.id, profesor.nombre, apellido, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						echo '<td class="td" width="20%"><l2>'.$rowIdeaXProfe['nombre'].', '.$rowIdeaXProfe['apellido'].'</l2></td>';
-					}
-				?>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-			<?php
-				$cont = 0;
-				//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-				if ($informe_final == 1) {
-					$sql = traerSqlCondicion('informexprofesor.id,informe_final,profesor,informeaprobado,visto','informexprofesor INNER JOIN profesor ON profesor.id = informexprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','informe_final = '.$id_informe.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['informeaprobado'];
-						if ($rowIdeaXProfe['visto'] == 'f') {
-							echo '<td class="azul td"><l2>No Evaluado</l2></td>';
-						}else{
-							if ($calificacion == 't') {
-								echo '<td class="verde td"><l2>Aprobada</l2></td>';
-							}else{
-								echo '<td class="rojo td"><l2>No Aprobada</l2></td>';
-							}
-						}
-						$cont++;
-					}
-				}else{
-					$sql = traerSqlCondicion('ideaxprofesor.id,idea,profesor,ideaaprobada,visto','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['ideaaprobada'];
-						if ($rowIdeaXProfe['visto'] == 'f') {
-							echo '<td class="azul td"><l2>No Evaluado</l2></td>';
-						}else{
-							if ($calificacion == 't') {
-								echo '<td class="verde td"><l2>Aprobada</l2></td>';
-							}else{
-								echo '<td class="rojo td"><l2>No Aprobada</l2></td>';
-							}
-						}
-						$cont++;
-					}
-				}
-			?>
-			</tr>
-
-			<tr>
-			<?php
-				$cont = 0;
-				//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-				if ($informe_final == 1) {
-					$sql = traerSqlCondicion('informexprofesor.id,informe_final,informeaprobado,visto,fecha_calif','informexprofesor INNER JOIN profesor ON profesor.id = informexprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','informe_final = '.$id_informe.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['informeaprobado'];
-						$fecha_calif = $rowIdeaXProfe['fecha_calif'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							echo '<td class="fecha td">'.$fecha_calif = setDate($fecha_calif).'</td>';
-						}else{
-							echo '<td class="fecha td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}else{
-					$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto,fecha_calif, fecha_desaprobada','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['ideaaprobada'];
-						$fecha_calif = $rowIdeaXProfe['fecha_calif'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							echo '<td class="fecha td">'.$fecha_calif = setDate($fecha_calif).'</td>';
-						}else{
-							echo '<td class="fecha td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}
-			?>
-			</tr>
-
-			<tr>
-			<?php
-				$cont = 0;
-				//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
-				if ($informe_final == 1) {
-					$sql = traerSqlCondicion('informexprofesor.id,informe_final,informeaprobado,visto, observacion','informexprofesor INNER JOIN profesor ON profesor.id = informexprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','informe_final = '.$id_informe.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['informeaprobado'];
-						$observacion = $rowIdeaXProfe['observacion'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							//if ($calificacion == 't') {
-								echo '<td class="observa td">'.$observacion.'</td>';
-							// }else{
-							// 	echo '<td class="observa td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
-							// }
-						}else{
-							echo '<td class="observa td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}else{
-					$sql = traerSqlCondicion('ideaxprofesor.id,idea,ideaaprobada,visto, observacion','ideaxprofesor INNER JOIN profesor ON profesor.id = ideaxprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','idea = '.$id_Idea.' AND rol_fk <> 2 ORDER BY id');
-					while ($rowIdeaXProfe = pg_fetch_array($sql)){
-						$calificacion = $rowIdeaXProfe['ideaaprobada'];
-						$observacion = $rowIdeaXProfe['observacion'];
-						if ($rowIdeaXProfe['visto'] == 't') {
-							//if ($calificacion == 't') {
-								echo '<td class="observa td">'.$observacion.'</td>';
-							// }else{
-							// 	echo '<td class="observa td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
-							// }
-						}else{
-							echo '<td class="observa td"><l2></l2></td>';
-						}
-						$cont++;
-					}
-				}
-			?>
-			</tr>
-
-
-			<tr>
-				<?php
-					if ($informe_final == 1) {
-						$sql = traerSqlCondicion('profesor.id, profesor.nombre, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
-						//$sql = traerSql('id,nombre','profesor');
-						while ($rowIdeaXProfe = pg_fetch_array($sql)){
-							echo '<td class="contactar"><a href="sendToProfe.php?idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
-						}
-					}else{
-						$sql = traerSqlCondicion('profesor.id, profesor.nombre, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
-						//$sql = traerSql('id,nombre','profesor');
-						while ($rowIdeaXProfe = pg_fetch_array($sql)){
-							echo '<td class="contactar"><a href="sendToProfe.php?idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
-						}
-					}
-				?>
-			</tr>
-			</tbody>
-		</table>
-		</form>
-		</div>
-	</body>
-<?php	}  include_once "cerrar_conexion.php"; ?>
+	include_once "cerrar_conexion.php"; ?>
 </html>
