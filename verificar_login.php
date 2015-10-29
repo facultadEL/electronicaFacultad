@@ -26,11 +26,12 @@ while($rowLogin=pg_fetch_array($usuario_bd)){
 }
 //echo 'usu: '.$idUsuario;
     if ($_SESSION['rol_fk'] == 1){
-    	$otrosDatos = traerSqlCondicion('nombre,apellido,confirmado,id,usuario_fk','pasante','usuario_fk='.$idUsuario);
+    	$otrosDatos = traerSqlCondicion('nombre,apellido,confirmado,id,usuario_fk,nro_legajo','pasante','usuario_fk='.$idUsuario);
     	$rowOD = pg_fetch_array($otrosDatos);
     	$_SESSION['nombre'] = $rowOD['nombre'];
     	$_SESSION['apellido'] = $rowOD['apellido'];
     	$_SESSION['id_Pasante'] = $rowOD['id'];
+        $_SESSION['nro_legajo'] = $rowOD['nro_legajo'];
     	$confirmado = $rowOD['confirmado'];
     }elseif($_SESSION['rol_fk'] == 4){
         $otrosDatos = traerSqlCondicion('nombre,apellido,id,usuario_fk','constatador','usuario_fk='.$idUsuario);

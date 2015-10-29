@@ -32,18 +32,18 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="3%" align="right">
+					<td width="5%" align="right">
 						<label for="nombre">Archivo: </label>
 					</td>
-					<td width="20%" align="left">
+					<td width="18%" align="left">
 						<input id="path" name="path" type="text" class="campoText" value="" readonly="true"/>
 					</td>
 				</tr>
 				<tr>
-					<td width="3%" align="right">
-						<label for="nombre">Nombre: </label>
+					<td width="5%" align="right">
+						<label for="nombre">Nombre Idea: </label>
 					</td>
-					<td width="20%" align="left">
+					<td width="18%" align="left">
 						<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
 					</td>
 				</tr>

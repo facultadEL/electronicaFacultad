@@ -109,19 +109,20 @@ Se le tiene que mandar:
 - fileName = La informacion obtenida de $_FILES['archivoPdf']['name'] 
 - fileTmpName = La informacion obtenida de $_FILES['archivoPdf']['tmp_name'];
 */
-function loadFileToServer($placeToLoad) {
+
+function loadFileToServer($placeToLoad,$nombre_archivo_modif) {
 	$nombre_archivoPdf = $_FILES['add_idea']['name'];
 	$tipo_archivo = $_FILES['add_idea']['type'];
 	$tamano_archivo = $_FILES['add_idea']['size'];
 	$filePdf = $_FILES['add_idea']['tmp_name'];
 
-    $nombre_archivoPdf = str_replace(" ", "-", $nombre_archivoPdf);
+    //$nombre_archivoPdf = str_replace(" ", "-", $nombre_archivoPdf);
 	
 	$ftp_server = "190.114.198.126";
 	$ftp_user_name = "fernandoserassioextension";
 	$ftp_user_pass = "fernando2013";
-	$destino_Pdf = "web/".$placeToLoad."/ideas/".$nombre_archivoPdf;
-	$destinoPdf = "ideas/".$nombre_archivoPdf;
+	$destino_Pdf = "web/".$placeToLoad."/ideas/".$nombre_archivo_modif;
+	$destinoPdf = "ideas/".$nombre_archivo_modif;
 	$vacio = "ideas/";
 
 	//conexión
@@ -159,9 +160,9 @@ require ("PHPMailer_5.2.1/class.phpmailer.php");
 // $cant_mail = cantidad de mails a enviar
 
 function enviarMail($c,$a,$sendFrom,$from_name,$to,$copia_oculta,$cant_mail){
-        
-    $cuerpo = $c;
-    $asunto = $a;
+	
+	$cuerpo = utf8_decode($c);
+    $asunto = utf8_decode($a);
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;

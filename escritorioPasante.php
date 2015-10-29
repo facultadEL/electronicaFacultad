@@ -110,7 +110,12 @@ if ($enviado == 1) {
 	$archivo = $_REQUEST['add_idea'];
 //$id = $_SESSION['id_Pasante'];
 	$id_new_idea = traerId('idea');
-	$destino = loadFileToServer('electronicaFacultad');
+
+	$ape = str_replace(" ", "_", $_SESSION['apellido']);
+	$nom_idea = str_replace(" ", "_", $nombre_idea);
+	$nombre_idea_serv = $ape."_".$_SESSION['nro_legajo']."_".$nom_idea.'.pdf';
+
+	$destino = loadFileToServer('electronicaFacultad',$nombre_idea_serv);
 	$fecha_registro = date(Ymd);
 	//$destino = '/electronica/archivo.pdf';
 	$cont = 0;
@@ -165,7 +170,9 @@ if ($inf_fin == 1) {
 	$archivo = $_REQUEST['add_idea'];
 	//$id = $_SESSION['id_Pasante'];
 	$id_new_informe = traerId('informe_final');
-		$destino = loadFileToServer('electronicaFacultad');
+
+		$nombre_idea = $_SESSION['apellido']."_".$_SESSION['nro_legajo'].$nombre_idea.'.pdf';
+		$destino = loadFileToServer('electronicaFacultad',$nombre_idea);
 		$fecha_registro = date(Ymd);
 		//$destino = '/electronica/archivo.pdf';
 		$cont = 0;

@@ -75,7 +75,7 @@ if ($enviado == 1) {
 		$mail_profe .= $rowIdP['mail'].';';
     }
     //$mail_profe = "lucas.peraltam@outlook.com;lpm19.2009@gmail.com;eze.olea.f@gmail.com;";
-    echo 'lista: '.$mail_profe.'<br>';
+    //echo 'lista: '.$mail_profe.'<br>';
     //echo 'destino: '.$destino.'<br>';
     $cuerpo = "
 		<div align='left'>
@@ -98,7 +98,7 @@ if ($enviado == 1) {
 	$to = $mail_profe.'<br>';
 	//$to2 = "lucas.peraltam@outlook.com";
 
-	//enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL,$cant_mails);
+	enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL,$cant_mails);
 	
 	if($_REQUEST['esFinal'] == 0){
 		$error = GuardarSql($newPDF);
@@ -123,10 +123,10 @@ if ($enviado == 1) {
 		enviarMail($cuerpo2,$asunto2,$sendFrom,$from_name,$mail_pasante,NULL,1);
 		$newPDF .= "UPDATE idea SET estado=6 WHERE id = $id_idea;";
 		$error = GuardarSql($newPDF);
-		if ($error==1){
+		if ($error==0){
 			//echo '<script language="JavaScript"> alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador");</script>';
 			//echo $errorpg;
-		}else{
+			//}else{
 			echo '<script language="JavaScript"> alert("Los datos se guardaron correctamente."); window.location = "escritorioConstatador.php";</script>';
 		}
 	}

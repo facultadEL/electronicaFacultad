@@ -26,6 +26,18 @@ $from_name = "Dpto Electronica";
 $to = $mail_constatador;
 $to2 = "lucas.peraltam@outlook.com";
 
+
+$cuerpo_pasante = "
+	<div align='left'>
+	    <div align='left'>
+	        <strong>Idea en Ejecuci&oacute;n</strong><br/><br/>
+
+	        Finalizado el tr&aacute;mite de los convenios. A partir de este momento tiene 1 a&ntilde;o para subir el informe final.<br/><br />
+	        De lo contrario deber&aacute; presentar una nueva idea.
+	    </div>
+	</div>
+";
+
 if ($idea != 0) {
 
 	$aEjecucion = "UPDATE idea SET estado=5 WHERE id = $idea;";
@@ -35,6 +47,7 @@ if ($idea != 0) {
 		echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el programador");</script>';
 	}else{
 		enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2);
+		enviarMail($cuerpo_pasante,$asunto2,$sendFrom,$from_name,$to,$to2);
 		echo '<script language="JavaScript"> window.location = "ideas_aprob.php";</script>';
 	}
 }else{

@@ -24,8 +24,8 @@
 				<th>Legajo</th>
 				<th>Mail</th>
 				<th>Idea</th>
-				<th>Archivo</th>
-				<!-- <th>Observaciones</th> -->
+				<!-- <th>Archivo</th> -->
+				<th>Observaciones</th>
 				<th>Calificaciones</th>
 			</tr>
 			<?php

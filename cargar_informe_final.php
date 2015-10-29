@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td width="3%" align="right">
-						<label for="nombre">Nombre: </label>
+						<label for="nombre">Nombre Inf. Final: </label>
 					</td>
 					<td width="20%" align="left">
 						<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>

@@ -26,7 +26,7 @@ $idIdeaXprofe = (empty($_REQUEST['idIdeaXprofe'])) ? 0 : $_REQUEST['idIdeaXprofe
 <div id="formulario">
 <h2>Observaciones de la Idea</h2>
 <?php include_once "menuProfe.html";?>
-<form class="nueva_idea" name="consulta" id="nueva_idea" action="save_observa.php" method="post" enctype="multipart/form-data">
+<form class="nueva_idea" name="consulta" id="nueva_idea" action="save_observa_if.php" method="post" enctype="multipart/form-data">
 <table class="mail">
 	<tr>
 		<td class="label">
@@ -34,9 +34,9 @@ $idIdeaXprofe = (empty($_REQUEST['idIdeaXprofe'])) ? 0 : $_REQUEST['idIdeaXprofe
 		</td>
 		<td class="campo">
 			<?php
-				$sql = traerSqlCondicion('ideaxprofesor.id, idea.nombre nom_idea','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id','ideaxprofesor.id='.$idIdeaXprofe);
+				$sql = traerSqlCondicion('informexprofesor.id, informe_final.nombre nom_informe','informexprofesor INNER JOIN informe_final ON informexprofesor.informe = informe_final.id','informexprofesor.id='.$idIdeaXprofe);
 				$rowNombre = pg_fetch_array($sql);
-				echo '<l1> '.$rowNombre['nom_idea'].'</l1>';
+				echo '<l1> '.$rowNombre['nom_informe'].'</l1>';
 				echo '<input type="hidden" name="ideaxprofesor" value="'.$idIdeaXprofe.'"/>';
 
 				include_once "cerrar_conexion.php";
@@ -58,9 +58,9 @@ $idIdeaXprofe = (empty($_REQUEST['idIdeaXprofe'])) ? 0 : $_REQUEST['idIdeaXprofe
 		<td>
 			<?php
 				if ($_SESSION['rol_fk'] == 2) {
-					echo '<td width="50%" align="right"><a href="enCursoAdmin.php"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>';
+					echo '<td width="50%" align="right"><a href="enCursoAdmin_if.php"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>';
 				}elseif ($_SESSION['rol_fk'] == 3) {
-					echo '<td width="50%" align="right"><a href="calificarIdea.php"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>';
+					echo '<td width="50%" align="right"><a href="calificarInformeF.php"><input type="button" id="btn_cancelar" value="Cancelar"></a></td>';
 				}
 			?>
 

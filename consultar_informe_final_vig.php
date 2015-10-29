@@ -20,26 +20,26 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="3%" id="textoCI">
+				<td width="5%" id="textoCI">
 					<label for="nombre">Archivo: </label>
 				</td>
-				<td width="20%" id="campoCI">
+				<td width="18%" id="campoCI">
 					<l1><?php echo $archivo; ?></l1>
 				</td>
 			</tr>
 			<tr>
-				<td width="3%" id="textoCI">
-					<label for="nombre">Nombre: </label>
+				<td width="5%" id="textoCI">
+					<label for="nombre">Nombre Inf. Final: </label>
 				</td>
-				<td width="20%" id="campoCI">
+				<td width="18%" id="campoCI">
 					<l1><?php echo $nombre_informe; ?></l1>
 				</td>
 			</tr>
 			<tr>
-				<td width="3%" id="textoCI">
+				<td width="5%" id="textoCI">
 					<label for="estado">Estado: </label>
 				</td>
-				<td width="20%" id="campoCI">
+				<td width="18%" id="campoCI">
 				<?php
 					$estado_informe=traerSqlCondicion('estado, estado_idea.nombre','informe_final INNER JOIN estado_idea ON estado_idea.id = informe_final.estado','informe_final.id ='.$id_informe);
 					$row_estado_informe=pg_fetch_array($estado_informe);

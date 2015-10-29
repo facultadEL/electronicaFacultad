@@ -106,7 +106,8 @@ CREATE TABLE idea(
 	archivo character varying,
 	estado integer references estado_idea(id),
 	pasante_fk integer references pasante(id),
-	fecha_registro date
+	fecha_registro date,
+	fecha_aprobada date
 );
 
 CREATE TABLE informe_final(
