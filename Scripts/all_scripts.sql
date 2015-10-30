@@ -23,13 +23,23 @@ CREATE TABLE usuario(
 	primera_vez boolean default TRUE,
 	habilitado boolean default TRUE
 );
-INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(1,'hdferrari@gmail.com','aa72459f21421e8027a836f286729868',3,FALSE,TRUE);
-INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(2,'ramon.oros@gmail.com','3ee91f6b0075241c722728c639793364',3,FALSE,TRUE);
-INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(3,'gutiejose@hotmail.com','10d644b3d8776238df17bddf6553bcc2',3,FALSE,TRUE);
-INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(4,'maballes@arnet.com.ar','6f70e24eab5c9baf3d0137c6b467a678',3,FALSE,TRUE);
-INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(5,'fmsalvatico@hotmail.com','060baa8ecd2478c5c560ebd1125516f0',3,FALSE,TRUE);
+--TESTEO
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(1,'profe1@mail.com','aa72459f21421e8027a836f286729868',3,FALSE,TRUE);
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(2,'profe2@mail.com','3ee91f6b0075241c722728c639793364',3,FALSE,TRUE);
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(3,'profe3@mail.com','10d644b3d8776238df17bddf6553bcc2',3,FALSE,TRUE);
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(4,'profe4@mail.com','6f70e24eab5c9baf3d0137c6b467a678',3,FALSE,TRUE);
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(5,'profe5@mail.com','060baa8ecd2478c5c560ebd1125516f0',3,FALSE,TRUE);
 INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(6,'etell@frvm.utn.edu.ar','21232f297a57a5a743894a0e4a801fc3',2,FALSE,TRUE);
-INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(7,'ing_oliveros@arnet.com.ar','8090af55fa8de93895ee60c16c4c88b8',4,FALSE,TRUE);
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(7,'constatador@mail.com','8090af55fa8de93895ee60c16c4c88b8',4,FALSE,TRUE);
+INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(8,'alumno@mail.com','c6865cf98b133f1f3de596a4a2894630',1,FALSE,TRUE);
+--PRODUCCIÓN
+-- INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(1,'hdferrari@gmail.com','aa72459f21421e8027a836f286729868',3,FALSE,TRUE);
+-- INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(2,'ramon.oros@gmail.com','3ee91f6b0075241c722728c639793364',3,FALSE,TRUE);
+-- INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(3,'gutiejose@hotmail.com','10d644b3d8776238df17bddf6553bcc2',3,FALSE,TRUE);
+-- INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(4,'maballes@arnet.com.ar','6f70e24eab5c9baf3d0137c6b467a678',3,FALSE,TRUE);
+-- INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(5,'fmsalvatico@hotmail.com','060baa8ecd2478c5c560ebd1125516f0',3,FALSE,TRUE);
+-- INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(6,'etell@frvm.utn.edu.ar','21232f297a57a5a743894a0e4a801fc3',2,FALSE,TRUE);
+-- INSERT INTO usuario(id,mail,password,rol_fk,primera_vez,habilitado)VALUES(7,'ing_oliveros@arnet.com.ar','8090af55fa8de93895ee60c16c4c88b8',4,FALSE,TRUE);
 
 CREATE TABLE tipo_dni(
   id serial NOT NULL primary key,
@@ -127,12 +137,33 @@ CREATE TABLE profesor(
 	telefono character varying,
 	usuario_fk integer references usuario(id)
 );
-INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(1,'Hector','Ferrari','hdferrari@gmail.com','',1);
-INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(2,'Ramon','Oros','ramon.oros@gmail.com','',2);
-INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(3,'José','Gutierrez','gutiejose@hotmail.com','',3);
-INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(4,'Miguel','Ballesteros','maballes@arnet.com.ar','',4);
-INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(5,'Franco','Salvatico','fmsalvatico@hotmail.com','',5);
-INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(6,'Eduardo','Tell','etell@frvm.utn.edu.ar','',6);
+--PRODUCCIÓN
+-- INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(1,'Hector','Ferrari','hdferrari@gmail.com','',1);
+-- INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(2,'Ramon','Oros','ramon.oros@gmail.com','',2);
+-- INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(3,'José','Gutierrez','gutiejose@hotmail.com','',3);
+-- INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(4,'Miguel','Ballesteros','maballes@arnet.com.ar','',4);
+-- INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(5,'Franco','Salvatico','fmsalvatico@hotmail.com','',5);
+-- INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(6,'Eduardo','Tell','etell@frvm.utn.edu.ar','',6);
+--TESTEO
+INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(1,'Profe 1','primero','profe1@mail.com','',1);
+INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(2,'Profe 2','segundo','profe2@mail.com','',2);
+INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(3,'Profe 3','tercero','profe3@mail.com','',3);
+INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(4,'Profe 4','cuarto','profe4@mail.com','',4);
+INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(5,'Profe 5','quinto','profe5@mail.com','',5);
+INSERT INTO profesor(id,nombre,apellido,mail,telefono,usuario_fk)VALUES(6,'Admin','admin','admin@mail.com','',6);
+
+CREATE TABLE constatador(
+	id serial NOT NULL primary key,
+	nombre character varying,
+	apellido character varying,
+	mail character varying,
+	usuario_fk integer references usuario(id)
+);
+--PRODUCCIÓN
+--INSERT INTO constatador(id,nombre,apellido,mail,usuario_fk)VALUES(1,'Hugo','Oliveros','ing_oliveros@arnet.com.ar',7);
+--TESTEO
+INSERT INTO constatador(id,nombre,apellido,mail,usuario_fk)VALUES(1,'Persona','constatador','constatador@mail.com',7);
+
 
 CREATE TABLE ideaxprofesor(
 	id serial NOT NULL primary key,
@@ -148,7 +179,7 @@ CREATE TABLE informexprofesor(
 	id serial NOT NULL primary key,
 	informe integer references informe_final(id),
 	profesor integer references profesor(id),
-	informeaprobado boolean;
+	informeaprobado boolean,
 	fecha_calif date,
 	observacion text,
 	visto boolean default false
@@ -163,12 +194,3 @@ CREATE TABLE informe_idea(
 	constatador integer references constatador(id),
 	es_final boolean default false
 );
-
-CREATE TABLE constatador(
-	id serial NOT NULL primary key,
-	nombre character varying,
-	apellido character varying,
-	mail character varying,
-	usuario_fk integer references usuario(id)
-);
-INSERT INTO constatador(id,nombre,apellido,mail,usuario_fk)VALUES(1,'Hugo','Oliveros','ing_oliveros@arnet.com.ar',7);

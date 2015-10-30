@@ -4,7 +4,7 @@ session_start();
 include_once "conexion.php";
 include_once "libreria.php";
 
-$id_IdeaXprofe = (empty($_REQUEST['ideaxprofesor'])) ? 0 : $_REQUEST['ideaxprofesor'];
+$id_IdeaXprofe = (empty($_REQUEST['informexprofesor'])) ? 0 : $_REQUEST['informexprofesor'];
 $observacion = $_REQUEST['observa'];
 // echo $observacion;
 // echo $id_IdeaXprofe;

@@ -159,6 +159,10 @@ require ("PHPMailer_5.2.1/class.phpmailer.php");
 // $to = dirección a donde enviamos
 // $cant_mail = cantidad de mails a enviar
 
+//define('ADMIN', 'etell@frvm.utn.edu.ar');
+define('ADMIN', 'lucas.peraltam@outlook.com');
+define('DEPTO', 'dpto-electronica@frvm.utn.edu.ar');
+
 function enviarMail($c,$a,$sendFrom,$from_name,$to,$copia_oculta,$cant_mail){
 	
 	$cuerpo = utf8_decode($c);

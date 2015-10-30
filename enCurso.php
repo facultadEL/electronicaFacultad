@@ -37,7 +37,7 @@
 				$calificacion = $_REQUEST['calificacion'];
 
 					//$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
-				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto, ideaaprobada','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' ORDER BY idea.id DESC');
+				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto, ideaaprobada','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','estado = 2 AND profesor ='.$_SESSION['id_Profesor'].' ORDER BY idea.id DESC');
 					while($rowNuevasIdeas = pg_fetch_array($NuevasIdeas)){
 						$id_IdeaXprofe = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
 						
@@ -49,14 +49,7 @@
 							echo '<td>'.$rowNuevasIdeas['mail'].'</td>';
 							echo '<td>'.$rowNuevasIdeas['nomidea'].'</td>';
 							echo '<td><a href="'.$rowNuevasIdeas['archivo'].'" target="_blank"><input type="button" id="btn_verincs" value="Ver" title="Ver archivo de la Idea" alt="ver"></a></td>';
-							//PREGUNTAR SI PUEDE SEGUIR AGREGANDO OBSERVACIONES UNA VEZ CALIFICADA LA IDEA.
-							//echo '<td><a href="add_observa.php?idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_observa" value="Agregar" title="Agregar Observaciones sobre la idea"></a></td>';
 							echo '<td><a href="ver_notas.php?idea='.$rowNuevasIdeas['idea'].'"><input type="button" id="btn_verincs" value="Ver" title="Ver las calificaciones de los dem&aacute;s profesores"></a></td>';
-							// if ($rowNuevasIdeas['ideaaprobada'] == 'f') {
-							// 	echo '<td><a href="calificada.php?aprobar=1&iec=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Aprobar"></a></td>';
-							// }else{
-							// 	echo '<td><a href="calificada.php?aprobar=0&iec=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Desaprobar"></a></td>';
-							// }
 								
 						}
 						echo '</tr>';

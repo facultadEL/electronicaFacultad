@@ -46,10 +46,8 @@ if ($id_IdeaXprofe != 0) {
 				$asunto = "Informacion sobre la idea";
 				$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 				$from_name = "Dpto Electronica";
-				//$to2 = "etell@frvm.utn.edu.ar";
 				$to = $mail_pasante;
-				$to2 = "lucas.peraltam@outlook.com";
-
+				$to2 = ADMIN;
 
 				$error=0;
 				if (!pg_query($conn, $calificarIdea)){
@@ -91,12 +89,11 @@ if ($id_IdeaXprofe != 0) {
 				$asunto = "Informacion sobre la idea";
 				$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 				$from_name = "Dpto Electronica";
-				//$to2 = "etell@frvm.utn.edu.ar";
 				$to = $mail_pasante;
-				$to2 = "lucas.peraltam@outlook.com";
+				$to2 = ADMIN;
 
 				$f_a = date(Ymd);
-				$calificarIdea = "UPDATE idea SET estado=3,fecha_aprobada=$f_a WHERE id = $id_idea;";
+				$calificarIdea = "UPDATE idea SET estado=3,fecha_aprobada='$f_a' WHERE id = $id_idea;";
 				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2,1);
 				//$calificarIdea .= "INSERT INTO informe_idea(idea,archivo_pdf,fecha_registro_pdf,descripcion)VALUES($id_idea,NULL,NULL,NULL)"			
 			}elseif ($cant_NoAprobados == 0 && $cantAprobados < 4) {

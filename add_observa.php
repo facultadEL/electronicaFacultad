@@ -18,9 +18,6 @@ include_once "conexion.php";
 include_once "libreria.php";
 
 $idIdeaXprofe = (empty($_REQUEST['idIdeaXprofe'])) ? 0 : $_REQUEST['idIdeaXprofe'];
-//$enviado = $_REQUEST['enviado'];
-//if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
-
 ?>
 <body>
 <div id="formulario">

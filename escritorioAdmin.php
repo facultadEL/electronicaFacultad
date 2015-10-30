@@ -15,14 +15,16 @@
 <body>
 <div id="formulario">
 <h2>Administrador</h2>
-<?php include_once "menuAdmin.html";?>
+<?php include_once "menuAdmin.html"; ?>
 <form class="nueva_idea" name="nueva_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
 	<?php
 		include_once "conexion.php";
 		include_once "libreria.php";
 
 			$cantNuevasIdeas = contarRegistro('id','ideaxprofesor','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
+			$cantNuevosInformes = contarRegistro('id','informexprofesor','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
 			echo '<center><h1>Hay <strong>'.$cantNuevasIdeas.'</strong> ideas nuevas</h1></center>';
+			echo '<center><h1>Hay <strong>'.$cantNuevosInformes.'</strong> informes finales nuevos</h1></center>';
 		include_once "cerrar_conexion.php";
 	?>
 <div id="tablaCuerpo">

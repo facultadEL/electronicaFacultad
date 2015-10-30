@@ -22,7 +22,9 @@
 		include_once "libreria.php";
 
 			$cantNuevasIdeas = contarRegistro('id','ideaxprofesor','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
-			echo '<center><h1>Hay <strong>'.$cantNuevasIdeas.'</strong> ideas nuevas</h1></center>';
+			$cantNuevosInformes = contarRegistro('id','informexprofesor','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
+			echo '<center><h1>Hay <strong>'.$cantNuevasIdeas.'</strong> Ideas nuevas</h1></center>';
+			echo '<center><h1>Hay <strong>'.$cantNuevosInformes.'</strong> Informes finales nuevos</h1></center>';
 		include_once "cerrar_conexion.php";
 	?>
 <div id="tablaCuerpo">

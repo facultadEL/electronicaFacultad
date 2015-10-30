@@ -43,23 +43,6 @@
 						<input id="nombre" name="nombre" type="text" class="campoText" value="" required/>
 					</td>
 				</tr>
-				<!-- <tr>
-					<td width="3%" align="right">
-						<label for="estado">Estado: </label>
-					</td>
-					<td width="20%" class="lbl_estado" align="left">
-						<?php
-							//$consultaEstado=traerSqlCondicion('id,nombre','estado_idea','id=1');
-							//$consultaEstado=pg_query("SELECT id,nombre FROM estado_idea");
-							//while($rowEstado=pg_fetch_array($consultaEstado)){
-								//if ($rowEstado['id'] == 1){
-			                //    	echo '<l1>'.$rowEstado['nombre'].'</l1>';
-								//}
-								//echo '<input id="carrera_alumno" name="carrera_alumno" type="hidden" value="'.$carrera_alumno.'"/>';
-							//}
-						?>
-					</td>
-				</tr> -->
 			</table>
 	</div>
 	</center>

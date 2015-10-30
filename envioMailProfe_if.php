@@ -30,10 +30,10 @@ enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$copia_oculta);
 include_once "cerrar_conexion.php";
 
 if ($_SESSION['rol_fk'] == 2) {
-	echo '<script language="JavaScript"> window.location = "enCursoAdmin.php";</script>';
+	echo '<script language="JavaScript"> window.location = "enCursoAdmin_if.php";</script>';
 }elseif ($_SESSION['rol_fk'] == 1) {
 	echo '<script language="JavaScript"> window.location = "escritorioPasante.php";</script>';
 }elseif ($_SESSION['rol_fk'] == 3) {
-	echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
+	echo '<script language="JavaScript"> window.location = "enCurso_if.php";</script>';
 }
 ?>

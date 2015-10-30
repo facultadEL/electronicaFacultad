@@ -19,8 +19,9 @@ include_once "libreria.php";
 
 $idIdea = (empty($_REQUEST['informe'])) ? 0 : $_REQUEST['informe'];
 //echo 'id: '.$idIdea;
-		$consultarInforme = traerSqlCondicion('i.id, pasante_fk, i.nombre, archivo, estado, fecha_registro', 'informe_final i INNER JOIN pasante p ON i.pasante_fk = p.id', 'i.id = '.$idIdea);
-		while($rowIdea=pg_fetch_array($consultarInforme,NULL,PGSQL_ASSOC)){
+		$consultarIdea = traerSqlCondicion('i.id, pasante_fk, i.nombre, archivo, estado, fecha_registro', 'informe_final i INNER JOIN pasante p ON i.pasante_fk = p.id', 'i.id = '.$idIdea);
+		//$consultarIdea = pg_query("SELECT i.id, pasante_fk, i.nombre, archivo, estado, fecha_registro FROM idea i INNER JOIN pasante p ON i.pasante_fk = p.id WHERE i.id = $idIdea;");
+		while($rowIdea=pg_fetch_array($consultarIdea,NULL,PGSQL_ASSOC)){
 			$id_Pasante = $rowIdea['pasante_fk'];
 			$id_Idea = (empty($rowIdea['id'])) ? 0 : $rowIdea['id'];
 			$nombre_idea = $rowIdea['nombre'];
@@ -32,8 +33,8 @@ $idIdea = (empty($_REQUEST['informe'])) ? 0 : $_REQUEST['informe'];
 ?>
 	<body>
 	<div id="formulario">
-	<h2>Seguimiento del Informe Final</h2>
-	<?php include_once "menuProfe.html"; ?>
+	<h2>Seguimiento de la Idea</h2>
+	<?php include_once "menuAdmin.html"; ?>
 	<form class="nueva_idea" name="con_idea" id="nueva_idea" action="" method="post" enctype="multipart/form-data">
 		
 	<!-- <div id="tablaCuerpo"> -->
@@ -57,7 +58,7 @@ $idIdea = (empty($_REQUEST['informe'])) ? 0 : $_REQUEST['informe'];
 			</tr>
 			<tr>
 				<td width="5%" id="textoCI">
-					<label for="estado">Estado Inf. Final: </label>
+					<label for="estado">Estado: </label>
 				</td>
 				<td width="18%" id="campoCI">
 					<?php
@@ -101,7 +102,7 @@ $idIdea = (empty($_REQUEST['informe'])) ? 0 : $_REQUEST['informe'];
 		<?php
 			$cont = 0;
 			$visto = 0;
-			//$sql = traerSqlCondicion('ixp.id,idea,profesor,ideaaprobada','ideaxprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
+			//$sql = traerSqlCondicion('ixp.id,idea,profesor,informeaprobado','informexprofesor ixp INNER JOIN profesor p ON ixp.profesor = p.id','idea = '.$id_Idea);
 			$sql = traerSqlCondicion('informexprofesor.id,informe,profesor,informeaprobado,visto','informexprofesor INNER JOIN profesor ON profesor.id = informexprofesor.profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','informe = '.$idIdea.' AND rol_fk <> 2 ORDER BY id');
 			while ($rowIdeaXProfe = pg_fetch_array($sql)){
 				$calificacion = $rowIdeaXProfe['informeaprobado'];
@@ -132,9 +133,10 @@ $idIdea = (empty($_REQUEST['informe'])) ? 0 : $_REQUEST['informe'];
 					if ($rowIdeaXProfe['visto'] == 't') {
 						//if ($calificacion == 't') {
 							echo '<td class="fecha td">'.$fecha_calif = setDate($fecha_calif).'</td>';
-						//}else{
-						//	echo '<td class="fecha td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
 						//}
+						// else{
+						// 	echo '<td class="fecha td">'.$fecha_calif = setDate($fecha_calif).'</td>';
+						// }
 					}else{
 						echo '<td class="fecha td"><l2></l2></td>';
 					}
@@ -171,7 +173,7 @@ $idIdea = (empty($_REQUEST['informe'])) ? 0 : $_REQUEST['informe'];
 				$sql = traerSqlCondicion('profesor.id, profesor.nombre, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk = 3');
 				//$sql = traerSql('id,nombre','profesor');
 				while ($rowIdeaXProfe = pg_fetch_array($sql)){
-					echo '<td class="contactar"><a href="sendToProfe_if.php?vernotas=1&informe='.$idIdea.'&idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
+					echo '<td class="contactar"><a href="sendToProfe_if.php?vernotasadmin=1&vernotas=1&informe='.$idIdea.'&idProfesor='.$rowIdeaXProfe['id'].'"><img class="msj" src="img/msj.png" title="Click aqu&iacute; para enviar un mail al profesor '.$rowIdeaXProfe['nombre'].'"><l3>  Contactar</l3></a></td>';
 				}
 			?>
 		</tr>

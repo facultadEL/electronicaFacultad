@@ -22,9 +22,8 @@ $cuerpo = "
 $asunto = "Nueva idea";
 $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 $from_name = "Dpto Electronica";
-//$to2 = "etell@frvm.utn.edu.ar";
 $to = $mail_constatador;
-$to2 = "lucas.peraltam@outlook.com";
+$to2 = ADMIN;
 
 
 $cuerpo_pasante = "

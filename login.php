@@ -131,18 +131,6 @@
 	</script>
 </head>
 <body>
-<?php
-// include_once "conexion.php";
-// include_once "libreria.php";
-// 	$sql = traerSql('mail,password','usuario ORDER BY id');
-// 	while($rowData=pg_fetch_array($sql,NULL,PGSQL_ASSOC)){
-// 		$dataToPass = strtolower($rowData['mail']).'/--/'.$rowData['password'];
-// 		echo "<script>setData('".$dataToPass."')</script>";
-// 		echo $dataToPass.'<br>';
-// 	}
-// include_once "cerrar_conexion.php";
-?>
-
 <center><div class="alerta" id="av_usu"><strong>Atenci&oacute;n:</strong> debe ingresar su usuario.</div></center>
 <center><div class="alerta" id="av_pass"><strong>Atenci&oacute;n:</strong> debe ingresar su contrase&ntilde;a.</div></center>
 <center><div class="alerta" id="ae_usu"><strong>Atenci&oacute;n:</strong> el usuario ingresado es incorrecto.</div></center>

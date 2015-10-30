@@ -43,13 +43,11 @@ if ($id_IdeaXprofe != 0) {
 					    </div>
 					</div>
 				";
-				$asunto = "Informacion sobre el informe final";
+				$asunto = "Informaci&oacute;n sobre el informe final";
 				$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 				$from_name = "Dpto Electronica";
-				//$to2 = "etell@frvm.utn.edu.ar";
 				$to = $mail_pasante;
-				$to2 = "lucas.peraltam@outlook.com";
-
+				$to2 = ADMIN;
 
 				$error=0;
 				if (!pg_query($conn, $calificarIdea)){
@@ -66,7 +64,7 @@ if ($id_IdeaXprofe != 0) {
 			}else{
 				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$to2,1);
 				if ($iec == 1) {
-					echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
+					echo '<script language="JavaScript"> window.location = "enCurso_if.php";</script>';
 				}else{
 					echo '<script language="JavaScript"> window.location = "calificarInformeF.php";</script>';
 				}
@@ -88,14 +86,14 @@ if ($id_IdeaXprofe != 0) {
 					    </div>
 					</div>
 				";
-				$asunto = "Informacion sobre informe final";
+				$asunto = "Informaci&oacute;n sobre informe final";
 				$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 				$from_name = "Dpto Electronica";
-				
 				$to = $mail_pasante;
 
-				$f_a = date(Ymd);
-				$calificarIdea = "UPDATE informe_final SET estado=3,fecha_aprobada=$f_a WHERE id = $id_idea;";
+				//$f_a = date(Ymd);
+				//$calificarIdea = "UPDATE informe_final SET estado=3,fecha_aprobada='$f_a' WHERE id = $id_idea;";
+				$calificarIdea = "UPDATE informe_final SET estado=7 WHERE id = $id_idea;";
 				enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,'',1);
 
 				$sqlPasante = traerSqlCondicion('nombre,apellido,nro_legajo','pasante','pasante.id= '.$rowIdea['pasante_fk']);
@@ -110,12 +108,10 @@ if ($id_IdeaXprofe != 0) {
 					        El pasante $nombreC con legajo: $legajo, ha finalizado la pr&aacute;ctica supervisada ya que su informe final ha sido aprobado.<br/><br />
 					    </div>
 					</div>
-				";				
-				
-				$to2 = "etell@frvm.utn.edu.ar";
-				$to22 = "dpto-electronica@frvm.utn.edu.ar";
+				";
+				$to2 = ADMIN;
+				$to22 = DEPTO;
 				enviarMail($cuerpo2,$asunto2,$sendFrom,$from_name,$to2,$to22,1);
-				//$calificarIdea .= "INSERT INTO informe_idea(idea,archivo_pdf,fecha_registro_pdf,descripcion)VALUES($id_idea,NULL,NULL,NULL)"			
 			}elseif ($cant_NoAprobados == 0 && $cantAprobados < 4) {
 				$calificarIdea = "UPDATE informe_final SET estado=2 WHERE id = $id_idea;";
 			}
@@ -136,7 +132,7 @@ if ($id_IdeaXprofe != 0) {
 				echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el administrador");</script>';
 			}else{
 				if ($iec == 1) {
-					echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
+					echo '<script language="JavaScript"> window.location = "enCurso_if.php";</script>';
 				}else{
 					echo '<script language="JavaScript"> window.location = "calificarInformeF.php";</script>';
 				}

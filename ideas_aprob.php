@@ -35,14 +35,11 @@
 				$calificacion = $_REQUEST['calificacion'];
 
 					//$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
-				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto, ideaaprobada, estado','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND estado IN(3,5) ORDER BY idea.id DESC');
+				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto, ideaaprobada, estado','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND estado IN(3,5,6) ORDER BY idea.id DESC');
 					while($rowNuevasIdeas = pg_fetch_array($NuevasIdeas)){
 						$id_IdeaXprofe = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
 						$estado = $rowNuevasIdeas['estado'];
-						
-
 						//if ($rowNuevasIdeas['visto'] == 't') {
-
 							echo '<tr>';
 								echo '<td>'.$rowNuevasIdeas['apellido'].', '.$rowNuevasIdeas['nompasante'].'</td>';
 								echo '<td>'.$rowNuevasIdeas['nro_legajo'].'</td>';
@@ -54,6 +51,8 @@
 									echo '<td>En Ejecuci&oacute;n</td>';
 								}elseif($estado == 3){
 									echo '<td><a href="pasar_ejecucion.php?idea='.$rowNuevasIdeas['idea'].'"><input type="button" id="btn_verincs" value="OK" title="Pasa la idea a estado (en ejecuci&oacute;n) si tiene los convenios finalizados"></a></td>';
+								}elseif($estado == 6){
+									echo '<td>Finalizada</td>';
 								}
 									//echo '<td><a href="calificada.php?aprobar=0&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="No"></a>';
 									//echo '<a href="calificada.php?aprobar=1&idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_confirm" value="Si"></a></td>';

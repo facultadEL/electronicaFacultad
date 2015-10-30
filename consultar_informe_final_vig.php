@@ -124,11 +124,7 @@
 					$calificacion = $rowIdeaXProfe['informeaprobado'];
 					$observacion = $rowIdeaXProfe['observacion'];
 					if ($rowIdeaXProfe['visto'] == 't') {
-						//if ($calificacion == 't') {
-							echo '<td class="observa td">'.$observacion.'</td>';
-						// }else{
-						// 	echo '<td class="observa td">'.$fecha_desaprobada = setDate($fecha_desaprobada).'</td>';
-						// }
+						echo '<td class="observa td">'.$observacion.'</td>';
 					}else{
 						echo '<td class="observa td"><l2></l2></td>';
 					}

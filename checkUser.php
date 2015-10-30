@@ -7,9 +7,7 @@ include_once "libreria.php";
 	while($rowData=pg_fetch_array($sql,NULL,PGSQL_ASSOC)){
 		$dataToPass = strtolower($rowData['mail']).'/--/'.$rowData['password'];
 		echo "<script>setData('".$dataToPass."')</script>";
-		//echo $dataToPass.'<br>';
 	}
-
 
 //Traigo los datos
 $user = $_POST["user"];
@@ -19,9 +17,6 @@ $condicion = "mail='".$user."' LIMIT 1";
 
 $sql = traerSqlCondicion("password","usuario",$condicion);
 $rowSql = pg_fetch_array($sql);
-
-
-
 
 include_once "cerrar_conexion.php";
 ?>

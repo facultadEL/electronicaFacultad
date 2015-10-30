@@ -12,9 +12,6 @@ $rowPasante=pg_fetch_array($sql,NULL,PGSQL_ASSOC);
     $mail = $rowPasante['mailuser'];
     $password = $rowPasante['nrodni'];
     $enviado = $rowPasante['enviado'];
-    // echo 'pass: '.$password;
-    // echo 'usuario:'.$mail;
-    // echo 'confirmado: '.$confirmado;
 
     $traerId = traerId('pasante');
 	$cuerpo = "

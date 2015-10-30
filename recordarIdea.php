@@ -28,7 +28,6 @@ while($rowVisto = pg_fetch_array($sql)){
     $sendFrom = "dpto-electronica@frvm.utn.edu.ar";
     $from_name = "Dpto Electronica";
     $to = $mail;
-
 	    enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL);
     }
 

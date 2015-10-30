@@ -18,8 +18,6 @@ include_once "conexion.php";
 include_once "libreria.php";
 
 $idIdeaXprofe = (empty($_REQUEST['idIdeaXprofe'])) ? 0 : $_REQUEST['idIdeaXprofe'];
-//$enviado = $_REQUEST['enviado'];
-//if (isset($_REQUEST['enviado'])) { //para que no se ejecute el código en caso de no tener un archivo cargado
 
 ?>
 <body>
@@ -37,7 +35,7 @@ $idIdeaXprofe = (empty($_REQUEST['idIdeaXprofe'])) ? 0 : $_REQUEST['idIdeaXprofe
 				$sql = traerSqlCondicion('informexprofesor.id, informe_final.nombre nom_informe','informexprofesor INNER JOIN informe_final ON informexprofesor.informe = informe_final.id','informexprofesor.id='.$idIdeaXprofe);
 				$rowNombre = pg_fetch_array($sql);
 				echo '<l1> '.$rowNombre['nom_informe'].'</l1>';
-				echo '<input type="hidden" name="ideaxprofesor" value="'.$idIdeaXprofe.'"/>';
+				echo '<input type="hidden" name="informexprofesor" value="'.$idIdeaXprofe.'"/>';
 
 				include_once "cerrar_conexion.php";
 			?>

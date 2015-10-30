@@ -58,12 +58,11 @@ $id = $_SESSION['id_Pasante'];
 
 $cant_ideas = contarRegistro('id','idea','pasante_fk = '.$id);
 $cant_informes = contarRegistro('id','informe_final','pasante_fk = '.$id);
-echo 'cant_ideas: '.$cant_ideas.'<br>';
-echo 'cant_informes: '.$cant_informes.'<br>';
+//echo 'cant_ideas: '.$cant_ideas.'<br>';
+//echo 'cant_informes: '.$cant_informes.'<br>';
 
 $cargar_idea = 0;
 $consulta_idea = 0;
-//$tiene_idea = 0;
 
 $cargar_informe = 0;
 $consulta_informe_final = 0;
@@ -98,7 +97,6 @@ if ($cant_informes > 0) {
 	}else{
 		$consulta_informe_final = 1;
 	}
-
 	//$tiene_idea = 0;
 	//$informe_final = 1;
 }

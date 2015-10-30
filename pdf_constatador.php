@@ -57,7 +57,14 @@ $id_idea = (empty($_REQUEST['idea'])) ? 0 : $_REQUEST['idea'];
 if ($enviado == 1) {
 	$id_idea = (empty($_REQUEST['idea'])) ? 0 : $_REQUEST['idea'];
 	$archivo = $_REQUEST['add_idea'];
-	$destino = loadFileToServer('electronicaFacultad');
+	$cant_informes = contarRegistro('id','informe_idea','idea='.$id_idea);
+	$cant_informes++;
+	$ape = str_replace(" ", "_", $_SESSION['apellido']);
+	$nom_idea = str_replace(" ", "_", $archivo);
+	//echo '<script>alert('.$cant_informes.');</script>';
+	$nombre_idea_serv = $ape."_Seguimiento_".$cant_informes.'.pdf';
+
+	$destino = loadFileToServer('electronicaFacultad',$nombre_idea_serv);
 	$fecha_registro = date(Ymd);
 	$id_Constatador = $_SESSION['id_Constatador'];
 	$esFinal = ($_REQUEST['esFinal'] == 0) ? 'FALSE' : 'TRUE';
@@ -94,9 +101,7 @@ if ($enviado == 1) {
 
 	$sendFrom = "dpto-electronica@frvm.utn.edu.ar";
 	$from_name = "Dpto Electronica";
-	//$to2 = "etell@frvm.utn.edu.ar";
 	$to = $mail_profe.'<br>';
-	//$to2 = "lucas.peraltam@outlook.com";
 
 	enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,NULL,$cant_mails);
 	
