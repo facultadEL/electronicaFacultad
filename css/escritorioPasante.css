@@ -434,3 +434,26 @@ option{
 	display: block;
 	padding: 0.5%;
 }
+
+#btn_recordar{
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #A4A4A4;
+	color: #fff;
+	font-size: 18px;
+	margin: 1% auto;
+	cursor: pointer;
+	width: 100px;
+	height: 40px;
+	border: none;
+	-webkit-background-size: 100% 75%;
+    -moz-background-size: 100% 75%;
+    -o-background-size: 100% 75%;
+    background-size: 100% 75%;
+}
+#btn_recordar:hover {
+	box-shadow:0px 0px 1px 1px  #000;
+	-moz-box-shadow: 0px 0px 15px 0px  #000;
+	-webkit-box-shadow: 0px 0px 15px 0px  #000;
+}

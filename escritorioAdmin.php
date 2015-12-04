@@ -10,7 +10,26 @@
 <script type='text/javascript' src="jquery.min-1.9.1.js"></script>
 <link rel="stylesheet" href="css/escritorioPasante.css">
 <title><?php echo 'Bienvenido, '.$_SESSION['nombre'];?></title>
+<script>
+	function recordar(){
 
+		//var parametros = {};
+
+		$.ajax({
+			type: "POST",
+			url: "recordar.php",
+			//data: parametros,
+			async: false,
+			success:  function (response) { //Funcion que ejecuta si todo pasa bien. El response es los datos que manda el otro archivo
+				alert("Recordatorios enviados");
+            },
+			error: function (msg) {
+				$('#error_cod').attr('hidden', false);
+				//alert("No se pudo validar el usuario. Contactarse con el equipo de mantenimiento");
+			}
+		});
+	}
+</script>
 </head>
 <body>
 <div id="formulario">
@@ -25,6 +44,8 @@
 			$cantNuevosInformes = contarRegistro('id','informexprofesor','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
 			echo '<center><h1>Hay <strong>'.$cantNuevasIdeas.'</strong> ideas nuevas</h1></center>';
 			echo '<center><h1>Hay <strong>'.$cantNuevosInformes.'</strong> informes finales nuevos</h1></center>';
+
+			echo '<div><input type="button" onclick="recordar();" id="btn_recordar" value="Recordar" title="Enviar recordatorios"></div>';
 		include_once "cerrar_conexion.php";
 	?>
 <div id="tablaCuerpo">
