@@ -45,6 +45,15 @@ function traerSqlCondicion($rango,$tabla,$condicion){
     return $sql;
 }
 
+function diferencia_horas($fecreg){
+    //
+    $fecact = date('Ymd hh:mm');
+    $sql = pg_query("SELECT DATE_PART('day', '$fecreg'::timestamp - '$fecact'::timestamp) * 24 + DATE_PART('hour', '$fecreg'::timestamp - '$fecact'::timestamp) AS diferencia;");
+    $rowDiff = pg_fetch_array($sql);
+    //$sql = pg_query('SELECT '.$rango.' FROM '.$tabla);
+    return $rowDiff['diferencia'];
+}
+
 function traerId($tabla){
 	$sqlId = pg_query('SELECT max(id) FROM '.$tabla);
 	$rowId = pg_fetch_array($sqlId);

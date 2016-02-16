@@ -194,3 +194,10 @@ CREATE TABLE informe_idea(
 	constatador integer references constatador(id),
 	es_final boolean default false
 );
+
+CREATE TABLE recupera_pass(
+	id serial NOT NULL primary key,
+	codigo_personal character varying,
+	fecha_sol timestamp,
+	fecha_vto timestamp
+);
