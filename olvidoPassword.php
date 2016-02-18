@@ -25,7 +25,7 @@
 ?>
 <div id="formulario">
 <h2>Recuperar Contrase&ntilde;a</h2>
-<form class="nueva_idea" name="nueva_idea" id="nueva_idea" onsubmit="valida_mail(event);" action="mailOlvidoPass.php" method="post" enctype="multipart/form-data">
+<form class="nueva_idea" name="nueva_idea" id="nueva_idea" onsubmit="return valida_mail();" action="" method="post" enctype="multipart/form-data">
 <table id="tabla" align="center">
 	<tr>
 		<td align="center"><input type="email" id="mail" name="recuperarPass" value="" placeholder="Ingrese su E-mail" autocomplete="off" autofocus required/></td>
@@ -55,9 +55,13 @@
 			async: false,
 			success:  function (response) { //Funcion que ejecuta si todo pasa bien. El response es los datos que manda el otro archivo
 				if (response > 0) {
+					$('#nueva_idea').attr('action', 'mailOlvidoPass.php');
+					return true;
 					//$('#nueva_idea').submit();
 				}else{
-					alert("El mail ingresado no se encuentra registrado.")
+					alert("El mail ingresado no se encuentra registrado.");
+					$('#nueva_idea').attr('action', '');
+					return false;
 				}
 	        },
 			error: function (msg) {
