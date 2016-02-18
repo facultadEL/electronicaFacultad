@@ -2,10 +2,14 @@
 <script type='text/javascript' src="jquery.min-1.9.1.js"></script>
 <script type='text/javascript' src="codeLibrary.js"></script>
 <?php
-//Actualizada a la fecha 30/09/2014 
+//Actualizada a la fecha 17/02/2016
 //error_reporting(E_ALL & ~E_NOTICE);
 //Guarda la consulta de base de datos, siempre y cuando se le envie el sql y la conexion a la base;
     //Devuelve el error para hacer el javascript para mostrar los mensajes segun el guardado
+
+
+date_default_timezone_set("America/Argentina/Buenos_Aires");
+
 function guardarSql($sqlGuardar){
     $error = 0;
     if(!pg_query($sqlGuardar)){
@@ -52,6 +56,39 @@ function diferencia_horas($fecreg){
     $rowDiff = pg_fetch_array($sql);
     //$sql = pg_query('SELECT '.$rango.' FROM '.$tabla);
     return $rowDiff['diferencia'];
+}
+
+function dateTime_diff( $str_interval, $dt_menor, $dt_maior, $relative=false){
+
+    if( is_string( $dt_menor)) $dt_menor = date_create( $dt_menor);
+    if( is_string( $dt_maior)) $dt_maior = date_create( $dt_maior);
+
+    $diff = date_diff( $dt_menor, $dt_maior, ! $relative);
+   
+    switch( $str_interval){
+        case "y": 
+            $total = $diff->y + $diff->m / 12 + $diff->d / 365.25; break;
+        case "m":
+            $total= $diff->y * 12 + $diff->m + $diff->d/30 + $diff->h / 24;
+            break;
+        case "d":
+            $total = $diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i / 60;
+            break;
+        case "h": 
+            $total = ($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60;
+            break;
+        case "i": 
+            $total = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i + $diff->s/60;
+            break;
+        case "s": 
+            $total = ((($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i)*60 + $diff->s;
+            break;
+    }
+    if( $diff->invert){
+        return -1 * $total;
+    }else{
+        return $total;
+    }
 }
 
 function traerId($tabla){

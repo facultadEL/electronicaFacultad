@@ -199,5 +199,6 @@ CREATE TABLE recupera_pass(
 	id serial NOT NULL primary key,
 	codigo_personal character varying,
 	fecha_sol timestamp,
-	fecha_vto timestamp
+	fecha_vto timestamp,
+	pasante_fk integer references pasante(id)
 );

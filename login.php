@@ -32,8 +32,8 @@
 				data: parametros,
 				async: false,
 				success:  function (response) { //Funcion que ejecuta si todo pasa bien. El response es los datos que manda el otro archivo
+					//alert(response);
 					if(response == '1'){
-						//alert("Usuario ok");
 						$('#form').attr('action','verificar_login.php');
 						$('#form').submit();
 					}else{

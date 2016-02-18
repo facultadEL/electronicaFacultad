@@ -4,7 +4,13 @@ session_start();
 $passNuevo = md5($_REQUEST['nuevoPass']);
 //echo 'usuario: '.$usuario.'<br>';
 //echo 'password: '.$password.'<br>';
-$id_Pasante = $_SESSION['id_Pasante'];
+if (empty($_SESSION['id_Pasante'])) {
+	$id_Pasante = $_REQUEST['idPasante'];
+	//echo 'idR: '.$id_Pasante;
+}else{
+	$id_Pasante = $_SESSION['id_Pasante'];
+	//echo 'idS: '.$id_Pasante;
+}
 //echo 'pass: '.$passNuevo;
 
 include_once "conexion.php";
@@ -15,16 +21,9 @@ $rowUsu = pg_fetch_array($sql);
 	$id_Usuario = $rowUsu['usuario_fk'];
 
 $modifPass="UPDATE usuario SET password='$passNuevo', primera_vez='FALSE' WHERE id = $id_Usuario;";
-	$error=0;
-
-	if (!pg_query($conn, $modifPass)){
-		$errorpg = pg_last_error($conn);
-		$termino = "ROLLBACK";
-		$error=1;
-	}else{
-		$termino = "COMMIT";
-	}
-   pg_query($termino);
+$modifPass.="DELETE FROM recupera_pass WHERE pasante_fk = $id_Pasante;";
+//echo $modifPass;
+$error = guardarSql($modifPass);
 		
 if ($error==1){
 	echo '<script language="JavaScript"> alert("Los datos no se actualizaron correctamente. Pongase en contacto con el administrador");</script>';
