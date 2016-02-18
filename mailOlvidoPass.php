@@ -56,7 +56,6 @@ if ($error == 1){
             Usted solicit&oacute; recuperar su contrase&ntilde;a:<br/><br />
             
             Para poder proseguir con la solicitud, haga click aqu&iacute;.
-            <a href=".'"localhost/lpm19/electronicaFacultad/cambiarPassGenerado.php?pass='.$codper.'" target="_blank"'.">Restaurar</a>.<br /><br />
             <a href=".'"http://extension.frvm.utn.edu.ar/electronicaFacultad/cambiarPassGenerado.php?pass='.$codper.'" target="_blank"'.">Restaurar</a>.<br /><br />
 
             Esta solicitud tiene una vigencia de 2 horas por cuesti&oacute;n de seguridad.
@@ -74,4 +73,5 @@ include_once "cerrar_conexion.php";
 echo '<script language="JavaScript"> alert("Verifique su casilla de correo, le enviamos un mail con los datos solicitados"); window.location ="login.php"; </script>';
 
 }
+//<a href=".'"localhost/lpm19/electronicaFacultad/cambiarPassGenerado.php?pass='.$codper.'" target="_blank"'.">Restaurar</a>.<br /><br />
 ?>
