@@ -37,7 +37,7 @@
 				$calificacion = $_REQUEST['calificacion'];
 
 					//$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
-				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto, ideaaprobada','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','estado = 2 AND profesor ='.$_SESSION['id_Profesor'].' ORDER BY idea.id DESC');
+				$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto, ideaaprobada','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','estado = 2 AND profesor ='.$_SESSION['id_Profesor'].' AND pasante.deleted IS FALSE ORDER BY idea.id DESC');
 					while($rowNuevasIdeas = pg_fetch_array($NuevasIdeas)){
 						$id_IdeaXprofe = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
 						

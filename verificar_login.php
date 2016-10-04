@@ -12,7 +12,7 @@ echo '<meta charset="UTF-8"/>';
 include_once "conexion.php";
 include_once "libreria.php";
 
-$condicion = " UPPER(mail) LIKE UPPER('{$usuario}') AND password LIKE '{$password}' LIMIT 1";
+$condicion = " UPPER(mail) LIKE UPPER('{$usuario}') AND password LIKE '{$password}' AND deleted IS FALSE LIMIT 1";
 
 $usuario_bd = traerSqlCondicion('id,mail,password,rol_fk,primera_vez,habilitado', 'usuario', $condicion);
 while($rowLogin=pg_fetch_array($usuario_bd)){

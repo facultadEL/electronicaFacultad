@@ -33,7 +33,7 @@
 				include_once "libreria.php";
 
 					//$NuevasIdeas = traerSqlCondicion('ideaxprofesor.id, idea.nombre as nomidea, pasante.nombre as nompasante, apellido, nro_legajo, mail, archivo, visto','ideaxprofesor INNER JOIN idea ON ideaxprofesor.idea = idea.id INNER JOIN pasante ON idea.pasante_fk = pasante.id','profesor ='.$_SESSION['id_Profesor'].' AND visto = false');
-				$NuevasIdeas = traerSqlCondicion('idea.id, idea.nombre as nomidea, archivo, pasante_fk, pasante.nombre as nompasante, apellido, nro_legajo, mail','idea INNER JOIN pasante ON idea.pasante_fk = pasante.id','estado = 5 ORDER BY idea.id DESC');
+				$NuevasIdeas = traerSqlCondicion('idea.id, idea.nombre as nomidea, archivo, pasante_fk, pasante.nombre as nompasante, apellido, nro_legajo, mail','idea INNER JOIN pasante ON idea.pasante_fk = pasante.id','estado = 5 AND pasante.deleted IS FALSE ORDER BY idea.id DESC');
 					while($rowNuevasIdeas = pg_fetch_array($NuevasIdeas)){
 						$id_idea = (empty($rowNuevasIdeas['id'])) ? 0 : $rowNuevasIdeas['id'];
 						
