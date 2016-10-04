@@ -34,7 +34,7 @@ include_once "libreria.php";
 </table>
 <table id="tablaCampos" align="center">
 	<?php
-		$noConfirmado = traerSqlCondicion('id, nombre, apellido, nro_legajo','pasante','confirmado = false');
+		$noConfirmado = traerSqlCondicion('id, nombre, apellido, nro_legajo','pasante','confirmado = false AND deleted IS FALSE');
 		while($rowNoConfirmado=pg_fetch_array($noConfirmado,NULL,PGSQL_ASSOC)){
 			$id = $rowNoConfirmado['id'];
 			$nombre = $rowNoConfirmado['nombre'];
