@@ -25,7 +25,7 @@ if ($_SESSION['rol_fk'] == 2) {
 }else{
 	$copia_oculta = ADMIN;
 }
-enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$copia_oculta);
+enviarMail($cuerpo,$asunto,$sendFrom,$from_name,$to,$copia_oculta,1);
 
 include_once "cerrar_conexion.php";
 
@@ -36,4 +36,5 @@ if ($_SESSION['rol_fk'] == 2) {
 }elseif ($_SESSION['rol_fk'] == 3) {
 	echo '<script language="JavaScript"> window.location = "enCurso.php";</script>';
 }
+
 ?>
