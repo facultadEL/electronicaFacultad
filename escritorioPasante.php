@@ -119,10 +119,18 @@ if ($enviado == 1) {
 	$cont = 0;
 	$newIdea="INSERT INTO idea(id,nombre, archivo, estado, pasante_fk, fecha_registro)VALUES('$id_new_idea','$nombre_idea','$destino',2,'$id','$fecha_registro');";
 	//echo $newIdea;
-	$profe = traerSqlCondicion('profesor.id, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk IN(2,3)');
+	$nPasante = $_SESSION['nombre'];
+	$c = "Se ha cargado una nueva idea perteneciente al alumno <b>$nPasante</b><br/>Por favor, ingrese al sistema para poder calificar al alumno.";
+	$a = "Nueva idea - PPS";
+	$sFrom = "dpto-electronica@frvm.utn.edu.ar";
+	$fName = "Dpto Electronica";
+
+	$profe = traerSqlCondicion('profesor.id, profesor.mail as m, rol_fk','profesor INNER JOIN usuario ON profesor.usuario_fk = usuario.id','rol_fk IN(2,3)');
 	while($rowIdP=pg_fetch_array($profe,NULL,PGSQL_ASSOC)){
 		$id_profe[$cont] = $rowIdP['id'];
-    	//echo 'idProfesor: '.$id_profe[$cont];
+		$to = $rowIdP['mail'];
+		$copia_oculta = NULL;
+		enviarMail($c,$a,$sFrom,$fName,$to,$copia_oculta,1);
     	$cont++;
     }
     
