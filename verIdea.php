@@ -47,7 +47,7 @@
                 echo '<tr>';
                 echo '<td>'.$rI['nombreidea'].'</td>';
                 echo '<td>'.$rI['pasante'].'</td>';
-                echo '<td>'.$rI['fechaidea'].'</td>';
+                echo '<td>'.implode('/',array_reverse(explode('-',$rI['fechaidea']))).'</td>';
 
                 $cP = "select fecha_calif as f from ideaxprofesor where idea=$idIdea and profesor in (select id from usuario where rol_fk=3) order by profesor asc";
                 $sP = pg_query($cP);
@@ -62,8 +62,7 @@
 			?>
 		</table>
 	</div>
-<div id="tablaCuerpo">
-</div>
+
 </center>
 </form>
 <form class="nueva_idea" name="consulta" id="nueva_idea" action="envioMailPasante.php" method="post" enctype="multipart/form-data">
