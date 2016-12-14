@@ -44,7 +44,7 @@
 								echo '<td>'.$rowNuevasIdeas['apellido'].', '.$rowNuevasIdeas['nompasante'].'</td>';
 								echo '<td>'.$rowNuevasIdeas['nro_legajo'].'</td>';
 								echo '<td>'.$rowNuevasIdeas['mail'].'</td>';
-								echo '<td>'.$rowNuevasIdeas['nomidea'].'</td>';
+								echo '<td><a href="verIdea.php?id='.$rowNuevasIdeas['idea'].'">'.$rowNuevasIdeas['nomidea'].'</a></td>';
 								echo '<td><a href="'.$rowNuevasIdeas['archivo'].'" target="_blank"><input type="button" id="btn_verincs" value="Ver" title="Ver archivo de la Idea" alt="ver"></a></td>';
 								//echo '<td><a href="add_observa.php?idIdeaXprofe='.$id_IdeaXprofe.'"><input type="button" id="btn_observa" value="Agregar" title="Agregar Observaciones sobre la idea"></a></td>';
 								if ($estado == 5) {
